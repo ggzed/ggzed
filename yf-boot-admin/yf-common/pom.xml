@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.yf</groupId>
+        <artifactId>yf-boot-admin</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>yf-common</artifactId>
+
+    <dependencies>
+        <!--   integration => ocr     -->
+        <dependency>
+            <groupId>com.yf</groupId>
+            <artifactId>yf-ocr</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <!--   integration => file     -->
+        <dependency>
+            <groupId>com.yf</groupId>
+            <artifactId>yf-file</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <!--   integration => message  => sms   -->
+        <dependency>
+            <groupId>com.yf</groupId>
+            <artifactId>yf-sms</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <!--   integration => message  => graphic   -->
+        <dependency>
+            <groupId>com.yf</groupId>
+            <artifactId>yf-graphic</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <!--   integration => message  => mail   -->
+        <dependency>
+            <groupId>com.yf</groupId>
+            <artifactId>yf-mail</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+</project>

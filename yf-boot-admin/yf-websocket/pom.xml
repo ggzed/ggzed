@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.yf</groupId>
+        <artifactId>yf-boot-admin</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>yf-websocket</artifactId>
+    <packaging>pom</packaging>
+    <modules>
+        <module>yf-websocket-redis</module>
+        <module>yf-websocket-rabbitmq</module>
+        <module>yf-websocket-standalone</module>
+    </modules>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.yf</groupId>
+            <artifactId>yf-common</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yf</groupId>
+            <artifactId>yf-monitor</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+        <!--   脏词过滤     -->
+        <dependency>
+            <groupId>com.github.houbb</groupId>
+            <artifactId>sensitive-word</artifactId>
+        </dependency>
+    </dependencies>
+
+
+</project>

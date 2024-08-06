@@ -1,0 +1,35 @@
+@import "reset.scss";
+
+
+.search-container {
+    padding: 18px 0 0 18px;
+    margin-bottom: 10px;
+    background-color: var(--el-bg-color-overlay);
+    border: 1px solid var(--el-border-color-light);
+    border-radius: 4px;
+    box-shadow: var(--el-box-shadow-light);
+}
+
+.search-container .el-input {
+    --el-input-width: 200px;
+    --el-date-editor-width: 200px;
+}
+
+.search-container .el-select {
+    --el-select-width: 200px;
+}
+
+.table-container > .el-card__header {
+    display: flex;
+    justify-content: space-between;
+    padding: calc(var(--el-card-padding) - 8px) var(--el-card-padding);
+}
+
+.table-container > .el-card__footer {
+    display: flex;
+    justify-content: right;
+}
+
+.table-container .el-tag {
+    cursor: pointer;
+}

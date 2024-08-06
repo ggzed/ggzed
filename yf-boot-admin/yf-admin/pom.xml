@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>com.yf</groupId>
+        <artifactId>yf-boot-admin</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>yf-admin</artifactId>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+        </dependency>
+        <!--   权限模块     -->
+        <dependency>
+            <groupId>com.yf</groupId>
+            <artifactId>yf-auth</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.yf</groupId>
+            <artifactId>yf-demo</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <!--   日志模块     -->
+        <dependency>
+            <groupId>com.yf</groupId>
+            <artifactId>yf-monitor</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <!--   聊天室模块     -->
+        <dependency>
+            <groupId>com.yf</groupId>
+            <artifactId>yf-websocket-redis</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <!--   代码生成模块     -->
+        <dependency>
+            <groupId>com.yf</groupId>
+            <artifactId>yf-generate</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+        <!--   ai模块     -->
+        <dependency>
+            <groupId>com.yf</groupId>
+            <artifactId>yf-ai</artifactId>
+            <version>1.0.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

@@ -1,0 +1,210 @@
+server:
+  port: 9999
+spring:
+  application:
+    name: yf-admin
+  jackson:
+    ## 默认序列化时间格式
+    date-format: yyyy-MM-dd HH:mm:ss
+    ## 默认序列化时区
+    time-zone: GMT+8
+  ## 数据库配置
+  datasource:
+    ## 数据库驱动 （ 5.0 和 8.0 不一样）
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/vue3_springboot3_admin?useUnicode=true&characterEncoding=UTF-8&&serverTimezone=GMT%2B8&useSSL=false&allowMultiQueries=true&rewriteBatchedStatements=true
+    username: ???
+    password: ???
+    ## Hikari连接池配置
+    hikari:
+      ## 最小空闲连接数量
+      minimum-idle: 16
+      ## 最大连接池数量
+      maximum-pool-size: 32
+      ## 空闲连接存活最大时间，默认600000 (10分钟)
+      idle-timeout: 180000
+      ## 此属性控制从池返回的连接的默认自动提交行为，默认值: true
+      auto-commit: true
+      ## 连接池名称
+      pool-name: HikariICP
+      ## 此属性控制池中连接的最长生命周期，值0表示无限生命周期，默认1800000即30分钟
+      max-lifetime: 1800000
+      ## 数据库连接超时时间，默认30秒，即30000
+      connection-timeout: 30000
+      connection-test-query: SELECT 1
+  servlet:
+    multipart:
+      ## 单个文件最大 10MB
+      max-file-size: 10MB
+      ## 总文件最大 100MB
+      max-request-size: 100MB
+  cache:
+    type: redis
+  data:
+    redis:
+      host: ???
+      port: 6379
+      #      password: 123456
+      timeout: 10s
+      lettuce:
+        pool:
+          # 连接池最大连接数 默认8 ，负数表示没有限制
+          max-active: 8
+          # 连接池最大阻塞等待时间（使用负值表示没有限制） 默认-1
+          max-wait: -1
+          # 连接池中的最大空闲连接 默认8
+          max-idle: 8
+          # 连接池中的最小空闲连接 默认0
+          min-idle: 0
+  ## 邮箱配置
+  mail:
+    ## 配置邮件服务器的地址
+    host: smtp.qq.com
+    ## 配置邮件服务器的端口（465或587）
+    port: 465
+    ## 配置邮箱账号
+    username: ${company.email}
+    ## 配置邮箱授权码
+    password: ???
+    # 配置默认编码
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          socketFactory:
+            ## SSL 连接配置
+            class: javax.net.ssl.SSLSocketFactory
+        ## 是否开启 debug，这样方便开发者查看邮件发送日志
+        debug: false
+  ## ai 配置
+  ai:
+    ollama:
+      chat:
+        enabled: true
+# mybatis-plus 基础配置
+mybatis-plus:
+  ## 扫描 mapper 文件
+  mapper-locations: classpath*:mapper/**/*.xml
+  configuration:
+    ## 日志输出
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  global-config:
+    db-config:
+      ## 逻辑删除 字段名
+      logic-delete-field: deleted
+      ## 逻辑删除 删除值
+      logic-delete-value: 1
+      ## 逻辑删除 未删除值
+      logic-not-delete-value: 0
+## jwt 配置
+jwt:
+  secret-key: yf-boot-admin
+  access-token-expiration-time: 8h
+  refresh-token-expiration-time: 3d
+## 公司信息配置
+company:
+  name: 公司名
+  email: 公司邮箱
+  website: 公司官网
+
+## 文件上传存储位置
+file:
+  storage:
+    type: local
+    local:
+      endpoint: http://localhost:${server.port}
+      access-url: /images
+    minio:
+      host: localhost
+      bucket-name: ${spring.application.name}
+    qiniu:
+      access-key: ???
+      secret-key: ???
+      bucket-name: ${spring.application.name}
+      domain: ???
+    aliyun:
+      endpoint: ???
+      region: ???
+      access-key-id: ???
+      secret-access-key: ???
+      bucket-name: ${spring.application.name}
+
+## 系统配置
+system:
+  machine-name: 1C-2G-01
+  security-whitelist-paths:
+    - /favicon.ico
+    - /auth/login/*
+    - /auth/refresh
+    - /auth/*/redirect
+    - /auth/*/code
+    - /doc.html
+    - /v3/api-docs/**
+    - /webjars/**
+    - ${file.storage.local.access-url}/**
+## 二维码配置
+
+## 验证码配置
+captcha:
+  width: 100
+  height: 40
+  font-size: 24
+## 邮箱配置
+
+## 雪花算法配置
+snowflake:
+  datacenter-id: 1
+  machine-id: 1
+
+## just-auth
+just-auth:
+  cache:
+    type: redis
+  type:
+    ## gitee 配置
+    GITEE:
+      client-id: ???
+      client-secret: ???
+      redirect-uri: ???
+    GITHUB:
+      client-id: ???
+      client-secret: ???
+      redirect-uri: ???
+## swagger 配置 https://springdoc.org/#properties
+knife4j:
+  enable: true
+springdoc:
+  group-configs:
+    - group: "权限操作"
+      paths-to-match:
+        - "/auth/**"
+      packages-to-scan: com.yf.controller.auth
+    - group: "系统操作"
+      paths-to-match:
+        - "/user/**"
+        - "/oauth/**"
+        - "/role/**"
+        - "/menu/**"
+        - "/dept/**"
+        - "/dict/**"
+      packages-to-scan: com.yf.controller.system
+    - group: "AI助手"
+      paths-to-match:
+        - "/ai/**"
+      packages-to-scan: com.yf.controller.ai
+    - group: "websocket操作"
+      paths-to-match:
+        - "/chat-room/**"
+        - "/message/**"
+      packages-to-scan: com.yf.controller.websocket
+    - group: "系统监控"
+      paths-to-match:
+        - "/log/**"
+        - "/online_user/**"
+        - "/black_list/**"
+        - "/rate_limiter/**"
+      packages-to-scan: com.yf.controller.monitor
+    - group: "文件上传操作"
+      paths-to-match:
+        - "/file/**"
+      packages-to-scan: com.yf.controller.file

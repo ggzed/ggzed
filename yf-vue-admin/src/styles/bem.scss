@@ -1,0 +1,35 @@
+$namespace: "yf" !default;        // 命名空间
+$block-sel: "-" !default;         // block 用 - 连接
+$element-sel: "__" !default;      // element 用 __ 连接
+$modify-sel: "--" !default;       // modify 用 -- 连接。      如 namespace-page__button--primary
+
+// 生成 block 的规范类，如 .namespace-block{}
+@mixin block($block, $ns: $namespace) {
+  $B: #{$ns + $block-sel + $block};
+  .#{$B} {
+    @content;
+  }
+}
+
+// 生成 element 的规范类，如 .namespace-block__inner{}
+@mixin element($el, $ns: $namespace) {
+  $selector: &;
+
+  // 如果不想要父级名称，只需要 .namespace-block__inner{}，则使用 @at-root
+  @at-root {
+    #{$selector + $element-sel + $el} {
+      @content;
+    }
+  }
+}
+
+// 生成 modify 的规范类，如 .namespace-block__inner--primary{}
+@mixin modify($mod, $ns: $namespace) {
+  $selector: &;
+
+  @at-root {
+    #{$selector + $modify-sel + $mod} {
+      @content;
+    }
+  }
+}
