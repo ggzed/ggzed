@@ -42,7 +42,11 @@
 
 ### PC端
 
+![PC端项目截图](https://foruda.gitee.com/images/1722956633903082210/719fc801_9026884.png)
+
 ### 移动端
+
+![移动端项目截图](https://foruda.gitee.com/images/1722956662136702771/e725e761_9026884.png)
 
 ## 项目运行
 
