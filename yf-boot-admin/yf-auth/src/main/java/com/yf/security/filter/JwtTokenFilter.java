@@ -44,7 +44,12 @@ public class JwtTokenFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response, @NonNull FilterChain filterChain) throws ServletException, IOException {
         String token = jwtUtil.removeTokenPrefix(request);
-        String uri = request.getRequestURI().substring(properties.getServlet().getContextPath().length());
+        // 获取请求路径uri
+        String uri = request.getRequestURI();
+        String contextPath = properties.getServlet().getContextPath();
+        if (StringUtils.hasText(contextPath)) {
+            uri = uri.substring(contextPath.length());
+        }
         // 1. 判断token是否存在, 判断是否在 security白名单中 ,不存在交给下一个责任链解决
         if (!SecurityUtil.isWhitelisted(uri, systemConfiguration.getSecurityWhitelistPaths())
                 && StringUtils.hasText(token)) {
