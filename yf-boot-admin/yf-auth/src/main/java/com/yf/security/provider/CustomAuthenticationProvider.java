@@ -4,7 +4,7 @@ import com.yf.exception.ServiceException;
 import com.yf.model.enums.LoginTypeEnum;
 import com.yf.model.form.LoginForm;
 import com.yf.model.result.ResultCode;
-import com.yf.security.authentication.ILoginProcessTemplate;
+import com.yf.security.authentication.ILoginProcessStrategy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
@@ -30,7 +30,7 @@ import java.util.Map;
 public class CustomAuthenticationProvider extends DaoAuthenticationProvider {
 
     // 使用静态初始化块来初始化不同登录类型对应的策略映射
-    private final Map<LoginTypeEnum, ILoginProcessTemplate> loginStrategyMap = new EnumMap<>(LoginTypeEnum.class);
+    private final Map<LoginTypeEnum, ILoginProcessStrategy> loginStrategyMap = new EnumMap<>(LoginTypeEnum.class);
 
     /**
      * 通过构造函数注入`UserDetailsService`和`PasswordEncoder`，
@@ -41,7 +41,7 @@ public class CustomAuthenticationProvider extends DaoAuthenticationProvider {
      * @param passwordEncoder    密码编码器，用于在验证过程中对密码进行编码和匹配。
      */
     @Autowired
-    public CustomAuthenticationProvider(List<ILoginProcessTemplate> loginProcessTemplates, UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
+    public CustomAuthenticationProvider(List<ILoginProcessStrategy> loginProcessTemplates, UserDetailsService userDetailsService, PasswordEncoder passwordEncoder) {
         super.setPasswordEncoder(passwordEncoder); // 设置密码编码器
         super.setUserDetailsService(userDetailsService); // 设置用户详情服务
         loginProcessTemplates.forEach(template -> this.loginStrategyMap.put(template.getLoginTypeSupport(), template));
@@ -51,7 +51,7 @@ public class CustomAuthenticationProvider extends DaoAuthenticationProvider {
     @Transactional
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
         // 1. 根据凭证到工厂获取对象
-        ILoginProcessTemplate loginProcessTemplate = loginStrategyMap.get((LoginTypeEnum) authentication.getCredentials());
+        ILoginProcessStrategy loginProcessTemplate = loginStrategyMap.get((LoginTypeEnum) authentication.getCredentials());
         if (loginProcessTemplate == null) {
             throw new ServiceException(ResultCode.AUTH_MALICIOUS_LOGIN);
         }

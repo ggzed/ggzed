@@ -2,7 +2,7 @@ package com.yf.security.authentication.impl;
 
 import com.yf.model.enums.LoginTypeEnum;
 import com.yf.model.form.LoginForm;
-import com.yf.security.authentication.ILoginProcessTemplate;
+import com.yf.security.authentication.ILoginProcessStrategy;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @RequiredArgsConstructor
-public class PhoneTemplate implements ILoginProcessTemplate {
+public class PhoneStrategy implements ILoginProcessStrategy {
     @Override
     public LoginTypeEnum getLoginTypeSupport() {
         return LoginTypeEnum.PHONE;

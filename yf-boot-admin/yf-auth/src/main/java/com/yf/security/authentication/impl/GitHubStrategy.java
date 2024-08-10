@@ -9,7 +9,7 @@ import com.yf.model.enums.LoginTypeEnum;
 import com.yf.model.form.LoginForm;
 import com.yf.model.form.OauthForm;
 import com.yf.model.result.ResultCode;
-import com.yf.security.authentication.ILoginProcessTemplate;
+import com.yf.security.authentication.ILoginProcessStrategy;
 import com.yf.service.ISysOauthService;
 import com.yf.service.ISysUserService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 /**
- * Gitee登陆
+ * GitHub登陆
  *
  * @author YiFei
  * @since 2024/4/16 18:56
@@ -32,7 +32,7 @@ import org.springframework.util.StringUtils;
 @Slf4j
 @Component
 @RequiredArgsConstructor
-public class GiteeTemplate implements ILoginProcessTemplate {
+public class GitHubStrategy implements ILoginProcessStrategy {
 
     private final JustAuthFactory justAuthFactory;
     private final ISysOauthService oauthService;
@@ -41,19 +41,18 @@ public class GiteeTemplate implements ILoginProcessTemplate {
 
     @Override
     public LoginTypeEnum getLoginTypeSupport() {
-        return LoginTypeEnum.GITEE;
+        return LoginTypeEnum.GITHUB;
     }
 
     @Override
     public boolean registeredUsers(LoginForm principal) {
-        AuthRequest authRequest = justAuthFactory.getAuthRequest(AuthDefaultSource.GITEE);
+        AuthRequest authRequest = justAuthFactory.getAuthRequest(AuthDefaultSource.GITHUB);
         AuthResponse<AuthUser> login = authRequest.login(principal.getOauth());
         AuthUser authUser = login.getData();
         if (authUser == null) {
-            log.debug("Third-party authorization failed , GiteeTemplate , oauth: {}", principal.getOauth());
+            log.debug("Third-party authorization failed , GitHubTemplate , oauth: {}", principal.getOauth());
             return false;
         }
-
         Long userId = oauthService.autoRegisterOauthInfo(OauthForm.builder()
                 .platformName(authUser.getSource())
                 .platformUserId(authUser.getUuid())
@@ -92,13 +91,13 @@ public class GiteeTemplate implements ILoginProcessTemplate {
         String oauthCode = principal.getOauth().getCode();
         if (StringUtils.hasText(oauthCode)) {
             // 记录日志
-            log.debug("GiteeTemplate , Invalidating cache for OAuth code: {}", oauthCode);
+            log.debug("GitHubTemplate , Invalidating cache for OAuth code: {}", oauthCode);
             // 删除缓存中的用户ID
             shortLivedCache.invalidate(oauthCode);
         } else {
-            log.warn("GiteeTemplate ,OAuth code is empty or null for principal: {}", principal);
+            log.warn("GitHubTemplate , OAuth code is empty or null for principal: {}", principal);
         }
-        return ILoginProcessTemplate.super.validatePostParameters(principal, userDetails);
+        return ILoginProcessStrategy.super.validatePostParameters(principal, userDetails);
     }
 }
 

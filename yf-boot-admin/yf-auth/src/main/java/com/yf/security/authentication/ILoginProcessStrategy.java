@@ -10,7 +10,7 @@ import org.springframework.security.core.userdetails.UserDetails;
  * @author YiFei
  * @since 2024/4/16 16:29
  */
-public interface ILoginProcessTemplate {
+public interface ILoginProcessStrategy {
 
     /**
      * 获取登录类型

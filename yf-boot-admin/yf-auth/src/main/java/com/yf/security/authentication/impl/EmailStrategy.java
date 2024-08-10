@@ -10,7 +10,7 @@ import com.yf.model.enums.LoginTypeEnum;
 import com.yf.model.form.LoginForm;
 import com.yf.model.form.UserForm;
 import com.yf.model.result.ResultCode;
-import com.yf.security.authentication.ILoginProcessTemplate;
+import com.yf.security.authentication.ILoginProcessStrategy;
 import com.yf.service.IEmailService;
 import com.yf.service.ISysUserService;
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @RequiredArgsConstructor
-public class EmailTemplate implements ILoginProcessTemplate {
+public class EmailStrategy implements ILoginProcessStrategy {
 
     private final IEmailService emailService;
     private final ISysUserService userService;

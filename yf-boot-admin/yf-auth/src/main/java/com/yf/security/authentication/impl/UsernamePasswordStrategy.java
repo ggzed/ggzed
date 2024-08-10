@@ -7,7 +7,7 @@ import com.yf.model.enums.LoginTypeEnum;
 import com.yf.model.form.CaptchaCodeForm;
 import com.yf.model.form.LoginForm;
 import com.yf.model.result.ResultCode;
-import com.yf.security.authentication.ILoginProcessTemplate;
+import com.yf.security.authentication.ILoginProcessStrategy;
 import com.yf.service.ICaptchaCodeService;
 import com.yf.service.ISysUserService;
 import lombok.RequiredArgsConstructor;
@@ -23,7 +23,7 @@ import org.springframework.stereotype.Component;
  */
 @Component
 @RequiredArgsConstructor
-public class UsernamePasswordTemplate implements ILoginProcessTemplate {
+public class UsernamePasswordStrategy implements ILoginProcessStrategy {
 
     private final ICaptchaCodeService captchaCodeService;
     private final ISysUserService userService;
