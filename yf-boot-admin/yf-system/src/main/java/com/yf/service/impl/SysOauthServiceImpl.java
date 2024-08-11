@@ -53,7 +53,7 @@ public class SysOauthServiceImpl extends ServiceImpl<SysOauthMapper, SysOauth> i
             // 1. 未查询则自动注册用户
             Long userId = userService.autoRegisterUser();
             // 2. 保存oauth信息
-            boolean saved = this.save(oauthConverter.form2entity(oauthForm));
+            boolean saved = this.save(oauthConverter.form2entity(oauthForm).setId(userId));
             // 3. 返回用户id
             if (saved) {
                 return userId;
