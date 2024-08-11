@@ -87,6 +87,7 @@ yarn run dev
 ### yf-boot-admin ( 后端服务 )
 
 - 前提 : 已经配置好 java17、 maven 、redis 、mysql，并且mysql数据库已经导入
+- 注意 : 导入数据库后默认管理员账户 => 用户名 : admin 密码 : 12345678
 
 ```shell
 ## 切换目录
