@@ -177,7 +177,7 @@ import {UserProfileForm, UserProfileInfoVO} from "@/api/system/user/profile/type
 import {UserFilled} from "@element-plus/icons-vue";
 import {useDictionary} from "@/hooks/userDict";
 import {DictType} from "@/api/system/dict/data/type";
-import {ALLOWED_FILE_TYPES, MAX_FILE_SIZE, UserProfileAPI} from "@/api/system/user/profile";
+import {UserProfileAPI} from "@/api/system/user/profile";
 import {useUserStore} from "@/store/modules/user";
 import {useDialogManagement} from "@/hooks/useDialogManagement";
 import {useSystemStore} from "@/store/modules/system";
@@ -230,10 +230,10 @@ const emit = defineEmits<{
  * @param rawFile 文件信息
  */
 function beforeAvatarUpload(rawFile: UploadRawFile) {
-  if (!ALLOWED_FILE_TYPES.includes(rawFile.type)) {
+  if (!UserProfileAPI.UPLOAD_AVATAR.allowedFileTypes.includes(rawFile.type)) {
     ElMessage.error('头像文件格式错误')
     return false
-  } else if (rawFile.size > MAX_FILE_SIZE) {
+  } else if (rawFile.size > UserProfileAPI.UPLOAD_AVATAR.maxFileSize) {
     ElMessage.error('头像文件大小不能超过 10MB!')
     return false
   } else if (rawFile.name.length <= 0 || rawFile.name.length >= 100) {

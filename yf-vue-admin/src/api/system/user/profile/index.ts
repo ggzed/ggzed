@@ -5,9 +5,6 @@ import {Oauth} from "@/api/auth/type";
 
 const API_BASE = '/user/profile';
 
-export const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10M
-export const MAX_REQUEST_SIZE = 100 * 1024 * 1024; // 100M
-export const ALLOWED_FILE_TYPES = ['image/bmp', 'image/png', 'image/jpeg', 'image/gif'];
 
 const API_SUFFIXES = {
     /** 获取个人信息 */
@@ -97,6 +94,8 @@ export class UserProfileAPI {
      */
     static UPLOAD_AVATAR = {
         endpoint: `${API_BASE}${API_SUFFIXES.UPLOAD_AVATAR}`,
+        maxFileSize: 10 * 1024 * 1024, // 10M
+        allowedFileTypes: ['image/bmp', 'image/png', 'image/jpeg', 'image/gif'],
         request: (avatar: File): AxiosPromise<string> => {
             // 1. 创建一个FormData对象并附加文件
             const formData = new FormData();
