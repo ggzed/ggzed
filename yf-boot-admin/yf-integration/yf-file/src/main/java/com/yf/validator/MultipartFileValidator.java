@@ -26,6 +26,9 @@ public class MultipartFileValidator implements ConstraintValidator<MultipartFile
 
     @Override
     public boolean isValid(MultipartFile file, ConstraintValidatorContext context) {
+        if (file == null) {
+            return false;
+        }
         String originalFilename = file.getOriginalFilename();
         // 校验扩展名 && 文件名
         return FileUtils.isAllowedExtension(file, this.allowedFileTypes)

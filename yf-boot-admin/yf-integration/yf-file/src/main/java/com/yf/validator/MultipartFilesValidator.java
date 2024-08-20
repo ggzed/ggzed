@@ -4,6 +4,7 @@ import com.yf.constraints.MultipartFileValid;
 import com.yf.utils.FileUtils;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
+import org.springframework.util.ObjectUtils;
 import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,6 +29,9 @@ public class MultipartFilesValidator implements ConstraintValidator<MultipartFil
 
     @Override
     public boolean isValid(MultipartFile[] files, ConstraintValidatorContext context) {
+        if (ObjectUtils.isEmpty(files)) {
+            return false;
+        }
         return Arrays.stream(files).allMatch(file -> {
             String originalFilename = file.getOriginalFilename();
             // 校验扩展名 && 文件名
