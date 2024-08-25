@@ -69,6 +69,7 @@ public enum ResultCode implements IResultCode, Serializable {
     FILE_NOT_FOUND("I404", "No static resource"),
     FILE_VIOLATIONS("I408", "文件内容违规,不符合平台规定(如有异议请联系管理员)"),
     FILE_MAX_UPLOAD_SIZE("I418", "文件大小超过平台阈值"),
+    FILE_ANALYZER_ERROR("I409", "文件解析错误,文件可能更改原后缀名"),
 
     DB_SERVER_NOT_ENABLED("I500", "数据库服务并未开启"),
 

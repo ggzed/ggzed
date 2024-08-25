@@ -35,7 +35,7 @@ public class TensorflowUtil {
         copyTempModel("", classPathResource, tempModelDirPath);
         copyTempModel("assets", classPathResource, tempModelDirPath);
         copyTempModel("variables", classPathResource, tempModelDirPath);
-        
+
         log.info("classPathResource: {} , ===> 临时文件存储在 {} ", classPathResource, tempModelDir.getAbsolutePath());
         return tempModelDir.getAbsolutePath();
     }
@@ -72,7 +72,7 @@ public class TensorflowUtil {
      * @param resourcePath  资源路径
      * @param targetDirPath 临时文件路径
      */
-    private static void copyResource2TempDir(String resourcePath, Path targetDirPath) throws IOException {
+    public static void copyResource2TempDir(String resourcePath, Path targetDirPath) throws IOException {
         // 扫描所有资源
         PathMatchingResourcePatternResolver patternResolver = new PathMatchingResourcePatternResolver();
         Resource[] resources = patternResolver.getResources(SEARCH_RESOURCE.formatted(resourcePath));
