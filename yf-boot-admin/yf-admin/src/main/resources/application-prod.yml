@@ -176,38 +176,3 @@ just-auth:
 ## swagger 配置 https://springdoc.org/#properties
 knife4j:
   enable: false
-springdoc:
-  group-configs:
-    - group: "权限操作"
-      paths-to-match:
-        - "/auth/**"
-      packages-to-scan: com.yf.controller.auth
-    - group: "系统操作"
-      paths-to-match:
-        - "/user/**"
-        - "/oauth/**"
-        - "/role/**"
-        - "/menu/**"
-        - "/dept/**"
-        - "/dict/**"
-      packages-to-scan: com.yf.controller.system
-    - group: "AI助手"
-      paths-to-match:
-        - "/ai/**"
-      packages-to-scan: com.yf.controller.ai
-    - group: "websocket操作"
-      paths-to-match:
-        - "/chat-room/**"
-        - "/message/**"
-      packages-to-scan: com.yf.controller.websocket
-    - group: "系统监控"
-      paths-to-match:
-        - "/log/**"
-        - "/online_user/**"
-        - "/black_list/**"
-        - "/rate_limiter/**"
-      packages-to-scan: com.yf.controller.monitor
-    - group: "文件上传操作"
-      paths-to-match:
-        - "/file/**"
-      packages-to-scan: com.yf.controller.file

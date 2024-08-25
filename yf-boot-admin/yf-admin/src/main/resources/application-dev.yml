@@ -208,3 +208,9 @@ springdoc:
       paths-to-match:
         - "/file/**"
       packages-to-scan: com.yf.controller.file
+    - group: "demo分区"
+      paths-to-match:
+        - "/ocr/**"
+        - "/nsfw/**"
+        - "/qr/**"
+      packages-to-scan: com.yf.controller.demo
