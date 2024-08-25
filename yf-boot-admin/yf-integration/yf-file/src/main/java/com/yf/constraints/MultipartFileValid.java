@@ -30,6 +30,8 @@ public @interface MultipartFileValid {
 
     Class<? extends Payload>[] payload() default {};
 
+    boolean required() default true;
+
     int maxFileNameLength() default 100;
 
     String[] allowedFileTypes() default {"bmp", "gif", "jpg", "jpeg", "png"};

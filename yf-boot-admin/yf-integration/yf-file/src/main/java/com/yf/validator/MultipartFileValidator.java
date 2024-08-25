@@ -17,18 +17,28 @@ public class MultipartFileValidator implements ConstraintValidator<MultipartFile
 
     private int maxFileNameLength;
     private String[] allowedFileTypes;
+    private boolean required;
 
     @Override
     public void initialize(MultipartFileValid constraintAnnotation) {
         this.maxFileNameLength = constraintAnnotation.maxFileNameLength();
         this.allowedFileTypes = constraintAnnotation.allowedFileTypes();
+        this.required = constraintAnnotation.required();
     }
 
     @Override
     public boolean isValid(MultipartFile file, ConstraintValidatorContext context) {
-        if (file == null) {
+        boolean exist = file == null || file.isEmpty();
+        // 如果文件是必须的，且文件为空，直接返回 false
+        if (required && exist) {
             return false;
         }
+
+        // 如果文件不是必须的，且文件为空，返回 true
+        if (exist) {
+            return true;
+        }
+
         String originalFilename = file.getOriginalFilename();
         // 校验扩展名 && 文件名
         return FileUtils.isAllowedExtension(file, this.allowedFileTypes)
