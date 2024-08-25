@@ -81,7 +81,7 @@ yarn install
 ## 启动项目
 yarn run dev
 
-## 接下来会自动打开项目到网页 , 如果未部署后端服务请设置 .env.production 中 VITE_APP_API_URL = VITE_APP_API_URL = http://110.41.173.220/api
+## 接下来会自动打开项目到网页 , 如果未部署后端服务请设置 .env.production 中 VITE_APP_API_URL = http://110.41.173.220/api
 ```
 
 ### yf-boot-admin ( 后端服务 )
