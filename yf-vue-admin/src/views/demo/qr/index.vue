@@ -84,7 +84,7 @@ import {FormInstance, FormRules, UploadRawFile, UploadRequestOptions} from "elem
 import {QrAPI} from "@/api/demo/qr";
 
 defineOptions({
-  name: "Ocr",
+  name: "Qr",
   inheritAttrs: false,
 });
 
