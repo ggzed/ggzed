@@ -6,6 +6,7 @@ import com.yf.justauth.factory.JustAuthFactory;
 import com.yf.model.dto.CaptchaResult;
 import com.yf.model.dto.LoginResult;
 import com.yf.model.enums.BusinessTypeEnum;
+import com.yf.model.enums.LimitTypeEnum;
 import com.yf.model.enums.LoginTypeEnum;
 import com.yf.model.form.LoginForm;
 import com.yf.model.form.RefreshTokenForm;
@@ -76,6 +77,7 @@ public class AuthController {
 
     @RateLimiters(rateLimiters = {
             @RateLimiter(
+                    limitTypeEnum = LimitTypeEnum.IP,
                     rateRules = @RateRule
             )
     })
@@ -94,4 +96,3 @@ public class AuthController {
     }
 
 }
-
