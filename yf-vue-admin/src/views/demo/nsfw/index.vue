@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <!--  描述  -->
-    <el-link :underline="false" href="https://element-plus.org" target="_blank">
+    <el-link :underline="false" href="https://juejin.cn/post/7408062004844625960" target="_blank">
       <el-icon slot="reference" :size="20" style="cursor: pointer">
         <QuestionFilled/>
       </el-icon>
