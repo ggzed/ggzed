@@ -1,7 +1,7 @@
 <template>
   <div class="app-container">
     <!--  描述  -->
-    <el-link :underline="false" href="https://element-plus.org" target="_blank">
+    <el-link :underline="false" href="https://juejin.cn/post/7407983735662362658" target="_blank">
       <el-icon slot="reference" :size="20" style="cursor: pointer">
         <QuestionFilled/>
       </el-icon>
@@ -82,6 +82,8 @@ function uploadFile(options: UploadRequestOptions) {
       imageUrl.value = URL.createObjectURL(file);
       // 4. data 传给 on-success
       resolve(data)
+    }).catch(() => {
+      ElMessage.error("目前不支持测试");
     })
   })
 }
