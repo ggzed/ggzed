@@ -372,7 +372,7 @@ INSERT INTO `sys_menu` VALUES (188, 180, '0,179,180', '群发消息', 4, '', NUL
 INSERT INTO `sys_menu` VALUES (189, 180, '0,179,180', '发送系统消息', 4, '', NULL, 'websocket:chat-room:system', NULL, NULL, NULL, NULL, '', NULL, 1, NULL, '2024-05-24 19:06:52', '2024-05-24 19:06:52');
 INSERT INTO `sys_menu` VALUES (190, 179, '0,179', '消息管理', 2, 'message', 'websocket/message/index', 'websocket:message:list', 1, 0, 0, 0, 'message', NULL, 1, NULL, '2024-05-29 18:31:17', '2024-05-29 18:31:28');
 INSERT INTO `sys_menu` VALUES (194, 0, '0', '功能封装演示', 1, '/demo', 'Layout', '', 0, 1, 1, 0, 'demo', NULL, 2, '/demo/file', '2024-06-12 18:28:38', '2024-08-02 19:08:15');
-INSERT INTO `sys_menu` VALUES (196, 194, '0,194', '图片检测', 2, 'nsfw', 'demo/nsfw/index', 'demo:nsfw:list', 0, 1, 0, 0, 'nsfw', NULL, 1, NULL, '2024-07-21 10:46:46', '2024-07-21 10:46:46');
+INSERT INTO `sys_menu` VALUES (196, 194, '0,194', '图片NSFW检测', 2, 'nsfw', 'demo/nsfw/index', 'demo:nsfw:list', 0, 1, 0, 0, 'nsfw', NULL, 1, NULL, '2024-07-21 10:46:46', '2024-07-21 10:46:46');
 INSERT INTO `sys_menu` VALUES (197, 194, '0,194', '图片物品检测', 2, 'object-search', 'demo/object-search/index', 'demo:object-search:list', 0, 1, 0, 0, 'image-detection', NULL, 1, NULL, '2024-07-21 11:00:42', '2024-07-21 11:00:42');
 INSERT INTO `sys_menu` VALUES (198, 194, '0,194', 'ffmpeg', 2, 'ffmpeg', 'demo/ffmpeg/index', 'demo:ffmpeg:list', 0, 1, 0, 0, 'ffmpeg', NULL, 1, NULL, '2024-07-21 11:05:20', '2024-07-21 11:45:06');
 INSERT INTO `sys_menu` VALUES (199, 194, '0,194', 'markdown', 2, 'markdown', 'demo/markdown/index', 'demo:markdown:list', 0, 1, 0, 0, 'markdown', NULL, 1, NULL, '2024-07-21 11:44:40', '2024-07-21 11:44:40');
@@ -391,6 +391,7 @@ INSERT INTO `sys_menu` VALUES (212, 209, '0,209', '稀土掘金', 3, 'https://ww
 INSERT INTO `sys_menu` VALUES (213, 209, '0,209', 'hooks文档', 2, 'hook', 'doc/hook/index', 'doc:hook:list', 0, 1, 0, 0, 'help-documentation', NULL, 1, NULL, '2024-08-03 22:02:21', '2024-08-03 22:02:36');
 INSERT INTO `sys_menu` VALUES (214, 148, '0,181,148', '删除操作日志信息', 4, '', '', 'monitor:operation-log:delete', 1, 0, 0, 0, '', NULL, 1, NULL, '2024-08-05 15:18:28', '2024-08-05 15:18:28');
 INSERT INTO `sys_menu` VALUES (215, 136, '0,128,136', '角色授权菜单', 4, '', '', 'system:role:permission', 1, 0, 0, 0, '', NULL, 0, NULL, '2024-08-11 14:45:26', '2024-08-11 14:45:31');
+INSERT INTO `sys_menu` VALUES (216, 194, '0,194', '生成二维码', 2, 'ocr', 'demo/qr/index', 'demo:qr:list', 0, 1, 0, 0, 'qr', NULL, 1, NULL, '2024-07-21 14:31:36', '2024-07-21 14:31:58');
 
 -- ----------------------------
 -- Table structure for sys_oauth
@@ -529,6 +530,7 @@ INSERT INTO `sys_role_menu` VALUES (128, 212);
 INSERT INTO `sys_role_menu` VALUES (128, 213);
 INSERT INTO `sys_role_menu` VALUES (128, 214);
 INSERT INTO `sys_role_menu` VALUES (128, 215);
+INSERT INTO `sys_role_menu` VALUES (128, 216);
 
 -- ----------------------------
 -- Table structure for sys_user
