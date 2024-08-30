@@ -22,7 +22,7 @@ import static com.yf.utils.FileUtils.DIR_SEPARATOR;
 // @formatter:off
 /**
  * Minio文件存储
- * 简易的 Docker 命令 :
+ * 简易的 Docker 启动 Minio 命令 :
   docker run -p 9000:9000 -p 9090:9090 --name minio --restart=always -d \
   -e "MINIO_ACCESS_KEY=minioadmin" \
   -e "MINIO_SECRET_KEY=minioadmin" \
@@ -41,10 +41,6 @@ import static com.yf.utils.FileUtils.DIR_SEPARATOR;
 @RequiredArgsConstructor
 @Data
 public class MinIoFileStorageService implements FileStorageService {
-    /**
-     * 文件上传后返回URL格式
-     */
-    private static final String FILE_URL_FORMAT = "%s://%s:%d%s%s%s%s";
     /**
      * 服务协议
      */
