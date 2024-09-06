@@ -48,16 +48,6 @@ public class SysUserController {
         return Result.success(userInfoVO);
     }
 
-    @Operation(summary = "踢出用户")
-    @OperationLog(title = "踢出用户", businessType = BusinessTypeEnum.KICK_OUT)
-    @DeleteMapping("/{userId}/kickOut")
-    @PreventDuplicateSubmit
-    @PreAuthorize("@permission.checker('system:user:kick-out')")
-    public Result<Void> kickOutUser(@Parameter(description = "用户Id") @PathVariable Long userId) {
-        boolean kicked = userService.kickOutUser(userId);
-        return Result.judge(kicked);
-    }
-
     @Operation(summary = "查询用户")
     @OperationLog(title = "查询用户", businessType = BusinessTypeEnum.SEARCH)
     @PreventDuplicateSubmit

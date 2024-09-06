@@ -102,13 +102,5 @@ public interface ISysUserService extends IService<SysUser> {
     Long autoRegisterUser(UserForm userForm);
 
     Long autoRegisterUser();
-
-    /**
-     * 踢出用户
-     *
-     * @param userId 用户id
-     * @return 是否踢出
-     */
-    boolean kickOutUser(Long userId);
 }
 

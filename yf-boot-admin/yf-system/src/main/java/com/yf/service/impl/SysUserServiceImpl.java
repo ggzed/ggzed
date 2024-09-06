@@ -389,23 +389,6 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
     }
 
     /**
-     * 踢出用户
-     *
-     * @param userId 用户id
-     * @return 是否踢出
-     */
-    @Override
-    public boolean kickOutUser(Long userId) {
-        // 删除 token
-        boolean deletedToken = redisUtil.deleteObject(RedisKeyConstants.USER_TOKEN_CACHE_PREFIX + userId);
-        // 删除 权限
-        boolean deletedPermission = redisUtil.deleteObject(RedisKeyConstants.USER_PERMISSIONS_CACHE_PREFIX + userId);
-        // 删除用户信息
-        redisUtil.deleteObject(RedisKeyConstants.SYSTEM_ME_CACHE_PREFIX + userId);
-        return deletedToken && deletedPermission;
-    }
-
-    /**
      * 查询用户是否重复 : form不会全为空 , 否则报错
      */
     private void isDuplicate(Long userId, UserForm userForm) {
