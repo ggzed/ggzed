@@ -74,13 +74,6 @@ export const useUserStore = defineStore(StoreTypeEnum.USER, {
                     // 记录权限信息
                     this.permissions = permissions;
                     resolve(data);
-                }).catch(() => {
-                    // 网络异常
-                    ElNotification({
-                        title: '无法获取到个人信息',
-                        message: '网络原因或未开启后端服务',
-                        type: 'warning',
-                    })
                 })
             })
         },
