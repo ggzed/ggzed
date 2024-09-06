@@ -412,7 +412,7 @@ function submitForm() {
       });
     } else {
       UserAPI.SAVE.request(form).then(() => {
-        ElMessage.success("新增成功");
+        ElMessage.success("新增成功,用户赋予平台默认密码");
         closeUserDialog();
         resetQuery();
       });
