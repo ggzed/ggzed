@@ -46,6 +46,7 @@ import java.util.stream.Collectors;
 public class JwtUtil {
 
     public static final String WEBSOCKET = "websocket";
+    public static final String SSE = "text/event-stream";
     private static final Logger log = LoggerFactory.getLogger(JwtUtil.class);
     /**
      * 记录日志使用 username ，防止多表查询
@@ -252,8 +253,8 @@ public class JwtUtil {
         String authorization = jwtConfiguration.getRequestHeaderKey();
         String token = request.getHeader(HttpHeaders.AUTHORIZATION);
         if (token == null) {
-            // 2. websocket => sec-websocket-protocol ( 该系统支持自定义协议 JWT_PROTOCOL )
-            if (WEBSOCKET.equals(request.getHeader(HttpHeaders.UPGRADE))) {
+            // 2. websocket & sse 认证处理
+            if (SSE.equals(request.getHeader(HttpHeaders.ACCEPT)) || WEBSOCKET.equals(request.getHeader(HttpHeaders.UPGRADE))) {
                 token = request.getParameter(authorization);
             }
         }
