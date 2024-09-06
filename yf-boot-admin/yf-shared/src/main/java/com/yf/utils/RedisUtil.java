@@ -90,6 +90,18 @@ public class RedisUtil {
     }
 
     /**
+     * 获得缓存的多个对象。
+     *
+     * @param keys 缓存键值的集合
+     * @return 缓存键值对应的数据集合
+     */
+    public <T> List<T> getCacheObjects(final Collection<String> keys) {
+        ValueOperations<String, T> operation = redisTemplate.opsForValue();
+        return operation.multiGet(keys);
+    }
+
+
+    /**
      * 删除单个对象
      */
     public boolean deleteObject(final String key) {
