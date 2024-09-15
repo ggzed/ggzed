@@ -3,6 +3,8 @@ import {RouteConstant} from "@/constants/route";
 
 export const Layout = () => import("@/layout/index.vue");
 export const Home = () => import("@/views/home/index.vue");
+export const HotList = () => import("@/views/home/hot-list/index.vue");
+export const TodayAvatar = () => import("@/views/home/today-avatar/index.vue");
 export const UserProfile = () => import("@/views/system/user/profile/index.vue");
 export const Login = () => import("@/views/login/index.vue");
 export const OauthRedirect = () => import("@/views/oauth-redirect/index.vue");
@@ -87,6 +89,24 @@ export const constantRoutes: RouteRecordRaw[] = [
         meta: {
             title: '登录页面',
             hidden: true,
+        },
+        children: []
+    },
+    {
+        path: "/hot-list",
+        name: "HotList",
+        component: HotList,
+        meta: {
+            title: '每日热点'
+        },
+        children: []
+    },
+    {
+        path: "/today-avatar",
+        name: "TodayAvatar",
+        component: TodayAvatar,
+        meta: {
+            title: '照片推荐墙'
         },
         children: []
     },
