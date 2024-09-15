@@ -67,7 +67,7 @@ public class SysDictDataController {
 
     @Operation(summary = "字典数据表单数据")
     @PreventDuplicateSubmit
-    @PreAuthorize("@permission.checker('system:dict-data:update')")
+    @PreAuthorize("@permission.checker('system:dict-data:list')")
     @GetMapping("/{dictDataId}/form")
     public Result<DictDataForm> getDictDataForm(@PathVariable Integer dictDataId) {
         DictDataForm dictDataForm = dictDataService.getDictDataForm(dictDataId);

@@ -51,7 +51,7 @@ public class SysMenuController {
 
     @Operation(summary = "菜单表单数据")
     @PreventDuplicateSubmit
-    @PreAuthorize("@permission.checker('system:user:update')")
+    @PreAuthorize("@permission.checker('system:user:list')")
     @GetMapping("/{menuId}/form")
     public Result<MenuForm> getMenuForm(@PathVariable Integer menuId) {
         MenuForm menuForm = menuService.getMenuForm(menuId);

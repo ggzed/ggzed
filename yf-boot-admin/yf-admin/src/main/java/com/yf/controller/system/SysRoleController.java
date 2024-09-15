@@ -52,7 +52,7 @@ public class SysRoleController {
 
     @Operation(summary = "角色表单数据")
     @PreventDuplicateSubmit
-    @PreAuthorize("@permission.checker('system:role:update')")
+    @PreAuthorize("@permission.checker('system:role:list')")
     @GetMapping("/{roleId}/form")
     public Result<RoleForm> getRoleForm(@PathVariable Integer roleId) {
         RoleForm roleForm = roleService.getRoleForm(roleId);

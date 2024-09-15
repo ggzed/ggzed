@@ -60,7 +60,7 @@ public class SysUserController {
 
     @Operation(summary = "用户表单数据")
     @PreventDuplicateSubmit
-    @PreAuthorize("@permission.checker('system:user:update')")
+    @PreAuthorize("@permission.checker('system:user:list')")
     @GetMapping("/{userId}/form")
     public Result<UserForm> getUserForm(@PathVariable Long userId) {
         UserForm userForm = userService.getUserForm(userId);

@@ -51,7 +51,7 @@ public class SysDictTypeController {
 
     @Operation(summary = "字典类型表单数据")
     @PreventDuplicateSubmit
-    @PreAuthorize("@permission.checker('system:dict-type:update')")
+    @PreAuthorize("@permission.checker('system:dict-type:list')")
     @GetMapping("/{dictTypeId}/form")
     public Result<DictTypeForm> getDictTypeForm(@PathVariable Integer dictTypeId) {
         DictTypeForm dictTypeForm = dictTypeService.getDictTypeForm(dictTypeId);
