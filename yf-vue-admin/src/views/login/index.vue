@@ -2,7 +2,7 @@
   <div v-loading="logging" class="login-container">
     <!-- 登录头部 -->
     <div class="login-header">
-      <div>该页面不符合整体设计</div>
+      <div>登录页面后续会更改</div>
       <div>
         <div class="settings-options">
           <span>暗黑模式:</span>
@@ -118,8 +118,8 @@ const userStore = useUserStore();                     // 存储用户信息
 const oauthStore = useOauthStore();                   // oauth 信息
 const captchaBase64 = ref<string>('');                // USERNAME_PASSWORD 登录方式中验证码
 const loginForm = ref<LoginParams>({                  // 登录表单信息
-  username: "",
-  password: ""
+  username: "demo_admin",
+  password: "12345678"
 });
 const logging = ref<boolean>(false);
 
@@ -229,13 +229,15 @@ onBeforeMount(async () => {
     loginType.value = oauthStore.type;
     loginForm.value.oauth = oauthStore.params;
     await handleLogin();
-    // 2.1 登陆完成清除 type
-    oauthStore.resetOauth();
   }
 })
 
 onMounted(() => {
   refreshCaptcha()
+})
+
+onUnmounted(() => {
+  oauthStore.resetOauth();
 })
 </script>
 
