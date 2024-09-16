@@ -270,7 +270,8 @@ public abstract class BaseWebSocketHandler extends AbstractWebSocketHandler {
                 this.socketMessageService.save(builder.build());
                 // 5. 不是默认用户 => 记录日志
                 if (isNonSystemUser(senderId)) {
-                    keepOperationLog(webSocketSession, builder.build());
+                    // 6. 非企业模式，不记录发送消息日志信息
+//                    keepOperationLog(webSocketSession, builder.build());
                 }
                 transactionManager.commit(status);
             } catch (Exception e) {
@@ -346,17 +347,17 @@ public abstract class BaseWebSocketHandler extends AbstractWebSocketHandler {
     public void disconnectionSocket(WebSocketSession session, CloseStatus status) {
         SysUserDetails userDetails = (SysUserDetails) session.getAttributes().get(WebSocketConstant.SOCKET_SESSION_USER_ID);
         Long userId = userDetails.getUserId();
-        // 1. 删除本地 session 信息
-        this.getWebSocketSessionMap().remove(userId);
-        // 2. 从所有用户中删除用户ID （ zset中删除 ）
+        // 1. 从所有用户中删除用户ID （ zset中删除 ）
         this.deleteUserConnectionInfo(userId);
-        // 4. 记录退出日志
-        keepOperationLog(session, SocketMessage.builder()
+        // 2. 记录退出日志
+        keepOperationLog(this.getWebSocketSessionMap().get(userId), SocketMessage.builder()
                 .senderId(userId)
                 .messageProvider(MessageProviderEnum.SYSTEM)            // 系统消息
                 .serviceProvider(this.getServiceProvider())             // 服务提供
                 .content(ChatRoomConstant.EXIT_MESSAGE)                 // 退出消息
                 .build());
+        // 3. 删除本地 session 信息
+        this.getWebSocketSessionMap().remove(userId);
     }
 
     /**
@@ -473,7 +474,8 @@ public abstract class BaseWebSocketHandler extends AbstractWebSocketHandler {
      */
     @SneakyThrows
     protected void keepOperationLog(WebSocketSession session, SocketMessage message) {
-        OperateLog.OperateLogBuilder builder = OperateLog.builder().title(this.getBusinessTypeEnum().getLabel())   // 日志标题
+        OperateLog.OperateLogBuilder builder = OperateLog.builder()
+                .title(this.getBusinessTypeEnum().getLabel())   // 日志标题
                 .businessType(this.getBusinessTypeEnum())       // 日志业务类型
                 .operatorType(this.getOperatorTypeEnum());      // 日志操作端
         if (session == null) {
@@ -483,11 +485,15 @@ public abstract class BaseWebSocketHandler extends AbstractWebSocketHandler {
             // 2. session != null 获取连接信息
             Map<String, Object> attributes = session.getAttributes();
             SessionConnectInfo sessionConnectInfo = (SessionConnectInfo) attributes.get(WebSocketConstant.SOCKET_SESSION_CONNECT_INFO);
+            SysUserDetails userDetails = (SysUserDetails) session.getAttributes().get(WebSocketConstant.SOCKET_SESSION_USER_ID);
             // 3. 构建日志对象
-            builder.operatorIp(sessionConnectInfo.getOperatorIp())                 // IP
+            builder
+                    .operatorIp(sessionConnectInfo.getOperatorIp())                 // IP
                     .operatorOs(sessionConnectInfo.getOperatorOs())                 // 操作系统
                     .operatorBrowser(sessionConnectInfo.getOperatorBrowser())       // 操作浏览器
                     .operatorLocation(sessionConnectInfo.getOperatorLocation())     // 操作地址
+                    .operatorName(userDetails.getUsername())                        // 记录用户名
+                    .status(LogOperatorStatusEnum.SUCCESS)                          // 操作正常
                     .jsonResult(StringUtils.substring(objectMapper.writeValueAsString(message), 0, 2000));
         }
         // 4. 存储日志数据
