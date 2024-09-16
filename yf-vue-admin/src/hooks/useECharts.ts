@@ -19,7 +19,7 @@ export function useECharts(
     const chartInstance = shallowRef<echarts.EChartsType | null>(null);
 
     // 使用 ref 创建一个响应式引用，用于保存图表的配置选项
-    const options = reactive<echarts.EChartsOption>(initOptions);
+    const options = reactive<echarts.EChartsOption>(initOptions as echarts.EChartsOption);
 
     // 初始化图表实例的函数
     const initChart = () => {
@@ -52,7 +52,7 @@ export function useECharts(
     };
 
     // 监听 options 的变化，并在其发生改变时更新图表
-    watch(options, updateChartOptions, {deep: true});
+    watch(options as echarts.EChartsOption, updateChartOptions, {deep: true});
 
     // 组件挂载时初始化图表并添加窗口大小调整的事件监听器
     onMounted(() => {

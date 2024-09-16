@@ -67,15 +67,19 @@ const loading = ref(false);
 const tableData = ref<OnlineUserVO[]>([]);
 
 // 定义事件监听器
-function handleMessage(event) {
+function handleMessage(event: MessageEvent) {
   const data = event.data;
 
-  // 将新数据添加到数组末尾
-  options.series[0].data.push(data);
+  // 确保 options.series 是一个数组并且有数据
+  const series = options.series as Array<{ data: any[] }>;
+  if (series && series.length > 0) {
+    // 将新数据添加到数组末尾
+    series[0].data.push(data);
 
-  // 检查数组长度是否超过 7，如果是则移除最早的一个
-  if (options.series[0].data.length > 7) {
-    options.series[0].data.shift();
+    // 检查数组长度是否超过 7，如果是则移除最早的一个
+    if (series[0].data.length > 7) {
+      series[0].data.shift();
+    }
   }
 }
 

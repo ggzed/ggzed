@@ -160,14 +160,24 @@ function initVisitTrendCharts() {
 
   // 获取访问趋势数据
   HomeAPI.VISIT_TREND.request(formattedStartDate, formattedEndDate).then(({data}) => {
-    // 更新 ECharts 图表 值
-    options.xAxis.data = data.dates;
-    options.series[0].data = data.pvList;
-    options.series[1].data = data.uvList;
-    options.series[2].data = data.ipList;
+    // 使用类型断言确保 xAxis 是带有 type 属性的对象
+    const xAxis = options.xAxis as { type: string; data?: string[] };
+    if (xAxis && xAxis.type === "category") {
+      xAxis.data = data.dates;
+    }
+
+    // 使用类型断言确保 series 是一个数组
+    const series = options.series as Array<{ data: number[] }>;
+    if (series && series.length >= 3) {
+      series[0].data = data.pvList;
+      series[1].data = data.uvList;
+      series[2].data = data.ipList;
+    }
   }).finally(() => {
     visitTrendLoading.value = false;
-  })
+  });
+
+
 }
 
 onMounted(() => {

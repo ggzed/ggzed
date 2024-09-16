@@ -29,7 +29,7 @@ import {EChartsOption} from "echarts";
 // 引用容器的 ref
 const chartRef = ref<HTMLDivElement | null>(null);
 
-const initChart: EChartsOption = ref({
+const initChart = ref<EChartsOption>({
   title: {
     text: 'ECharts展示图',
     subtext: 'useECharts',
@@ -71,10 +71,11 @@ const initChart: EChartsOption = ref({
   ]
 });
 
-const {chartInstance} = useECharts(chartRef, initChart.value);
+
+const {chartInstance} = useECharts(chartRef, initChart.value as EChartsOption);
 
 function changeInitChart() {
-  chartInstance.value.setOption(initChart.value);
+  chartInstance.value?.setOption(initChart.value);
 }
 </script>
 
