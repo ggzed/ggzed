@@ -7,7 +7,7 @@
 <script lang="ts" setup>
 
 defineOptions({
-  name: "HelpDocumentation",
+  name: "Help",
   inheritAttrs: false,
 });
 // 数据
