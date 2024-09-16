@@ -1,5 +1,6 @@
 import axios, {AxiosPromise} from "axios";
 import request from "@/utils/request";
+import {EChartsOption} from "echarts";
 
 const API_BASE = '';
 
@@ -29,15 +30,15 @@ export class HomeAPI {
 
     static HOT_LIST = {
         endpoint: `${API_SUFFIXES.HOT_LIST}`,
-        request: (): AxiosPromise<HotList> => {
-            return axios<HotList>.get(HomeAPI.HOT_LIST.endpoint);
+        request: (): AxiosPromise<HotApiVO> => {
+            return axios.get<HotApiVO>(HomeAPI.HOT_LIST.endpoint);
         }
     }
 
     static WEATHER = {
         endpoint: `${API_SUFFIXES.WEATHER}`,
         request: (): AxiosPromise<WeatherData> => {
-            return axios<WeatherData>.get(HomeAPI.WEATHER.endpoint);
+            return axios.get<WeatherData>(HomeAPI.WEATHER.endpoint);
         }
     }
 
@@ -47,7 +48,7 @@ export class HomeAPI {
 
     static VISIT_TREND = {
         endpoint: `${API_SUFFIXES.VISIT_TREND}`,
-        chartOptions: () => {
+        chartOptions: (): EChartsOption => {
             return {
                 tooltip: {
                     trigger: "axis",
@@ -129,8 +130,8 @@ export class HomeAPI {
                 ],
             }
         },
-        request: (startDate: string, endDate: string): AxiosPromise<void> => {
-            return request<void>({
+        request: (startDate: string, endDate: string): AxiosPromise<VisitTrendVO> => {
+            return request<VisitTrendVO>({
                 url: HomeAPI.VISIT_TREND.endpoint,
                 method: "get",
                 params: {startDate, endDate},
