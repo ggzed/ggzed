@@ -48,6 +48,28 @@ export const constantRoutes: RouteRecordRaw[] = [
                 }
             },
             {
+                path: "hot-list",
+                name: "HotList",
+                component: HotList,
+                meta: {
+                    title: '每日热点',
+                    hidden: true,
+                    keepAlive: true
+                },
+                children: []
+            },
+            {
+                path: "today-avatar",
+                name: "TodayAvatar",
+                component: TodayAvatar,
+                meta: {
+                    title: '照片推荐墙',
+                    hidden: true,
+                    keepAlive: true
+                },
+                children: []
+            },
+            {
                 path: "404",
                 name: "NotFound",
                 component: NotFound,
@@ -89,24 +111,6 @@ export const constantRoutes: RouteRecordRaw[] = [
         meta: {
             title: '登录页面',
             hidden: true,
-        },
-        children: []
-    },
-    {
-        path: "/hot-list",
-        name: "HotList",
-        component: HotList,
-        meta: {
-            title: '每日热点'
-        },
-        children: []
-    },
-    {
-        path: "/today-avatar",
-        name: "TodayAvatar",
-        component: TodayAvatar,
-        meta: {
-            title: '照片推荐墙'
         },
         children: []
     },
