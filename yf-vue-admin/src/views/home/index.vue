@@ -11,7 +11,7 @@
             </el-avatar>
             <div class="content">
               <p class="single-line">您好 , {{ userStore.userInfo.nickname }} !</p>
-              <p class="double-line">今日天气晴朗，气温在15℃至25℃之间，东南风。今日天气晴朗，气温在15℃至25℃之间，东南风。</p>
+              <p class="double-line"> {{ weather }}</p>
             </div>
           </div>
         </el-col>
@@ -21,30 +21,34 @@
     <!--  小功能向导  -->
     <el-row :gutter="20" class="action-cards">
       <el-col :lg="6" :sm="12" :xs="24">
-        <el-card>
-          <div>
-            <svg-icon icon-class="hot-list" size="24"></svg-icon>
-            <el-text tag="b">每日热榜</el-text>
-          </div>
-          <div>
-            <el-icon>
-              <ArrowRightBold/>
-            </el-icon>
-          </div>
-        </el-card>
+        <router-link to="/hot-list">
+          <el-card>
+            <div>
+              <svg-icon icon-class="hot-list" size="24"></svg-icon>
+              <el-text tag="b">每日热榜</el-text>
+            </div>
+            <div>
+              <el-icon>
+                <ArrowRightBold/>
+              </el-icon>
+            </div>
+          </el-card>
+        </router-link>
       </el-col>
       <el-col :lg="6" :sm="12" :xs="24">
-        <el-card>
-          <div>
-            <svg-icon icon-class="today-avatar" size="24"></svg-icon>
-            <el-text tag="b">照片推荐墙</el-text>
-          </div>
-          <div>
-            <el-icon>
-              <ArrowRightBold/>
-            </el-icon>
-          </div>
-        </el-card>
+        <router-link to="/today-avatar">
+          <el-card>
+            <div>
+              <svg-icon icon-class="today-avatar" size="24"></svg-icon>
+              <el-text tag="b">照片推荐墙</el-text>
+            </div>
+            <div>
+              <el-icon>
+                <ArrowRightBold/>
+              </el-icon>
+            </div>
+          </el-card>
+        </router-link>
       </el-col>
       <el-col :lg="6" :sm="12" :xs="24">
         <el-card @click="systemStore.settings.settingsVisible = true">
@@ -75,10 +79,24 @@
     </el-row>
 
     <!--  PV , UV , Echarts   -->
-    <el-row :gutter="10" class="mt-5">
+    <el-row :gutter="10">
       <el-col :span="16" :xs="24" style="margin-bottom: 10px;">
         <!-- 访问趋势统计图 -->
-        <div ref="VisitTrend" class="visit-trend"></div>
+        <el-card class="visit-trend-card">
+          <template #header>
+            <div>
+              <el-text size="large" tag="b">
+                访问趋势 🚀
+              </el-text>
+            </div>
+            <el-radio-group v-model="visitTrendType" size="small" @change="initVisitTrendCharts">
+              <el-radio-button label="近7天" value="0"/>
+              <el-radio-button label="近1个月" value="1"/>
+              <el-radio-button label="近6个月" value="2"/>
+            </el-radio-group>
+          </template>
+          <div ref="VisitTrend" v-loading="visitTrendLoading" class="visit-trend"></div>
+        </el-card>
       </el-col>
       <el-col :span="8" :xs="24" style="margin-bottom: 10px;">
         <div class="image-wrapper">
@@ -98,14 +116,78 @@
 // 数据
 import {useSystemStore} from "@/store/modules/system";
 import {useUserStore} from "@/store/modules/user";
+import {HomeAPI} from "@/api/home";
+import {useECharts} from "@/hooks/useECharts";
 
 defineOptions({
   name: "Home",
   inheritAttrs: false,
 });
 
+const VisitTrend = ref<HTMLDivElement | null>(null);
+
 const systemStore = useSystemStore();
 const userStore = useUserStore();
+const visitTrendType = ref<string>("0");
+const {options} = useECharts(VisitTrend, HomeAPI.VISIT_TREND.chartOptions())
+
+const weather = ref<string>();
+const visitTrendLoading = ref<boolean>(true);
+
+function initVisitTrendCharts() {
+  visitTrendLoading.value = true;
+  const now = new Date(); // 当前日期
+  let startDate = new Date(now); // 默认设置为当前日期
+  // 处理时间
+  switch (visitTrendType.value) {
+    case "0": // 近七天
+      startDate.setDate(now.getDate() - 6); // 从 7 天前开始
+      break;
+    case "1": // 近一个月
+      startDate.setMonth(now.getMonth() - 1); // 从 1 个月前开始
+      break;
+    case "2": // 近六个月
+      startDate.setMonth(now.getMonth() - 6); // 从 6 个月前开始
+      break;
+    default:
+      console.error("Invalid visitTrendType value");
+      return null;
+  }
+
+  // 格式化日期
+  const formattedStartDate = useDateFormat(startDate, 'YYYY-MM-DD').value;
+  const formattedEndDate = useDateFormat(now, 'YYYY-MM-DD').value;
+
+  // 获取访问趋势数据
+  HomeAPI.VISIT_TREND.request(formattedStartDate, formattedEndDate).then(({data}) => {
+    // 更新 ECharts 图表 值
+    options.xAxis.data = data.dates;
+    options.series[0].data = data.pvList;
+    options.series[1].data = data.uvList;
+    options.series[2].data = data.ipList;
+  }).finally(() => {
+    visitTrendLoading.value = false;
+  })
+}
+
+onMounted(() => {
+  // 获取天气信息
+  HomeAPI.WEATHER.request().then((response) => {
+    const {city, data, air, tip} = response.data
+    const {date, week, type, low, high, fengxiang, fengli, night} = data;
+
+    weather.value = `
+    欢迎来到${city}！
+    今天是 ${date} (${week})，天气 ${type}，
+    气温范围为 ${low} 到 ${high}。白天${fengxiang} ${fengli}，
+    晚上天气 ${night.type}，${night.fengxiang} ${night.fengli}。
+    当前空气质量：${air.aqi_name} (AQI: ${air.aqi})。
+    温馨提示：${tip}`
+  })
+
+  // 获取访问趋势信息
+  initVisitTrendCharts();
+})
 </script>
 
 <style lang="scss" scoped>
@@ -128,6 +210,8 @@ const userStore = useUserStore();
 
     // 限制第一个p标签为单行
     .single-line {
+      font-size: 16px;
+      font-weight: 700;
       display: -webkit-box;
       -webkit-box-orient: vertical;
       -webkit-line-clamp: 1;
@@ -138,9 +222,11 @@ const userStore = useUserStore();
 
     // 限制第二个p标签为双行
     .double-line {
+      line-height: 24px;
+      font-size: 16px;
       display: -webkit-box;
       -webkit-box-orient: vertical;
-      -webkit-line-clamp: 2;
+      -webkit-line-clamp: 4;
       overflow: hidden;
       text-overflow: ellipsis;
       white-space: normal;
@@ -187,11 +273,20 @@ const userStore = useUserStore();
   top: -6.6%;
 }
 
-//  U/PV 统计图
-.visit-trend {
-  height: 600px;
-  width: 100%;
-  background-color: red;
+
+.visit-trend-card {
+  // 卡片头部样式
+  :deep(.el-card__header) {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  //  访问趋势 统计图
+  .visit-trend {
+    height: 500px;
+    width: 100%;
+  }
 }
 
 </style>
