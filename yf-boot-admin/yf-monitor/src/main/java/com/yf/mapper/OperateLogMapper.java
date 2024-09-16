@@ -1,6 +1,7 @@
 package com.yf.mapper;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
+import com.yf.model.bo.VisitCount;
 import com.yf.model.entity.OperateLog;
 import com.yf.model.query.OperationLogQuery;
 import com.yf.model.vo.OperationLogVO;
@@ -27,5 +28,10 @@ public interface OperateLogMapper extends BaseMapper<OperateLog> {
      * @return 总条数
      */
     long getOperationLogTotal(@Param("queryParams") OperationLogQuery queryParams);
+
+    /**
+     * @return 系统访问趋势数据
+     */
+    List<VisitCount> getVisitData(@Param("startDateTime") String startDateTime, @Param("endDateTime") String endDateTime);
 }
 

@@ -107,4 +107,15 @@
         </where>
     </select>
 
+    <select id="getVisitData" resultType="com.yf.model.bo.VisitCount">
+        SELECT DATE_FORMAT(create_time, '%Y-%m-%d') AS date,
+            COUNT(*) AS pvCount,
+            COUNT(DISTINCT operator_name) AS uvCount,
+            COUNT(DISTINCT operator_ip) AS ipCount
+        FROM operate_log
+        WHERE create_time BETWEEN #{startDateTime}
+          AND #{endDateTime}
+        GROUP BY DATE_FORMAT(create_time, '%Y-%m-%d')
+    </select>
+
 </mapper>

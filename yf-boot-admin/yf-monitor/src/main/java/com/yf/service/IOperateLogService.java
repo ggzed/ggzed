@@ -5,7 +5,9 @@ import com.baomidou.mybatisplus.extension.service.IService;
 import com.yf.model.entity.OperateLog;
 import com.yf.model.query.OperationLogQuery;
 import com.yf.model.vo.OperationLogVO;
+import com.yf.model.vo.VisitTrendVO;
 
+import java.time.LocalDate;
 import java.util.List;
 
 /**
@@ -30,5 +32,14 @@ public interface IOperateLogService extends IService<OperateLog> {
      * @return 是否删除成功
      */
     boolean deleteOperationLog(List<Long> logIds);
+
+    /**
+     * 访问趋势
+     *
+     * @param startDate 开始时间
+     * @param endDate   结束时间
+     * @return ECharts图展示内容
+     */
+    VisitTrendVO getVisitTrend(LocalDate startDate, LocalDate endDate);
 }
 
