@@ -121,10 +121,10 @@ export class HomeAPI {
                         },
                         smooth: true,
                         itemStyle: {
-                            color: "#67C23A",
+                            color: "#E6A03EFF",
                         },
                         lineStyle: {
-                            color: "#67C23A",
+                            color: "#E6A03EFF",
                         },
                     },
                 ],
