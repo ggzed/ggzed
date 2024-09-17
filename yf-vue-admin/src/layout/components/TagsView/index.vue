@@ -4,7 +4,7 @@
         @click.middle         鼠标中键删除当前tag
         @contextmenu.prevent  右键打开菜单
       -->
-    <Draggable
+    <vue-draggable
         :list="visitedViews"
         class="tags-view-container-draggable"
         item-key="fullPath"
@@ -28,7 +28,7 @@
           </el-icon>
         </router-link>
       </template>
-    </Draggable>
+    </vue-draggable>
 
     <!-- tag标签操作菜单 -->
     <ul
@@ -70,7 +70,6 @@ import {TagView, useTagsViewStore} from "@/store/modules/tagsView";
 import {RouteRecordRaw} from "vue-router";
 import {useUserStore} from "@/store/modules/user";
 import {Close, Postcard, RefreshRight, ScaleToOriginal} from "@element-plus/icons-vue";
-import Draggable from 'vuedraggable';
 import {RouteConstant} from "@/constants/route";
 
 
