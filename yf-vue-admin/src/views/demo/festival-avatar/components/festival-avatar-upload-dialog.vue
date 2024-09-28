@@ -1,12 +1,12 @@
 <template>
   <el-dialog
       v-model="dialog.visible"
+      :title="dialog.title"
       :width="device === DeviceEnum.MOBILE ? '95%' : '42%'"
       class="festival-avatar-upload-dialog"
       destroy-on-close
       draggable
       overflow
-      title="上传头像"
   >
     <div style="height: 45vh">
       <vue-cropper
@@ -69,7 +69,7 @@ const props = withDefaults(defineProps<{
 
 const emit = defineEmits<{
   (event: 'update:img', value: string): void;
-  (event: 'update:dialog', value: DiaLog): void;
+  (event: 'update:dialog', value: Dialog): void;
   (event: 'avatarChanged', value: string): void;    // 头像修改事件
 }>();
 
@@ -134,7 +134,7 @@ const rotateRight = () => {
 
 // 提交并获取裁剪后的图片数据
 const submitForm = () => {
-  cropper.value?.getCropData((data) => {
+  cropper.value?.getCropData((data: string) => {
     img.value = data
     dialog.value.visible = false;
 

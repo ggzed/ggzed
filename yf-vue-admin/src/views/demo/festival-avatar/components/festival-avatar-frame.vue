@@ -111,7 +111,7 @@ function selectFrame(index: number) {
 async function drawCompositeAvatar() {
   if (!canCompositeAvatar()) return; // 调用检查方法，防止执行无效操作
 
-  const context = getCanvasContext(compositeCanvas); // 获取主 Canvas 上下文
+  const context = getCanvasContext(compositeCanvas)!; // 获取主 Canvas 上下文
 
   clearCanvas(context, compositeCanvas.value); // 清除之前的内容
 
@@ -122,7 +122,7 @@ async function drawCompositeAvatar() {
   context.drawImage(avatarImg, 0, 0, avatarImg.width, avatarImg.height);
 
   const frameImg = await loadFrameImage(selectAvatarFrameUrl.value); // 加载头像框图片
-  const frameContext = getCanvasContext(avatarFrameCanvas); // 获取头像框 Canvas 上下文
+  const frameContext = getCanvasContext(avatarFrameCanvas)!; // 获取头像框 Canvas 上下文
 
   resizeCanvas(avatarFrameCanvas, avatarImg); // 调整头像框 Canvas 大小
   setFrameOpacity(frameContext, frameOpacity.value); // 设置头像框透明度
@@ -136,7 +136,7 @@ async function drawCompositeAvatar() {
   }
 
   // 将处理后的头像框绘制到主 Canvas 上
-  context.drawImage(avatarFrameCanvas.value, 0, 0, avatarImg.width, avatarImg.height);
+  context.drawImage(avatarFrameCanvas.value!, 0, 0, avatarImg.width, avatarImg.height);
 
   // 将合成后的图片转换为数据 URL
   compositeAvatar.value = compositeCanvas.value!.toDataURL('image/png');
@@ -225,8 +225,8 @@ function loadFrameImage(src: string): Promise<HTMLImageElement> {
  * @param canvasRef Canvas 引用
  * @returns CanvasRenderingContext2D | null 返回 Canvas 上下文或 null
  */
-function getCanvasContext(canvasRef: Ref<HTMLCanvasElement | null>) {
-  return canvasRef.value?.getContext('2d', {willReadFrequently: true});
+function getCanvasContext(canvasRef: Ref<HTMLCanvasElement | null>): CanvasRenderingContext2D {
+  return canvasRef.value?.getContext('2d', {willReadFrequently: true}) as CanvasRenderingContext2D;
 }
 
 /**
@@ -295,7 +295,11 @@ function filterColorToTransparent(context: CanvasRenderingContext2D, width: numb
  * @param color2 颜色 2，包含 r、g、b 属性
  * @returns number 返回颜色之间的距离
  */
-function colorDistance(color1: { r: number; g: number; b: number }, color2: { r: number; g: number; b: number }) {
+function colorDistance(color1: { r: number; g: number; b: number }, color2: {
+  r: number;
+  g: number;
+  b: number
+}): number {
   return Math.sqrt(
       (color1.r - color2.r) ** 2 +
       (color1.g - color2.g) ** 2 +
@@ -308,7 +312,7 @@ function colorDistance(color1: { r: number; g: number; b: number }, color2: { r:
  * @param rgbString RGB 字符串（例如 'rgb(255,255,255)'）
  * @returns 返回一个包含 r、g、b 值的对象
  */
-function rgbStringToArray(rgbString: string) {
+function rgbStringToArray(rgbString: string): { r: number, g: number, b: number } {
   const result = rgbString.match(/\d+/g)?.map(Number) || [0, 0, 0]; // 匹配并转换 RGB 值
   return {r: result[0], g: result[1], b: result[2]}; // 返回 r、g、b 对象
 }

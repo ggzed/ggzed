@@ -2,7 +2,7 @@
   <div class="festival-avatar-container">
     <!--  预览区  -->
     <div class="festival-avatar-preview">
-      <div class="festival-avatar-preview__plus" @click="openAvatarDialog">
+      <div class="festival-avatar-preview__plus" @click="openAvatarDialog('上传头像')">
         <!--   展示合成后的头像     -->
         <img v-if="compositeAvatar" :src="compositeAvatar" alt="合成头像"/>
 
