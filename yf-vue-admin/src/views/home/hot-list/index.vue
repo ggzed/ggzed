@@ -15,7 +15,7 @@
           <!-- 内容 -->
           <el-scrollbar height="300">
             <div v-for="(hotInfoItem,itemIndex) in hotInfo.data" :key="itemIndex" class="hot-item-content">
-              <el-link :href="hotInfoItem.url">
+              <el-link :href="hotInfoItem.url" target="_blank">
                 <p>
                   {{ hotInfoItem.title }}
                 </p>
