@@ -103,7 +103,6 @@
           <el-image
               class="custom-image"
               fit="cover"
-              loading="lazy"
               src="https://api.vvhan.com/api/moyu"
           ></el-image>
         </div>
