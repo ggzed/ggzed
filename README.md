@@ -44,23 +44,21 @@
 
 所有页面均支持手机、平板、PC
 
-### 首页
+### 主要功能
 
 ![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/53a0af00e2b54fd88d8e87a21289d09f~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg57-86aOe:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMTg1ODYwNjAzNTg5NDQ1MSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1729758093&x-orig-sign=eYTLy%2FhOo3mm35ooHLVU9qJXnT8%3D)
 
-### 个人中心
+**个人中心**
 
 ![PC端项目截图](https://foruda.gitee.com/images/1722956633903082210/719fc801_9026884.png)
 
-### RBAC 模型控制
+**RBAC 模型控制**
 
 ![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/beb056c9abe2480f9f0991341e36e1e6~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg57-86aOe:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMTg1ODYwNjAzNTg5NDQ1MSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1729758093&x-orig-sign=muXiTWikyEiYLQm3F7rp7reXCdY%3D)
 
-### 在线聊天室
+**在线聊天室**
 
 ![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/ffc7bc4d3bd3485d83701acea853ae34~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg57-86aOe:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMTg1ODYwNjAzNTg5NDQ1MSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1729758093&x-orig-sign=RtjsTltopcKp0KKjM0mnLlk6SNA%3D)
-
-### 系统监控
 
 **操作日志**
 
@@ -94,11 +92,17 @@
 
 ### 平板
 
+**每日热点**
 
+![输入图片说明](https://foruda.gitee.com/images/1729154127712097341/1f20baab_9026884.png "屏幕截图")
 
 ### 移动端
 
+**个人主页**
 ![移动端项目截图](https://foruda.gitee.com/images/1722956662136702771/e725e761_9026884.png)
+
+**Echarts动态修改**
+![输入图片说明](https://foruda.gitee.com/images/1729154246629816063/80cba525_9026884.png "屏幕截图")
 
 ## 项目文档更新
 
