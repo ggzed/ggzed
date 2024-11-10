@@ -5,7 +5,7 @@
 	<a href="https://gitee.com/fateyifei/yf/blob/master/LICENSE"><img src="https://img.shields.io/github/license/mashape/apistatus.svg"></a>
 </p>
 <p align="center" >
-<a href="http://110.41.173.220/yf-vue-admin" target="_blank">👀 在线预览</a>
+<a href="http://8.137.57.215/yf-vue-admin" target="_blank">👀 在线预览</a>
  | <a href="#" target="_blank">📖 项目文档</a>
 </p>
 
@@ -37,7 +37,7 @@
 
 | 地址      | 链接                                                                            |
 |---------|-------------------------------------------------------------------------------|
-| 网站      | <a href="http://110.41.173.220/yf-vue-admin" target="_blank">yf-vue-admin</a> |
+| 网站      | <a href="http://8.137.57.215/yf-vue-admin" target="_blank">yf-vue-admin</a> |
 | Gitee源码 | <a href="https://gitee.com/fateyifei/yf" target="_blank">YF</a>               |
 
 ## 项目页面介绍
@@ -173,7 +173,7 @@ yarn install
 ## 启动项目
 yarn run dev
 
-## 接下来会自动打开项目到网页 , 如果未部署后端服务请设置 .env.production 中 VITE_APP_API_URL = http://110.41.173.220/api
+## 接下来会自动打开项目到网页 , 如果未部署后端服务请设置 .env.production 中 VITE_APP_API_URL = http://8.137.57.215/api
 ```
 
 ### yf-boot-admin ( 后端服务 )
