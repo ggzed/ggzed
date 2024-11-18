@@ -8,20 +8,20 @@ import java.util.List;
  * @author: YiFei
  * @since : 2023/11/5 20:48
  */
-public interface ITreeNode<T> {
+public interface ITreeNode<KEY, T> {
     /**
      * 获取当前元素Id
      *
      * @return 当前元素Id
      */
-    Number getId();
+    KEY getId();
 
     /**
      * 获取父元素Id
      *
      * @return 父元素Id
      */
-    Number getParentId();
+    KEY getParentId();
 
     /**
      * 获取当前元素的 children 属性

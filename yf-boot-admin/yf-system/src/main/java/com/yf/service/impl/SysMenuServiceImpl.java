@@ -71,7 +71,6 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
             String path = item.getPath();
             String realName = StrUtil.upperFirst(StrUtil.toCamelCase(path, '-'));
             item.setName(realName);
-            return item;
         });
         return menuConverter.routeBo2Vo(routeBos);
     }

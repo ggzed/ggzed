@@ -13,7 +13,7 @@ import java.util.List;
  * @since 2024/4/29 19:29
  */
 @Data
-public class RouteBo implements ITreeNode<RouteBo> {
+public class RouteBo implements ITreeNode<Integer, RouteBo> {
 
     private Integer id;
 

@@ -20,7 +20,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Option<T extends Number> implements ITreeNode<Option<T>> {
+public class Option<T extends Number> implements ITreeNode<T, Option<T>> {
 
     @Schema(name = "value", description = "选项的值")
     @JsonProperty("value")

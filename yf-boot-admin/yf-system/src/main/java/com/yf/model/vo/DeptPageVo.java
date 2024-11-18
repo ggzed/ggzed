@@ -14,7 +14,7 @@ import java.util.List;
  * @since 2024/5/15 15:54
  */
 @Data
-public class DeptPageVo implements ITreeNode<DeptPageVo> {
+public class DeptPageVo implements ITreeNode<Integer, DeptPageVo> {
 
     @Schema(description = "部门ID")
     private Integer id;

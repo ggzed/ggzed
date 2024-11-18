@@ -15,7 +15,7 @@ import java.util.List;
  * @since 2024/5/15 15:54
  */
 @Data
-public class MenuPageVO implements ITreeNode<MenuPageVO> {
+public class MenuPageVO implements ITreeNode<Integer, MenuPageVO> {
 
     @Schema(description = "菜单ID")
     private Integer id;
