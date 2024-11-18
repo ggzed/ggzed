@@ -5,7 +5,7 @@
 	<a href="https://gitee.com/fateyifei/yf/blob/master/LICENSE"><img src="https://img.shields.io/github/license/mashape/apistatus.svg"></a>
 </p>
 <p align="center" >
-<a href="http://8.137.57.215/yf-vue-admin" target="_blank">👀 在线预览</a>
+<a href="http://yf.wiki/yf-vue-admin" target="_blank">👀 在线预览</a>
  | <a href="#" target="_blank">📖 项目文档</a>
 </p>
 
