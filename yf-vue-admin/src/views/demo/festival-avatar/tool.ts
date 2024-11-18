@@ -1,4 +1,4 @@
-const baseUrl = "http://110.41.173.220/images/avatar-frame/"; // 节日头像地址
+const baseUrl = "http://yf.wiki/images/avatar-frame/"; // 节日头像地址
 
 export interface AvatarFrame {
     id: number;              // 头像框的唯一ID
