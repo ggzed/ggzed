@@ -40,13 +40,9 @@
 | 网站      | <a href="http://8.137.57.215/yf-vue-admin" target="_blank">yf-vue-admin</a> |
 | Gitee源码 | <a href="https://gitee.com/fateyifei/yf" target="_blank">YF</a>               |
 
-## 项目页面介绍
+## 基础项目页面介绍
 
 所有页面均支持手机、平板、PC
-
-### 主要功能
-
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/53a0af00e2b54fd88d8e87a21289d09f~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg57-86aOe:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMTg1ODYwNjAzNTg5NDQ1MSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1729758093&x-orig-sign=eYTLy%2FhOo3mm35ooHLVU9qJXnT8%3D)
 
 **个人中心**
 
