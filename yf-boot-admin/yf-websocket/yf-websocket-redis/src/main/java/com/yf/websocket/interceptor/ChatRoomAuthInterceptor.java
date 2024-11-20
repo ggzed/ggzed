@@ -41,13 +41,12 @@ public class ChatRoomAuthInterceptor extends HttpSessionHandshakeInterceptor {
     @RateLimiters(rateLimiters = {
             @RateLimiter(
                     limitTypeEnum = LimitTypeEnum.USER_ID,
-                    addToBlacklist = true,
                     rateRules = {@RateRule(
                             limit = 10,
                             timeDuration = 24,
                             timeUnit = TimeUnit.HOURS
                     )
-            })
+                    })
     })
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response, WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {

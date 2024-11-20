@@ -40,8 +40,7 @@ public class QrCodeController {
             ),
             @RateLimiter(
                     limitTypeEnum = LimitTypeEnum.USER_ID,
-                    rateRules = @RateRule(limit = 60, timeUnit = TimeUnit.MINUTES),
-                    addToBlacklist = true
+                    rateRules = @RateRule(limit = 60, timeUnit = TimeUnit.MINUTES)
             )
     })
     @Operation(summary = "生成二维码")

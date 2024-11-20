@@ -43,8 +43,7 @@ public class NsfwController {
             ),
             @RateLimiter(
                     limitTypeEnum = LimitTypeEnum.USER_ID,
-                    rateRules = @RateRule(limit = 60, timeUnit = TimeUnit.MINUTES),
-                    addToBlacklist = true
+                    rateRules = @RateRule(limit = 60, timeUnit = TimeUnit.MINUTES)
             )
     })
     @Operation(summary = "图片检测")
