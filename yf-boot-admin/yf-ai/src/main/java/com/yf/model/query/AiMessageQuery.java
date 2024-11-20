@@ -33,7 +33,7 @@ public class AiMessageQuery {
      */
     @Schema(description = "话题新鲜度", example = "0.5F")
     @Max(value = 1, message = "话题新鲜度在 0 ~ 1 之间")
-    private Float temperature;
+    private Double temperature;
 
     /**
      * 它控制了模型生成文本时考虑的词汇数量。较小的值会使生成的文本更加确定和重复，而较大的值会增加生成文本的多样性。
@@ -46,13 +46,13 @@ public class AiMessageQuery {
      */
     @Schema(description = "文章多样性", example = "0.5F")
     @Max(value = 1, message = "文本的多样性在 0 ~ 1 之间")
-    private Float topP;
+    private Double topP;
     /**
      * 它用于惩罚重复的单词或短语在生成文本中出现的频率。较大的值会增加惩罚，从而减少文本中的重复。
      */
     @Schema(description = "惩罚重复的强度", example = "0.5F")
     @Max(value = 1, message = "惩罚重复的强度 0 ~ 1 之间")
-    private Float repeatPenalty;
+    private Double repeatPenalty;
 
 
     @Data
