@@ -54,41 +54,41 @@
 
 **RBAC 模型控制**
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/beb056c9abe2480f9f0991341e36e1e6~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg57-86aOe:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMTg1ODYwNjAzNTg5NDQ1MSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1729758093&x-orig-sign=muXiTWikyEiYLQm3F7rp7reXCdY%3D)
+![RBAC 模型控制](https://foruda.gitee.com/images/1732125036179701847/e955af66_9026884.png)
 
 **在线聊天室**
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/ffc7bc4d3bd3485d83701acea853ae34~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg57-86aOe:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMTg1ODYwNjAzNTg5NDQ1MSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1729758093&x-orig-sign=RtjsTltopcKp0KKjM0mnLlk6SNA%3D)
+![在线聊天室](https://foruda.gitee.com/images/1732125140129842446/ee380e0d_9026884.png)
 
 **操作日志**
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/050d9d42e1d348c1a7d4019aa756ca86~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg57-86aOe:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMTg1ODYwNjAzNTg5NDQ1MSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1729758093&x-orig-sign=W6FT2hP8nWnI1aP1g2JBmPB40YM%3D)
+![操作日志](https://foruda.gitee.com/images/1732125190079913632/f8592b40_9026884.png)
 
 ### 有趣的小功能
 
 **每日热点推荐**
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/0bf401eb703142c99a317f7d46ca9a77~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg57-86aOe:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMTg1ODYwNjAzNTg5NDQ1MSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1729758093&x-orig-sign=N9P4FJceACJi6X37Thi41haaz0A%3D)
+![每日热点推荐](https://foruda.gitee.com/images/1732125235276043992/971c1446_9026884.png)
 
 **每日图片推荐**
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/aafaf7ad119643a5a85e82d5fde60576~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg57-86aOe:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMTg1ODYwNjAzNTg5NDQ1MSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1729758093&x-orig-sign=MauOT7j0hOXGLOHPIkPMy1JeTkk%3D)
+![每日图片推荐](https://foruda.gitee.com/images/1732125348620006400/fac03d36_9026884.png)
 
 **定制头像**
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/f0a27e2fed214df282935c1990e69fa6~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg57-86aOe:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMTg1ODYwNjAzNTg5NDQ1MSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1729758093&x-orig-sign=ODtWrWcN4ThpsBc65U92swhdRA4%3D)
+![定制头像](https://foruda.gitee.com/images/1732125386236066059/44cf7351_9026884.png)
 
 **图片内容安全检测**
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/081978a4a30c4c87a94c64252303a286~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg57-86aOe:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMTg1ODYwNjAzNTg5NDQ1MSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1729758093&x-orig-sign=EGLbmxaTf5o%2F4BO4NI5EcxntHRw%3D)
+![图片内容安全检测](https://foruda.gitee.com/images/1732125421589284928/4082908e_9026884.png)
 
 **Echarts Hooks**
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/c6a38a2ff2d54bb189e71d0a95deffba~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg57-86aOe:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMTg1ODYwNjAzNTg5NDQ1MSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1729758093&x-orig-sign=7p%2FMuWSSlq7hXW8Mq9SnS%2FrNwcg%3D)
+![Echarts Hooks](https://foruda.gitee.com/images/1732125467813935371/9dac9df9_9026884.png)
 
 **二维码生成**
 
-![image.png](https://p0-xtjj-private.juejin.cn/tos-cn-i-73owjymdk6/943ff2be7c314e7c96819c4f1b227eed~tplv-73owjymdk6-jj-mark-v1:0:0:0:0:5o6Y6YeR5oqA5pyv56S-5Yy6IEAg57-86aOe:q75.awebp?policy=eyJ2bSI6MywidWlkIjoiMTg1ODYwNjAzNTg5NDQ1MSJ9&rk3s=f64ab15b&x-orig-authkey=f32326d3454f2ac7e96d3d06cdbb035152127018&x-orig-expires=1729758093&x-orig-sign=iE4M5ebtuT5w%2BHO6AawarmfJS1k%3D)
+![二维码生成](https://foruda.gitee.com/images/1732125503989032826/69993cee_9026884.png)
 
 ### 平板
 
