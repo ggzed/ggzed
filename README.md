@@ -40,68 +40,6 @@
 | 网站      | <a href="http://8.137.57.215/yf-vue-admin" target="_blank">yf-vue-admin</a> |
 | Gitee源码 | <a href="https://gitee.com/fateyifei/yf" target="_blank">YF</a>               |
 
-## 基础项目页面介绍
-
-所有页面均支持手机、平板、PC
-
-**个人中心**
-
-![PC端项目截图](https://foruda.gitee.com/images/1722956633903082210/719fc801_9026884.png)
-
-**RBAC 模型控制**
-
-![RBAC 模型控制](https://foruda.gitee.com/images/1732125036179701847/e955af66_9026884.png)
-
-**在线聊天室**
-
-![在线聊天室](https://foruda.gitee.com/images/1732125140129842446/ee380e0d_9026884.png)
-
-**操作日志**
-
-![操作日志](https://foruda.gitee.com/images/1732125190079913632/f8592b40_9026884.png)
-
-### 有趣的小功能
-
-**每日热点推荐**
-
-![每日热点推荐](https://foruda.gitee.com/images/1732125235276043992/971c1446_9026884.png)
-
-**每日图片推荐**
-
-![每日图片推荐](https://foruda.gitee.com/images/1732125348620006400/fac03d36_9026884.png)
-
-**定制头像**
-
-![定制头像](https://foruda.gitee.com/images/1732125386236066059/44cf7351_9026884.png)
-
-**图片内容安全检测**
-
-![图片内容安全检测](https://foruda.gitee.com/images/1732125421589284928/4082908e_9026884.png)
-
-**Echarts Hooks**
-
-![Echarts Hooks](https://foruda.gitee.com/images/1732125467813935371/9dac9df9_9026884.png)
-
-**二维码生成**
-
-![二维码生成](https://foruda.gitee.com/images/1732125503989032826/69993cee_9026884.png)
-
-### 平板
-
-**每日热点**
-
-![输入图片说明](https://foruda.gitee.com/images/1729154127712097341/1f20baab_9026884.png "屏幕截图")
-
-### 移动端
-
-**个人主页**
-
-![移动端项目截图](https://foruda.gitee.com/images/1722956662136702771/e725e761_9026884.png)
-
-**Echarts动态修改**
-
-![输入图片说明](https://foruda.gitee.com/images/1729154246629816063/80cba525_9026884.png "屏幕截图")
-
 ## 项目文档更新
 
 为方便大家快速掌握项目内容，我整理了非常详尽的文档库，涵盖了前后端开发的各个方面。项目中可能遇到的难点、常见问题，基本都能在这里找到解决方案。但是肯定还有未涉及的细节或问题我会慢慢添加上，欢迎催更！你也可以在开源社区中加我私聊，我每天都在线，乐于解答大家的疑问。您的支持是我最大的动力!!!
