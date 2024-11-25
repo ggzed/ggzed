@@ -132,7 +132,7 @@ public class TreeNodeUtil {
         UnionFind unionFind = new UnionFind();
 
         // 2. 构建树形结构
-        List<T> tree = new ArrayList<>();
+        List<T> tree = isSaveFreeElements ? new ArrayList<>(dataList) : new ArrayList<>();
 
         // 3. 遍历所有节点，构建树并检查循环引用
         for (T target : dataList) {
