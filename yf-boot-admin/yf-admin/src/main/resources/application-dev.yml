@@ -133,6 +133,7 @@ file:
 system:
   machine-name: 1C-2G-01
   security-whitelist-paths:
+    - /public/**
     - /favicon.ico
     - /auth/login/*
     - /auth/refresh
@@ -214,3 +215,8 @@ springdoc:
         - "/nsfw/**"
         - "/qr/**"
       packages-to-scan: com.yf.controller.demo
+    - group: "公开接口"
+      paths-to-match:
+        - "/public/**"
+      packages-to-scan: com.yf.controller.publics
+

@@ -138,6 +138,7 @@ file:
 system:
   machine-name: 1C-2G-01
   security-whitelist-paths:
+    - /public/**
     - /favicon.ico
     - /auth/login/*
     - /auth/refresh
