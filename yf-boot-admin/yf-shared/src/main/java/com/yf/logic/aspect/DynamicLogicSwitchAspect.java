@@ -13,6 +13,9 @@ import org.springframework.beans.factory.NoSuchBeanDefinitionException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.stereotype.Component;
 
+import java.lang.management.ManagementFactory;
+import java.lang.management.MemoryMXBean;
+import java.lang.management.MemoryUsage;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
@@ -43,7 +46,9 @@ public class DynamicLogicSwitchAspect {
         String methodName = joinPoint.getSignature().getName();
         String className = joinPoint.getTarget().getClass().getName();
         long startTime = System.currentTimeMillis();
-        long startMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+
+        MemoryMXBean memoryMXBean = ManagementFactory.getMemoryMXBean();
+        MemoryUsage beforeHeapMemory = memoryMXBean.getHeapMemoryUsage();
 
         log.info("Starting logic switch for method: {} in class: {}", methodName, className);
 
@@ -81,14 +86,15 @@ public class DynamicLogicSwitchAspect {
         } finally {
             // 统计性能
             long endTime = System.currentTimeMillis();
-            long endMemory = Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory();
+            MemoryUsage afterHeapMemory = memoryMXBean.getHeapMemoryUsage();
 
             log.info("Completed logic for method: {}. Execution type: {}. Time: {} ms. Memory: {} KB.",
                     methodName,
                     dynamicLogicSwitch.executeTogether() ?
                             "Dual execution" : (shouldSwitch ?
                             "New logic" : "Original logic"),
-                    (endTime - startTime), (endMemory - startMemory) / 1024);
+                    (endTime - startTime),
+                    (afterHeapMemory.getUsed() - beforeHeapMemory.getUsed()) / 1024);
         }
     }
 
