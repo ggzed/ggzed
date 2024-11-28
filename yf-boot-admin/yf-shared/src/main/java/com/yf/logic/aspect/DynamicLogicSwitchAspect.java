@@ -131,7 +131,7 @@ public class DynamicLogicSwitchAspect {
 
         for (Class<? extends LogicSwitchRule> ruleClass : ruleClasses) {
             try {
-                LogicSwitchRule rule = applicationContext.getBean(ruleClass);
+                LogicSwitchRule rule = getHandlerInstance(ruleClass);
                 boolean result = rule.shouldApplyNewLogic(args);
                 ruleResults.add(result);
             } catch (Exception e) {
@@ -162,11 +162,10 @@ public class DynamicLogicSwitchAspect {
     /**
      * 获取新逻辑处理器实例
      */
-    private Object getHandlerInstance(Class<?> handlerClass) throws Exception {
+    private <T> T getHandlerInstance(Class<T> handlerClass) throws Exception {
         try {
             return applicationContext.getBean(handlerClass);
         } catch (NoSuchBeanDefinitionException e) {
-            log.warn("Handler bean not found, creating a new instance: {}", handlerClass.getName());
             return handlerClass.getDeclaredConstructor().newInstance();
         }
     }
