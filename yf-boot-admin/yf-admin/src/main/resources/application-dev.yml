@@ -214,6 +214,7 @@ springdoc:
         - "/ocr/**"
         - "/nsfw/**"
         - "/qr/**"
+        - "/dynamic-logic-switch/**"
       packages-to-scan: com.yf.controller.demo
     - group: "公开接口"
       paths-to-match:
