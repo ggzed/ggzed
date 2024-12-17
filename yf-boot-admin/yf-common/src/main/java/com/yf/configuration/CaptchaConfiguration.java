@@ -25,7 +25,7 @@ public class CaptchaConfiguration {
     /**
      * 验证码超时时间 , 单位 s
      */
-    private int timeout = 60;
+    private int timeout = 180;
     /**
      * 验证码宽度，表示生成的验证码图片的宽度，单位为像素。
      */
