@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
+    "@kangc/v-md-editor": "^2.3.18",
     "@types/lodash": "^4.17.7",
     "@vueuse/core": "^10.9.0",
     "axios": "^1.6.8",
@@ -20,6 +21,7 @@
     "nprogress": "^0.2.0",
     "pinia": "^2.1.7",
     "pinia-plugin-persistedstate": "^3.2.1",
+    "prismjs": "^1.29.0",
     "vue": "^3.4.21",
     "vue-cropper": "^1.1.4",
     "vue-json-pretty": "^2.4.0",
