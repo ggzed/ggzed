@@ -26,6 +26,7 @@ public enum BusinessTypeEnum implements IBaseEnum<Integer> {
     LOGOUT(9, "登出"),
     KICK_OUT(10, "踢出"),
     CHAT_ROOM(11, "聊天室"),
+    SEND_EMAIL(12, "发送邮件"),
     TEST(999, "测试");
 
 

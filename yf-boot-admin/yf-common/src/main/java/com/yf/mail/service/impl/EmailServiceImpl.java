@@ -4,10 +4,15 @@ import cn.hutool.core.util.RandomUtil;
 import com.yf.configuration.CompanyConfiguration;
 import com.yf.constants.RedisKeyConstants;
 import com.yf.constants.SystemConstants;
+import com.yf.log.common.ICommonOperateLogService;
 import com.yf.mail.constants.FreemarkerConstants;
 import com.yf.mail.constants.MailConstants;
 import com.yf.mail.dto.SendCodeFtlDto;
 import com.yf.mail.service.IEmailService;
+import com.yf.model.log.entity.OperateLog;
+import com.yf.model.log.enums.BusinessTypeEnum;
+import com.yf.model.log.enums.LogOperatorStatusEnum;
+import com.yf.model.log.enums.OperatorTypeEnum;
 import com.yf.utils.RedisUtil;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
@@ -46,6 +51,7 @@ public class EmailServiceImpl implements IEmailService {
     private final TaskExecutor ioIntensiveExecutor;
     private final RedisUtil redisUtil;
     private final Configuration configuration;
+    private final ICommonOperateLogService commonOperateLogService;
 
     /**
      * 使用邮箱发送验证码
@@ -54,7 +60,7 @@ public class EmailServiceImpl implements IEmailService {
      */
     @Override
     public void sendEmailCode(String email) {
-        // TODO 数据库存储到 email_table 里面
+        long enterTime = System.currentTimeMillis();
         // 1. 生成验证码
         String code = RandomUtil.randomString(MailConstants.EMAIL_CODE_NUM);
         // 2. 构建  sendCodeFtlDto 对象 （用于生成ftl的信息）
@@ -75,14 +81,17 @@ public class EmailServiceImpl implements IEmailService {
                         SystemConstants.EMAIL_CODE_TEMPLATE_SUBJECT.formatted(companyConfiguration.getName()),
                         stringWriter.toString()
                 );
-
+                // 6. 记录发送成功日志
+                commonOperateLogService.asyncSaveOperateLog(getOperateLog(
+                        LogOperatorStatusEnum.SUCCESS, null, null, System.currentTimeMillis() - enterTime));
             } catch (Exception e) {
-                // TODO 数据库存储错误信息到 email_table 里面
-                log.error("记录错误日志，案例说应该持久化到数据库", e);
+                // 7. 记录发送失败日志
+                commonOperateLogService.asyncSaveOperateLog(getOperateLog(
+                        LogOperatorStatusEnum.ERROR, email, e.getMessage(), System.currentTimeMillis() - enterTime));
                 throw new RuntimeException(e);
             }
         }, ioIntensiveExecutor).thenRunAsync(() -> {
-            // 6. 将验证码存储到 redis ( 默认转大写 )
+            // 8. 将验证码存储到 redis ( 默认转大写 )
             redisUtil.addCacheZSetValue(RedisKeyConstants.EMAIL_CODE_CACHE_PREFIX + email
                     , code.toUpperCase(), Instant.now().toEpochMilli(), sendCodeFtlDto.getValidTime(), TimeUnit.MINUTES);
         }, ioIntensiveExecutor);
@@ -140,5 +149,19 @@ public class EmailServiceImpl implements IEmailService {
 
         // 发送邮件
         javaMailSender.send(mimeMessage);
+    }
+
+
+    private OperateLog getOperateLog(LogOperatorStatusEnum status, String param, String errorMsg, Long costTime) {
+        return OperateLog.builder()
+                .title(BusinessTypeEnum.SEND_EMAIL.getLabel())
+                .businessType(BusinessTypeEnum.SEND_EMAIL)
+                .operatorType(OperatorTypeEnum.MANAGE)
+                .operatorParam(param)
+                .status(status)
+                .errorMsg(errorMsg)
+                .costTime(costTime)
+                .method("sendEmailCode")
+                .build();
     }
 }
