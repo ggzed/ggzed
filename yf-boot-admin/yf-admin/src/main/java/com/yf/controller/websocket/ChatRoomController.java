@@ -1,13 +1,13 @@
 package com.yf.controller.websocket;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.yf.annotation.OperationLog;
-import com.yf.annotation.PreventDuplicateSubmit;
-import com.yf.model.dto.UserConnectInfo;
-import com.yf.model.enums.BusinessTypeEnum;
-import com.yf.model.query.ChatRoomUserPageQuery;
-import com.yf.model.result.PageResult;
-import com.yf.model.result.Result;
+import com.yf.log.annotation.OperationLog;
+import com.yf.model.log.enums.BusinessTypeEnum;
+import com.yf.model.websocket.dto.UserConnectInfo;
+import com.yf.model.websocket.query.ChatRoomUserPageQuery;
+import com.yf.rate_limiting.annotation.PreventDuplicateSubmit;
+import com.yf.result.PageResult;
+import com.yf.result.Result;
 import com.yf.service.IChatRoomService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

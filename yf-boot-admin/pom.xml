@@ -6,20 +6,18 @@
 
     <groupId>com.yf</groupId>
     <artifactId>yf-boot-admin</artifactId>
-    <version>1.0.0</version>
+    <version>1.1.0</version>
     <packaging>pom</packaging>
     <modules>
-        <module>yf-integration</module>
         <module>yf-common</module>
         <module>yf-system</module>
-        <module>yf-auth</module>
         <module>yf-websocket</module>
         <module>yf-generate</module>
         <module>yf-ai</module>
         <module>yf-admin</module>
-        <module>yf-shared</module>
         <module>yf-demo</module>
         <module>yf-monitor</module>
+        <module>yf-base-model</module>
     </modules>
 
     <parent>
@@ -31,8 +29,8 @@
 
     <properties>
         <!--    JDK    -->
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
         <!-- db && orm -->
@@ -165,6 +163,11 @@
             <dependency>
                 <groupId>cn.hutool</groupId>
                 <artifactId>hutool-json</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-core</artifactId>
                 <version>${hutool.version}</version>
             </dependency>
             <!--  auth-验证码          -->

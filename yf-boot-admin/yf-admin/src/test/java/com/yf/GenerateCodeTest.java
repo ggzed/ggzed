@@ -1,8 +1,8 @@
 package com.yf;
 
-import com.yf.model.dto.GenCodeDto;
-import com.yf.model.entity.GenTable;
-import com.yf.model.entity.GenTableFields;
+import com.yf.model.generate.dto.GenCodeDto;
+import com.yf.model.generate.entity.GenTable;
+import com.yf.model.generate.entity.GenTableFields;
 import com.yf.service.impl.GenTableFieldsServiceImpl;
 import com.yf.service.impl.GenTableServiceImpl;
 import com.yf.utils.FreemarkerGenCodeUtil;

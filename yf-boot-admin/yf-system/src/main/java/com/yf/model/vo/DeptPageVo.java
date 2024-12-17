@@ -1,7 +1,7 @@
 package com.yf.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.yf.model.ITreeNode;
+import com.yf.model.common.ITreeNode;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

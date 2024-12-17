@@ -1,7 +1,7 @@
 package com.yf.utils;
 
-import com.yf.model.enums.BackendQueryMethod;
-import com.yf.model.enums.FrontendComponentType;
+import com.yf.model.generate.enums.BackendQueryMethod;
+import com.yf.model.generate.enums.FrontendComponentType;
 
 import java.util.HashMap;
 import java.util.HashSet;

@@ -1,7 +1,7 @@
 package com.yf.service;
 
-import com.yf.model.form.ResetUserPasswordForm;
-import com.yf.model.form.UserProfileForm;
+import com.yf.model.system.form.ResetUserPasswordForm;
+import com.yf.model.system.form.UserProfileForm;
 import com.yf.model.vo.UserProfileInfoVO;
 import me.zhyd.oauth.model.AuthCallback;
 import org.springframework.web.multipart.MultipartFile;

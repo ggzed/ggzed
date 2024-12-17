@@ -1,7 +1,7 @@
 package com.yf.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.yf.model.entity.GenTable;
+import com.yf.model.generate.entity.GenTable;
 
 /**
  * GenTableService

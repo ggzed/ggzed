@@ -1,7 +1,7 @@
 package com.yf.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.yf.model.dto.RouteMeta;
+import com.yf.model.system.dto.RouteMeta;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

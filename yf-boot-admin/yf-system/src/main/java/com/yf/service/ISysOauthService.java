@@ -2,9 +2,9 @@ package com.yf.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.yf.model.entity.SysOauth;
-import com.yf.model.form.OauthForm;
-import com.yf.model.query.OauthPageQuery;
+import com.yf.model.system.entity.SysOauth;
+import com.yf.model.system.form.OauthForm;
+import com.yf.model.system.query.OauthPageQuery;
 import com.yf.model.vo.OauthPageVO;
 
 import java.util.List;

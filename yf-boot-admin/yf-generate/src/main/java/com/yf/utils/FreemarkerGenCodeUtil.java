@@ -1,7 +1,7 @@
 package com.yf.utils;
 
 import cn.hutool.core.util.StrUtil;
-import com.yf.model.dto.GenCodeDto;
+import com.yf.model.generate.dto.GenCodeDto;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.TemplateException;

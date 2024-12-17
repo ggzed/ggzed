@@ -1,9 +1,10 @@
 package com.yf.converter;
 
-import com.yf.model.Option;
-import com.yf.model.bo.RouteBo;
-import com.yf.model.entity.SysMenu;
-import com.yf.model.form.MenuForm;
+
+import com.yf.model.common.Option;
+import com.yf.model.system.bo.RouteBo;
+import com.yf.model.system.entity.SysMenu;
+import com.yf.model.system.form.MenuForm;
 import com.yf.model.vo.MenuPageVO;
 import com.yf.model.vo.RouteVO;
 import org.mapstruct.Mapper;
@@ -24,8 +25,9 @@ public interface MenuConverter {
     List<RouteVO> routeBo2Vo(List<RouteBo> routeBos);
 
     List<Option<Integer>> list2options(List<SysMenu> list);
+
     @Mappings(
-            @Mapping(target = "label",source = "name")
+            @Mapping(target = "label", source = "name")
     )
     Option<Integer> list2option(SysMenu menu);
 

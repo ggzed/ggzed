@@ -1,8 +1,8 @@
 package com.yf.service.impl;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.yf.mapper.SysUserRoleMapper;
-import com.yf.model.entity.SysUserRole;
+import com.yf.mapper.system.SysUserRoleMapper;
+import com.yf.model.system.entity.SysUserRole;
 import com.yf.service.ISysUserRoleService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;

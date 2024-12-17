@@ -1,9 +1,9 @@
 package com.yf.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.yf.model.enums.DesensitizationTypeEnum;
-import com.yf.model.enums.GenderEnum;
+import com.yf.model.system.enums.GenderEnum;
 import com.yf.serializer.annotation.Desensitization;
+import com.yf.serializer.model.enums.DesensitizationTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 
@@ -18,39 +18,39 @@ import java.time.LocalDateTime;
 @Data
 public class UserPageVO {
 
-    @Schema(description="用户ID")
+    @Schema(description = "用户ID")
     private Long id;
 
-    @Schema(description="用户名")
+    @Schema(description = "用户名")
     private String username;
 
-    @Schema(description="用户昵称")
+    @Schema(description = "用户昵称")
     private String nickname;
 
-    @Schema(description="手机号")
+    @Schema(description = "手机号")
     @Desensitization(type = DesensitizationTypeEnum.MOBILE_PHONE)
     private String phoneNumber;
 
-    @Schema(description="性别")
+    @Schema(description = "性别")
     private GenderEnum gender;
 
-    @Schema(description="用户头像地址")
+    @Schema(description = "用户头像地址")
     private String avatar;
 
-    @Schema(description="用户邮箱")
+    @Schema(description = "用户邮箱")
     @Desensitization(type = DesensitizationTypeEnum.EMAIL)
     private String email;
 
-    @Schema(description="用户状态(1:启用;0:禁用)")
+    @Schema(description = "用户状态(1:启用;0:禁用)")
     private Integer status;
 
-    @Schema(description="部门名称")
+    @Schema(description = "部门名称")
     private String deptName;
 
-    @Schema(description="角色名称，多个使用英文逗号(,)分割")
+    @Schema(description = "角色名称，多个使用英文逗号(,)分割")
     private String roleNames;
 
-    @Schema(description="创建时间")
+    @Schema(description = "创建时间")
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createTime;
 

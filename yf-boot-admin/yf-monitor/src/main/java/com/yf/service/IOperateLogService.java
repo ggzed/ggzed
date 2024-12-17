@@ -2,8 +2,8 @@ package com.yf.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.yf.model.entity.OperateLog;
-import com.yf.model.query.OperationLogQuery;
+import com.yf.model.log.entity.OperateLog;
+import com.yf.model.log.query.OperationLogQuery;
 import com.yf.model.vo.OperationLogVO;
 import com.yf.model.vo.VisitTrendVO;
 

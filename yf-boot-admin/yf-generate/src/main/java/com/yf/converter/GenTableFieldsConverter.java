@@ -1,7 +1,7 @@
 package com.yf.converter;
 
-import com.yf.model.bo.SyncGenTableFieldsBo;
-import com.yf.model.entity.GenTableFields;
+import com.yf.model.generate.bo.SyncGenTableFieldsBo;
+import com.yf.model.generate.entity.GenTableFields;
 import org.mapstruct.Mapper;
 
 /**

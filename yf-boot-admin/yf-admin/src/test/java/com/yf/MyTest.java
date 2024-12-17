@@ -3,7 +3,7 @@ package com.yf;
 import com.baomidou.mybatisplus.core.toolkit.LambdaUtils;
 import com.baomidou.mybatisplus.core.toolkit.support.LambdaMeta;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
-import com.yf.model.entity.SysUser;
+import com.yf.model.system.entity.SysUser;
 import com.yf.service.ISysDictDataService;
 import com.yf.service.ISysRoleMenuService;
 import io.jsonwebtoken.Claims;

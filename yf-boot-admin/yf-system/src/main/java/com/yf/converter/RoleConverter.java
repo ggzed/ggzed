@@ -1,9 +1,9 @@
 package com.yf.converter;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.yf.model.Option;
-import com.yf.model.entity.SysRole;
-import com.yf.model.form.RoleForm;
+import com.yf.model.common.Option;
+import com.yf.model.system.entity.SysRole;
+import com.yf.model.system.form.RoleForm;
 import com.yf.model.vo.RolePageVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

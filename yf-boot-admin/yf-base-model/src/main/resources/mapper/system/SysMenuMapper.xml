@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yf.mapper.system.SysMenuMapper">
+
+    <!-- 路由菜单信息映射 -->
+    <resultMap id="RouteBoMap" type="com.yf.model.system.bo.RouteBo">
+        <id property="id" column="id"/>
+        <result property="parentId" column="parent_id"/>
+        <result property="path" column="path"/>
+        <result property="component" column="component"/>
+        <result property="redirect" column="redirect"/>
+        <result property="name" column="name"/>
+        <association property="meta" javaType="com.yf.model.system.dto.RouteMeta">
+            <result property="title" column="name"/>
+            <result property="icon" column="icon"/>
+            <result property="hidden" column="hidden"/>
+            <result property="keepAlive" column="keep_alive"/>
+            <result property="affix" column="affix"/>
+            <result property="breadcrumb" column="breadcrumb"/>
+            <result property="showSingleChildren" column="show_single_children"/>
+            <collection property="roles" ofType="java.lang.String">
+                <result column="code"/>
+            </collection>
+        </association>
+    </resultMap>
+
+    <!-- 路由菜单信息映射 -->
+    <resultMap id="MenuAndChildrenBoMap" type="com.yf.model.system.bo.MenuAndChildrenBo">
+        <id property="id" column="id"/>
+        <result property="parentId" column="parent_id"/>
+    </resultMap>
+
+    <!--  
+        解释:
+        <otherwise>
+                AND menu.id = -1       // 为了让 roles 为空的时候返回一个空的权限信息
+        </otherwise>
+    -->
+    <select id="listPermissions" resultType="java.lang.String">
+        SELECT
+        DISTINCT menu.permission
+        FROM
+        sys_menu menu
+        INNER JOIN sys_role_menu role_menu ON menu.id = role_menu.menu_id
+        INNER JOIN sys_role role ON role.id = role_menu.role_id
+        WHERE
+        menu.type IN (#{menuType.value}, #{buttonType.value})
+        AND menu.permission IS NOT NULL
+        <choose>
+            <when test="roles != null and roles.size() > 0">
+                AND role.CODE IN
+                <foreach collection="roles" item="role" separator="," open="(" close=")">
+                    #{role}
+                </foreach>
+            </when>
+            <otherwise>
+                AND menu.id = -1
+            </otherwise>
+        </choose>
+    </select>
+    <!--
+    解释: 查询菜单集合 , 除按钮以外
+    -->
+    <select id="listRoutes" resultMap="RouteBoMap">
+        SELECT menu.id,
+               menu.name,
+               menu.parent_id,
+               menu.path,
+               menu.component,
+               menu.icon,
+               menu.sort,
+               menu.hidden,
+               menu.affix,
+               menu.redirect,
+               menu.type,
+               menu.breadcrumb,
+               menu.show_single_children,
+               menu.keep_alive,
+               role.code
+        FROM sys_menu menu
+                 LEFT JOIN sys_role_menu role_menu ON menu.id = role_menu.menu_id
+                 LEFT JOIN sys_role role ON role_menu.role_id = role.id
+        WHERE menu.type != #{menuTypeEnum.value}
+        ORDER BY menu.sort asc
+    </select>
+
+    <!--  查询菜单以及子菜单  -->
+    <select id="getMenuAndChildrenByIds" resultMap="MenuAndChildrenBoMap">
+        SELECT
+        id,
+        parent_id
+        FROM
+        sys_menu
+        <where>
+            <foreach collection="menuIds" item="menuId" separator=" OR " open="(" close=")">
+                id = #{menuId} OR CONCAT(',', tree_path, ',') LIKE CONCAT('%,', #{menuId}, ',%')
+            </foreach>
+        </where>
+    </select>
+
+
+</mapper>

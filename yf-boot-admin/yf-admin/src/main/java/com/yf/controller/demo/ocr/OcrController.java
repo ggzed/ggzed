@@ -1,13 +1,17 @@
 package com.yf.controller.demo.ocr;
 
-import com.yf.annotation.*;
-import com.yf.constraints.MultipartFileValid;
+import com.yf.log.annotation.OperationLog;
 import com.yf.exception.ServiceException;
-import com.yf.model.enums.BusinessTypeEnum;
-import com.yf.model.enums.LimitTypeEnum;
-import com.yf.model.result.Result;
-import com.yf.model.result.ResultCode;
-import com.yf.models.TesseractOcrModelService;
+import com.yf.model.log.enums.BusinessTypeEnum;
+import com.yf.oss.constraints.MultipartFileValid;
+import com.yf.oss.models.TesseractOcrModelService;
+import com.yf.rate_limiting.annotation.PreventDuplicateSubmit;
+import com.yf.rate_limiting.annotation.RateLimiter;
+import com.yf.rate_limiting.annotation.RateLimiters;
+import com.yf.rate_limiting.annotation.RateRule;
+import com.yf.rate_limiting.model.enums.LimitTypeEnum;
+import com.yf.result.Result;
+import com.yf.result.ResultCode;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yf.mapper.system.SysUserMapper">
+
+    <!-- 用户认证信息映射 TODO UserAuthInfo 应该为 BO -->
+    <resultMap id="UserAuthMap" type="com.yf.model.common.dto.UserAuthInfo">
+        <id property="userId" column="userId" jdbcType="BIGINT"/>
+        <result property="username" column="username" jdbcType="VARCHAR"/>
+        <result property="password" column="password" jdbcType="VARCHAR"/>
+        <result property="status" column="status" jdbcType="BOOLEAN"/>
+        <result property="deptId" column="dept_id" jdbcType="BIGINT"/>
+        <collection property="roles" ofType="string" javaType="java.util.Set">
+            <result column="code"/>
+        </collection>
+    </resultMap>
+
+    <select id="getUserAuthInfo" resultMap="UserAuthMap">
+        SELECT user.id as userId,
+        user.username,
+        user.password,
+        user.status,
+        user.dept_id,
+        role.code
+        FROM sys_user `user`
+        LEFT JOIN sys_user_role user_role ON user_role.user_id = `user`.id
+        LEFT JOIN sys_role role ON role.id = user_role.role_id
+        <where>
+            user.deleted = 0 AND user.status = 1 AND role.status = 1
+            <choose>
+                <when test="userId != null and userId != ''">
+                    AND user.id = #{userId}
+                </when>
+                <when test="username != null and username != ''">
+                    AND user.username = #{username}
+                </when>
+                <when test="email != null and email != ''">
+                    AND user.email = #{email}
+                </when>
+                <when test="phoneNumber != null and phoneNumber != ''">
+                    AND user.phoneNumber = #{phoneNumber}
+                </when>
+                <otherwise>
+                    AND user.id = -1
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+
+    <select id="getUserPage" resultType="com.yf.model.system.bo.UserBo">
+        SELECT
+        user.id,
+        user.username,
+        user.nickname,
+        user.phone_number,
+        user.gender,
+        user.email,
+        user.avatar,
+        user.STATUS,
+        dept.NAME AS dept_name,
+        GROUP_CONCAT( role.NAME ) AS role_names,
+        user.create_time
+        FROM
+        sys_user user
+        LEFT JOIN sys_dept dept ON user.dept_id = dept.id
+        LEFT JOIN sys_user_role user_role ON user.id = user_role.user_id
+        LEFT JOIN sys_role role ON user_role.role_id = role.id
+        <where>
+            user.deleted = 0
+            <if test='queryParams.keywords!=null and queryParams.keywords.trim() neq ""'>
+                AND (
+                user.username LIKE CONCAT('%',#{queryParams.keywords},'%')
+                OR user.nickname LIKE CONCAT('%',#{queryParams.keywords},'%')
+                OR user.phone_number LIKE CONCAT('%',#{queryParams.keywords},'%')
+                OR user.email LIKE CONCAT('%',#{queryParams.keywords},'%')
+                )
+            </if>
+            <if test='queryParams.status!=null'>
+                AND user.status = #{queryParams.status}
+            </if>
+            <if test='queryParams.deptId!=null'>
+                AND concat(',',concat(dept.tree_path,',',dept.id),',') like concat('%,',#{queryParams.deptId},',%')
+            </if>
+            <if test="queryParams.startTime != null">
+                AND user.create_time &gt;= #{queryParams.startTime}
+            </if>
+            <if test="queryParams.endTime != null">
+                AND user.create_time &lt;= #{queryParams.endTime}
+            </if>
+
+        </where>
+        GROUP BY
+        user.id
+        ORDER BY
+        create_time DESC
+    </select>
+</mapper>

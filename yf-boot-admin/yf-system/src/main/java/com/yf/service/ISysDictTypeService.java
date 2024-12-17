@@ -1,10 +1,11 @@
 package com.yf.service;
 
+
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.yf.model.entity.SysDictType;
-import com.yf.model.form.DictTypeForm;
-import com.yf.model.query.DictTypePageQuery;
+import com.yf.model.system.entity.SysDictType;
+import com.yf.model.system.form.DictTypeForm;
+import com.yf.model.system.query.DictTypePageQuery;
 import com.yf.model.vo.DictTypePageVO;
 
 import java.util.List;

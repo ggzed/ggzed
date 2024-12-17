@@ -5,15 +5,15 @@ import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yf.constants.RedisKeyConstants;
 import com.yf.constants.SystemConstants;
 import com.yf.converter.MenuConverter;
-import com.yf.mapper.SysMenuMapper;
-import com.yf.model.Option;
-import com.yf.model.bo.MenuAndChildrenBo;
-import com.yf.model.bo.RouteBo;
-import com.yf.model.entity.SysMenu;
-import com.yf.model.entity.SysRoleMenu;
-import com.yf.model.enums.MenuTypeEnum;
-import com.yf.model.form.MenuForm;
-import com.yf.model.query.MenuPageQuery;
+import com.yf.mapper.system.SysMenuMapper;
+import com.yf.model.common.Option;
+import com.yf.model.system.bo.MenuAndChildrenBo;
+import com.yf.model.system.bo.RouteBo;
+import com.yf.model.system.entity.SysMenu;
+import com.yf.model.system.entity.SysRoleMenu;
+import com.yf.model.system.enums.MenuTypeEnum;
+import com.yf.model.system.form.MenuForm;
+import com.yf.model.system.query.MenuPageQuery;
 import com.yf.model.vo.MenuPageVO;
 import com.yf.model.vo.RouteVO;
 import com.yf.service.ISysMenuService;
@@ -67,10 +67,10 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
     @Override
     public List<RouteVO> listRoutes() {
         List<RouteBo> routes = this.getBaseMapper().listRoutes(MenuTypeEnum.BUTTON);
-        List<RouteBo> routeBos = TreeNodeUtil.buildTree(routes, Collections.singletonList(0), (item) -> {
-            String path = item.getPath();
+        List<RouteBo> routeBos = TreeNodeUtil.buildTree(routes, Collections.singletonList(0), (route) -> {
+            String path = route.getPath();
             String realName = StrUtil.upperFirst(StrUtil.toCamelCase(path, '-'));
-            item.setName(realName);
+            route.setName(realName);
         });
         return menuConverter.routeBo2Vo(routeBos);
     }

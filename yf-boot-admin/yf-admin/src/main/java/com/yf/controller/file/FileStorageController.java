@@ -1,6 +1,6 @@
 package com.yf.controller.file;
 
-import com.yf.storage.FileStorageService;
+import com.yf.oss.storage.FileStorageService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.validation.annotation.Validated;

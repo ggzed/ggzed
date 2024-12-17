@@ -1,6 +1,6 @@
 package com.yf.controller.demo.dynamic_logic_switch;
 
-import com.yf.model.result.Result;
+import com.yf.result.Result;
 import com.yf.service.DynamicLogicSwitchService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;

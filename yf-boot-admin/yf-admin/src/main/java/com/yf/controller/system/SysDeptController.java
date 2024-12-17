@@ -1,13 +1,13 @@
 package com.yf.controller.system;
 
-import com.yf.annotation.OperationLog;
-import com.yf.annotation.PreventDuplicateSubmit;
-import com.yf.model.Option;
-import com.yf.model.enums.BusinessTypeEnum;
-import com.yf.model.form.DeptForm;
-import com.yf.model.query.DeptPageQuery;
-import com.yf.model.result.Result;
+import com.yf.log.annotation.OperationLog;
+import com.yf.model.common.Option;
+import com.yf.model.log.enums.BusinessTypeEnum;
+import com.yf.model.system.form.DeptForm;
+import com.yf.model.system.query.DeptPageQuery;
 import com.yf.model.vo.DeptPageVo;
+import com.yf.rate_limiting.annotation.PreventDuplicateSubmit;
+import com.yf.result.Result;
 import com.yf.service.ISysDeptService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

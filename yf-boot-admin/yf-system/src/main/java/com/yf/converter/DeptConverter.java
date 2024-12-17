@@ -1,8 +1,8 @@
 package com.yf.converter;
 
-import com.yf.model.Option;
-import com.yf.model.entity.SysDept;
-import com.yf.model.form.DeptForm;
+import com.yf.model.common.Option;
+import com.yf.model.system.entity.SysDept;
+import com.yf.model.system.form.DeptForm;
 import com.yf.model.vo.DeptPageVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

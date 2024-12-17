@@ -1,9 +1,10 @@
 package com.yf.converter;
 
+
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.yf.model.Option;
-import com.yf.model.entity.SysDictData;
-import com.yf.model.form.DictDataForm;
+import com.yf.model.common.Option;
+import com.yf.model.system.entity.SysDictData;
+import com.yf.model.system.form.DictDataForm;
 import com.yf.model.vo.DictDataPageVO;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;

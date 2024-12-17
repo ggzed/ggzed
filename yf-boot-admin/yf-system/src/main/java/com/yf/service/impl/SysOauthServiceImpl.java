@@ -5,13 +5,13 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yf.converter.OauthConverter;
 import com.yf.exception.ServiceException;
-import com.yf.mapper.SysOauthMapper;
-import com.yf.model.bo.OauthBo;
-import com.yf.model.entity.SysOauth;
-import com.yf.model.form.OauthForm;
-import com.yf.model.query.OauthPageQuery;
-import com.yf.model.result.ResultCode;
+import com.yf.mapper.system.SysOauthMapper;
+import com.yf.model.system.bo.OauthBo;
+import com.yf.model.system.entity.SysOauth;
+import com.yf.model.system.form.OauthForm;
+import com.yf.model.system.query.OauthPageQuery;
 import com.yf.model.vo.OauthPageVO;
+import com.yf.result.ResultCode;
 import com.yf.service.ISysOauthService;
 import com.yf.service.ISysUserService;
 import lombok.RequiredArgsConstructor;
@@ -53,7 +53,7 @@ public class SysOauthServiceImpl extends ServiceImpl<SysOauthMapper, SysOauth> i
             // 1. 未查询则自动注册用户
             Long userId = userService.autoRegisterUser();
             // 2. 保存oauth信息
-            boolean saved = this.save(oauthConverter.form2entity(oauthForm).setId(userId));
+            boolean saved = this.save(oauthConverter.form2entity(oauthForm).setUserId(userId));
             // 3. 返回用户id
             if (saved) {
                 return userId;

@@ -1,7 +1,7 @@
 package com.yf.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.yf.model.entity.SysRoleMenu;
+import com.yf.model.system.entity.SysRoleMenu;
 
 import java.util.List;
 

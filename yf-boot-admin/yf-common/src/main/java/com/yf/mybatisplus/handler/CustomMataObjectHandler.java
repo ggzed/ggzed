@@ -1,7 +1,7 @@
 package com.yf.mybatisplus.handler;
 
 import com.baomidou.mybatisplus.core.handlers.MetaObjectHandler;
-import com.yf.utils.SecurityUtil;
+import com.yf.security.utils.SecurityUtil;
 import org.apache.ibatis.reflection.MetaObject;
 import org.springframework.stereotype.Component;
 

@@ -1,8 +1,8 @@
 package com.yf.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.yf.model.ITreeNode;
-import com.yf.model.enums.MenuTypeEnum;
+import com.yf.model.common.ITreeNode;
+import com.yf.model.system.enums.MenuTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

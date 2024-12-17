@@ -1,7 +1,7 @@
 package com.yf.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.yf.model.entity.GenTableFields;
+import com.yf.model.generate.entity.GenTableFields;
 
 import java.util.List;
 

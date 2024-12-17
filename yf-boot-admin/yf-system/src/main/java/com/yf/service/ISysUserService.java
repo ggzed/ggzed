@@ -2,11 +2,11 @@ package com.yf.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.yf.model.dto.UserAuthInfo;
-import com.yf.model.entity.SysUser;
-import com.yf.model.form.LoginForm;
-import com.yf.model.form.UserForm;
-import com.yf.model.query.UserPageQuery;
+import com.yf.model.common.dto.UserAuthInfo;
+import com.yf.model.system.entity.SysUser;
+import com.yf.model.system.form.LoginForm;
+import com.yf.model.system.form.UserForm;
+import com.yf.model.system.query.UserPageQuery;
 import com.yf.model.vo.UserInfoVO;
 import com.yf.model.vo.UserPageVO;
 

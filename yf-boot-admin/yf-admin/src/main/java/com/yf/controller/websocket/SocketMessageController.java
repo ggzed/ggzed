@@ -1,11 +1,11 @@
 package com.yf.controller.websocket;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.yf.annotation.PreventDuplicateSubmit;
-import com.yf.model.query.SocketMessagePageQuery;
-import com.yf.model.result.PageResult;
-import com.yf.model.result.Result;
 import com.yf.model.vo.SocketMessageVO;
+import com.yf.model.websocket.query.SocketMessagePageQuery;
+import com.yf.rate_limiting.annotation.PreventDuplicateSubmit;
+import com.yf.result.PageResult;
+import com.yf.result.Result;
 import com.yf.service.ISocketMessageService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

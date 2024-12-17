@@ -4,7 +4,7 @@ import com.yf.constants.ChatRequestConstant;
 import com.yf.exception.ServiceException;
 import com.yf.model.enums.MessageRoleEnum;
 import com.yf.model.query.AiMessageQuery;
-import com.yf.model.result.ResultCode;
+import com.yf.result.ResultCode;
 import com.yf.service.AiService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.messages.*;

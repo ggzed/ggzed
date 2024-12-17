@@ -1,10 +1,10 @@
 package com.yf.service;
 
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.yf.model.Option;
-import com.yf.model.entity.SysMenu;
-import com.yf.model.form.MenuForm;
-import com.yf.model.query.MenuPageQuery;
+import com.yf.model.common.Option;
+import com.yf.model.system.entity.SysMenu;
+import com.yf.model.system.form.MenuForm;
+import com.yf.model.system.query.MenuPageQuery;
 import com.yf.model.vo.MenuPageVO;
 import com.yf.model.vo.RouteVO;
 

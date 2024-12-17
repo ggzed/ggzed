@@ -1,8 +1,8 @@
 package com.yf.model.vo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.yf.model.enums.BusinessTypeEnum;
-import com.yf.model.enums.OperatorTypeEnum;
+import com.yf.model.log.enums.BusinessTypeEnum;
+import com.yf.model.log.enums.OperatorTypeEnum;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Data;
 

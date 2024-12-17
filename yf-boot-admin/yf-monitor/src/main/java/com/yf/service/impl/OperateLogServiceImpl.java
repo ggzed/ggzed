@@ -3,13 +3,16 @@ package com.yf.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
-import com.yf.mapper.OperateLogMapper;
-import com.yf.model.bo.VisitCount;
-import com.yf.model.entity.OperateLog;
-import com.yf.model.query.OperationLogQuery;
+import com.yf.converter.OperateLogConverter;
+import com.yf.mapper.log.OperateLogMapper;
+import com.yf.model.log.bo.OperationLogBO;
+import com.yf.model.log.bo.VisitCount;
+import com.yf.model.log.entity.OperateLog;
+import com.yf.model.log.query.OperationLogQuery;
 import com.yf.model.vo.OperationLogVO;
 import com.yf.model.vo.VisitTrendVO;
 import com.yf.service.IOperateLogService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
@@ -25,7 +28,11 @@ import java.util.stream.Collectors;
  * @since 2024-04-15 20:51:58
  */
 @Service("operateLogService")
+@RequiredArgsConstructor
 public class OperateLogServiceImpl extends ServiceImpl<OperateLogMapper, OperateLog> implements IOperateLogService {
+
+
+    private final OperateLogConverter logConverter;
 
     /**
      * 分页查询操作日志数据
@@ -37,9 +44,12 @@ public class OperateLogServiceImpl extends ServiceImpl<OperateLogMapper, Operate
     public IPage<OperationLogVO> getOperationLogPage(OperationLogQuery queryParams) {
         // 1. 创建分页对象
         Page<OperationLogVO> page = new Page<>(queryParams.getPageNum(), queryParams.getPageSize());
-        page.setTotal(this.baseMapper.getOperationLogTotal(queryParams));
-        page.setRecords(this.baseMapper.getOperationLogPage(queryParams));
         // 2. 分页查询
+        long total = this.baseMapper.getOperationLogTotal(queryParams);
+        List<OperationLogBO> operationLogBOS = this.baseMapper.getOperationLogPage(queryParams);
+        // 3. 填充参数
+        page.setTotal(total);
+        page.setRecords(logConverter.bos2vos(operationLogBOS));
         return page;
     }
 

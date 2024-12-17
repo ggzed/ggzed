@@ -2,10 +2,10 @@ package com.yf.service.impl;
 
 import com.yf.logic.annotation.DynamicLogicSwitch;
 import com.yf.logic.model.enums.LogicOperator;
+import com.yf.new_logic.rule.NumberRule;
+import com.yf.new_logic.rule.TestUserRule;
+import com.yf.new_logic.service.DSSNewLogic;
 import com.yf.service.DynamicLogicSwitchService;
-import com.yf.service.impl.new_logic.rule.NumberRule;
-import com.yf.service.impl.new_logic.rule.TestUserRule;
-import com.yf.service.impl.new_logic.service.DSSNewLogic;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

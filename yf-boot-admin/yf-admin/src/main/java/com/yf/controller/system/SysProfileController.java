@@ -1,13 +1,13 @@
 package com.yf.controller.system;
 
-import com.yf.annotation.OperationLog;
-import com.yf.annotation.PreventDuplicateSubmit;
-import com.yf.constraints.MultipartFileValid;
-import com.yf.model.enums.BusinessTypeEnum;
-import com.yf.model.form.ResetUserPasswordForm;
-import com.yf.model.form.UserProfileForm;
-import com.yf.model.result.Result;
+import com.yf.log.annotation.OperationLog;
+import com.yf.model.log.enums.BusinessTypeEnum;
+import com.yf.model.system.form.ResetUserPasswordForm;
+import com.yf.model.system.form.UserProfileForm;
 import com.yf.model.vo.UserProfileInfoVO;
+import com.yf.oss.constraints.MultipartFileValid;
+import com.yf.rate_limiting.annotation.PreventDuplicateSubmit;
+import com.yf.result.Result;
 import com.yf.service.ISysUserProfileService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;

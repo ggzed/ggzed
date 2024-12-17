@@ -1,8 +1,8 @@
 package com.yf.security.permission;
 
 import com.yf.constants.RedisKeyConstants;
+import com.yf.security.utils.SecurityUtil;
 import com.yf.utils.RedisUtil;
-import com.yf.utils.SecurityUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 

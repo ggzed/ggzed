@@ -1,17 +1,17 @@
 package com.yf.controller.system;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
-import com.yf.annotation.OperationLog;
-import com.yf.annotation.PreventDuplicateSubmit;
-import com.yf.model.enums.BusinessTypeEnum;
-import com.yf.model.form.UserForm;
-import com.yf.model.query.UserPageQuery;
-import com.yf.model.result.PageResult;
-import com.yf.model.result.Result;
+import com.yf.log.annotation.OperationLog;
+import com.yf.model.log.enums.BusinessTypeEnum;
+import com.yf.model.system.form.UserForm;
+import com.yf.model.system.query.UserPageQuery;
 import com.yf.model.vo.UserInfoVO;
 import com.yf.model.vo.UserPageVO;
+import com.yf.rate_limiting.annotation.PreventDuplicateSubmit;
+import com.yf.result.PageResult;
+import com.yf.result.Result;
+import com.yf.security.utils.SecurityUtil;
 import com.yf.service.ISysUserService;
-import com.yf.utils.SecurityUtil;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;

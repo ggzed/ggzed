@@ -2,10 +2,10 @@ package com.yf.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
-import com.yf.model.Option;
-import com.yf.model.entity.SysRole;
-import com.yf.model.form.RoleForm;
-import com.yf.model.query.RolePageQuery;
+import com.yf.model.common.Option;
+import com.yf.model.system.entity.SysRole;
+import com.yf.model.system.form.RoleForm;
+import com.yf.model.system.query.RolePageQuery;
 import com.yf.model.vo.RolePageVO;
 
 import java.util.List;

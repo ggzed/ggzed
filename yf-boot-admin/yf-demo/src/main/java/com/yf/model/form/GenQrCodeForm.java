@@ -1,7 +1,7 @@
 package com.yf.model.form;
 
 import com.google.zxing.qrcode.decoder.ErrorCorrectionLevel;
-import com.yf.constraints.MultipartFileValid;
+import com.yf.oss.constraints.MultipartFileValid;
 import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.validation.constraints.*;
 import lombok.Data;

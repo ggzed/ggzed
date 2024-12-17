@@ -1,9 +1,9 @@
 package com.yf.converter;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.yf.model.bo.OauthBo;
-import com.yf.model.entity.SysOauth;
-import com.yf.model.form.OauthForm;
+import com.yf.model.system.bo.OauthBo;
+import com.yf.model.system.entity.SysOauth;
+import com.yf.model.system.form.OauthForm;
 import com.yf.model.vo.OauthPageVO;
 import com.yf.model.vo.UserProfileOauthVo;
 import org.mapstruct.Mapper;

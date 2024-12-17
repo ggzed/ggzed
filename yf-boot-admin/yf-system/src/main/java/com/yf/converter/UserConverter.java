@@ -1,10 +1,10 @@
 package com.yf.converter;
 
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.yf.model.bo.UserBo;
-import com.yf.model.entity.SysUser;
-import com.yf.model.form.UserForm;
-import com.yf.model.form.UserProfileForm;
+import com.yf.model.system.bo.UserBo;
+import com.yf.model.system.entity.SysUser;
+import com.yf.model.system.form.UserForm;
+import com.yf.model.system.form.UserProfileForm;
 import com.yf.model.vo.UserInfoVO;
 import com.yf.model.vo.UserPageVO;
 import com.yf.model.vo.UserProfileInfoVO;
