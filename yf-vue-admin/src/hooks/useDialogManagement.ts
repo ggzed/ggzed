@@ -5,7 +5,7 @@ export interface Dialog {
 }
 
 export function useDialogManagement() {
-    const dialog: DiaLog = reactive({visible: false, title: '', loading: true});
+    const dialog: Dialog = reactive({visible: false, title: '', loading: true});
     /**
      * 开启对话框
      * @param title 标题
