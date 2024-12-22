@@ -1,14 +1,14 @@
-package com.yf.mail.service.impl;
+package com.yf.captcha.mail.service.impl;
 
 import cn.hutool.core.util.RandomUtil;
+import com.yf.captcha.mail.constants.FreemarkerConstants;
+import com.yf.captcha.mail.constants.MailConstants;
+import com.yf.captcha.mail.dto.SendCodeFtlDto;
+import com.yf.captcha.mail.service.IEmailService;
 import com.yf.configuration.CompanyConfiguration;
 import com.yf.constants.RedisKeyConstants;
 import com.yf.constants.SystemConstants;
 import com.yf.log.common.ICommonOperateLogService;
-import com.yf.mail.constants.FreemarkerConstants;
-import com.yf.mail.constants.MailConstants;
-import com.yf.mail.dto.SendCodeFtlDto;
-import com.yf.mail.service.IEmailService;
 import com.yf.model.log.entity.OperateLog;
 import com.yf.model.log.enums.BusinessTypeEnum;
 import com.yf.model.log.enums.LogOperatorStatusEnum;

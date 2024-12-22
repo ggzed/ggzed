@@ -1,7 +1,7 @@
 package com.yf.configuration;
 
 
-import com.yf.graphic.model.enums.CaptchaType;
+import com.yf.captcha.graphic.model.enums.CaptchaType;
 import lombok.Data;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;

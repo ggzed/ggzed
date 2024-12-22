@@ -1,4 +1,4 @@
-package com.yf.mail.dto;
+package com.yf.captcha.mail.dto;
 
 import lombok.Builder;
 import lombok.Data;

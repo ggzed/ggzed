@@ -1,4 +1,4 @@
-package com.yf.mail.service;
+package com.yf.captcha.mail.service;
 
 /**
  * 发送邮箱服务

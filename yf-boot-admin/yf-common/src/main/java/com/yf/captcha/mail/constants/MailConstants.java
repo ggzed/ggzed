@@ -1,4 +1,4 @@
-package com.yf.mail.constants;
+package com.yf.captcha.mail.constants;
 
 /**
  * 关于邮箱的常量

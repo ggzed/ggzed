@@ -1,4 +1,4 @@
-package com.yf.mail.constants;
+package com.yf.captcha.mail.constants;
 
 /**
  * 模板引擎常量

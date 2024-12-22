@@ -2,9 +2,9 @@ package com.yf.auth.security.authentication.impl;
 
 import com.yf.auth.model.enums.LoginTypeEnum;
 import com.yf.auth.security.authentication.ILoginProcessStrategy;
+import com.yf.captcha.graphic.model.form.CaptchaCodeForm;
+import com.yf.captcha.graphic.service.ICaptchaCodeService;
 import com.yf.exception.ServiceException;
-import com.yf.graphic.model.form.CaptchaCodeForm;
-import com.yf.graphic.service.ICaptchaCodeService;
 import com.yf.model.common.dto.UserAuthInfo;
 import com.yf.model.system.form.LoginForm;
 import com.yf.result.ResultCode;

@@ -1,4 +1,4 @@
-package com.yf.graphic.model.enums;
+package com.yf.captcha.graphic.model.enums;
 
 /**
  * 验证码类型

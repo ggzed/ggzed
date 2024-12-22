@@ -1,4 +1,4 @@
-package com.yf.graphic.model.dto;
+package com.yf.captcha.graphic.model.dto;
 
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.Builder;

@@ -1,8 +1,8 @@
-package com.yf.graphic.service;
+package com.yf.captcha.graphic.service;
 
 
-import com.yf.graphic.model.dto.CaptchaResult;
-import com.yf.graphic.model.form.CaptchaCodeForm;
+import com.yf.captcha.graphic.model.dto.CaptchaResult;
+import com.yf.captcha.graphic.model.form.CaptchaCodeForm;
 
 /**
  * 用户名验证码登陆
