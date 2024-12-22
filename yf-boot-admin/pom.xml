@@ -18,6 +18,7 @@
         <module>yf-demo</module>
         <module>yf-monitor</module>
         <module>yf-base-model</module>
+        <module>yf-message</module>
     </modules>
 
     <parent>
