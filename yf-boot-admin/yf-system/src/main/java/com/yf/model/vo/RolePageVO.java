@@ -13,7 +13,7 @@ import lombok.Data;
 public class RolePageVO {
 
     @Schema(description = "角色ID")
-    private Long id;
+    private Integer id;
 
     @Schema(description = "角色名称")
     private String name;
