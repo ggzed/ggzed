@@ -48,7 +48,7 @@ public enum ResultCode implements IResultCode, Serializable {
     USER_PASSWORD_LENGTH("I107", "密码长度在 8 ~ 16"),
     USER_UPDATE_USERNAME_TIMES("I108", "7天内只能修改一次用户名"),
 
-    DEMO_USER_OPERATION("I199", "演示用户信息禁止更改,您可以自己注册账号进行操作,或者与管理员生气操作账号,谢谢!"),
+    DEMO_USER_OPERATION("I199", "演示用户信息禁止更改,您可以自己注册账号进行操作,或联系管理员生成账号,谢谢!"),
 
     ROLE_CODE_DUPLICATE("I111", "含有相同角色编码的角色"),
     ROLE_BIND_USER("I112", "有用户为该角色,不能删除"),
