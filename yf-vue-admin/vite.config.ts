@@ -4,6 +4,7 @@ import AutoImport from "unplugin-auto-import/vite";
 import Components from "unplugin-vue-components/vite";
 import {ElementPlusResolver} from "unplugin-vue-components/resolvers";
 import {createSvgIconsPlugin} from "vite-plugin-svg-icons";
+import prismjs from 'vite-plugin-prismjs';
 import {resolve} from 'path';
 import {name, version,} from "./package.json";
 // https://vitejs.dev/config/
@@ -54,6 +55,12 @@ export default defineConfig(({mode}: ConfigEnv): UserConfig => {
                 iconDirs: [resolve(pathSrc, "assets/icons")],
                 // 指定symbolId格式
                 symbolId: "icon-[dir]-[name]",
+            }),
+            // markdown 高亮代码块
+            prismjs({
+                languages: ['json', 'javascript', 'typescript', 'html', 'css', 'scss', 'markdown', 'bash', 'yaml', 'sql', 'python'
+                    , 'java', 'php', 'go', 'rust', 'ruby', 'perl', 'swift', 'kotlin', 'dart', 'lua', 'r', 'scala', 'groovy', 'less',
+                    'stylus', 'scss', 'sass', 'typescript', 'tsx', 'jsx', 'yaml', 'json', 'graphql', 'xml', 'dockerfile'],
             })
         ],
         resolve: {

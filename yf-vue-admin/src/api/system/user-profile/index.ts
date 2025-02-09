@@ -124,7 +124,7 @@ export class UserProfileAPI {
      */
     static UPLOAD_AVATAR = {
         endpoint: `${API_BASE}${API_SUFFIXES.UPLOAD_AVATAR}`,
-        maxFileSize: 10 * 1024 * 1024, // 10M
+        maxFileSize: 20 * 1024 * 1024, // 20M
         allowedFileTypes: ['image/bmp', 'image/png', 'image/jpeg', 'image/gif'],
         request: (avatar: File): AxiosPromise<string> => {
             // 1. 创建一个FormData对象并附加文件

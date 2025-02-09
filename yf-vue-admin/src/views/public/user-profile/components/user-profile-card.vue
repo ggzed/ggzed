@@ -196,7 +196,7 @@ function beforeAvatarUpload(rawFile: UploadRawFile) {
     ElMessage.error('头像文件格式错误')
     return false
   } else if (rawFile.size > UserProfileAPI.UPLOAD_AVATAR.maxFileSize) {
-    ElMessage.error('头像文件大小不能超过 10MB!')
+    ElMessage.error('头像文件大小不能超过 20MB!')
     return false
   } else if (rawFile.name.length <= 0 || rawFile.name.length >= 100) {
     ElMessage.error('头像文件名不能超过100个字符')
