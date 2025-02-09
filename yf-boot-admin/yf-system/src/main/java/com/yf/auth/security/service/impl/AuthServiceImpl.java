@@ -60,7 +60,7 @@ public class AuthServiceImpl implements IAuthService {
         // 1. 解析 accessToken 是否真正过期
         if (!jwtUtil.isJwtExpired(refreshTokenForm.getAccessToken())) {
             // 1.1 未过期刷新 token 未恶意刷新
-            throw new ServiceException(ResultCode.AUTH_MALICIOUS_TOKEN_REFRESH);
+            throw new ServiceException(ResultCode.AUTH_TOKEN_EXPIRED);
         }
         // 2. 解析 refreshTokenForm 中的用户id
         Long userId = jwtUtil.getRefreshTokenUserId(refreshTokenForm.getRefreshToken());
@@ -71,7 +71,7 @@ public class AuthServiceImpl implements IAuthService {
                 throw new ServiceException(ResultCode.AUTH_TOKEN_EXPIRED);
             } else {
                 // 2.1.2 错误的 RefreshToken
-                throw new ServiceException(ResultCode.AUTH_MALICIOUS_TOKEN_REFRESH);
+                throw new ServiceException(ResultCode.AUTH_TOKEN_EXPIRED);
             }
         }
         // 3. 校验是否和缓存中 refreshToken 一致
@@ -83,7 +83,7 @@ public class AuthServiceImpl implements IAuthService {
         if (!refreshTokenForm.getAccessToken().equals(loginResult.getAccessToken()) ||
                 !refreshTokenForm.getRefreshToken().equals(loginResult.getRefreshToken())) {
             // 3.2 如果 accessToken 和 refreshToken 有一个不一致 ， 表示恶意刷新 Token
-            throw new ServiceException(ResultCode.AUTH_MALICIOUS_TOKEN_REFRESH);
+            throw new ServiceException(ResultCode.AUTH_TOKEN_EXPIRED);
         }
         // 4. 返回 刷新后的token
         return jwtUtil.refreshToken(refreshTokenForm);

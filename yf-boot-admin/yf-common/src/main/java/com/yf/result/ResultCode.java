@@ -30,10 +30,9 @@ public enum ResultCode implements IResultCode, Serializable {
     AUTH_CODE_EXPIRED("I006", "验证码过期"),
     AUTH_USER_NOT_LOGIN("I007", "用户未登录"),
     AUTH_USER_ELSEWHERE_LOGIN("I008", "账号在别处登录"),
-    AUTH_TOKEN_EXPIRED("I009", "登录令牌过期"),
+    AUTH_TOKEN_EXPIRED("I009", "由于账户长时间未操作,自动退出登录"),
     AUTH_LOGIN_TIMEOUT("I010", "登录超时"),
     AUTH_KICK_OUT("I011", "用户被踢出"),
-    AUTH_MALICIOUS_TOKEN_REFRESH("W002", "恶意刷新token"),
     AUTH_MALICIOUS_LOGIN("W006", "恶意登录"),
     AUTH_USER_INFO_ERROR("W003", "用户信息被删除,请联系管理员"),
     AUTH_USER_NOT_FOUND("I012", "未找到改用户"),
@@ -48,6 +47,8 @@ public enum ResultCode implements IResultCode, Serializable {
     USER_AUTO_REGISTER("I106", "用户自动注册失败"),
     USER_PASSWORD_LENGTH("I107", "密码长度在 8 ~ 16"),
     USER_UPDATE_USERNAME_TIMES("I108", "7天内只能修改一次用户名"),
+
+    DEMO_USER_OPERATION("I199", "演示用户信息禁止更改,您可以自己注册账号进行操作,或者与管理员生气操作账号,谢谢!"),
 
     ROLE_CODE_DUPLICATE("I111", "含有相同角色编码的角色"),
     ROLE_BIND_USER("I112", "有用户为该角色,不能删除"),
