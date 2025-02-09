@@ -2,7 +2,7 @@
   <div class="app-container">
     <div class="content">
       <el-row
-          v-for="(ApiInfo, index) in apiInfoList"
+          v-for="(apiInfo, index) in apiInfoList"
           :key="index"
           style="margin-bottom: 20px"
       >
@@ -10,10 +10,10 @@
           <!-- 信息条 -->
           <div class="info-api" @click="toggleHiddenBox(index)">
             <div id="methodDisplay" class="info-method">
-              {{ ApiInfo.method }}
+              {{ apiInfo.method }}
             </div>
-            <div class="InfoURL">
-              {{ ApiInfo.endpoint }}
+            <div class="info-url">
+              {{ apiInfo.endpoint }}
             </div>
             <el-icon
                 :style="{
@@ -71,7 +71,7 @@
                   <!-- 响应结果 -->
                   <li>
                     <span>响应结果</span>
-                    <div class="result-info">{{ ApiInfo.result }}</div>
+                    <div class="result-info">{{ apiInfo.result }}</div>
                   </li>
 
                   <!-- 提交按钮 -->
@@ -246,7 +246,7 @@ onMounted(() => {
   border-right: #cdcdcd solid 1px;
 }
 
-.InfoURL {
+.info-url {
   width: 80%;
   font-size: 16px;
 }
@@ -346,7 +346,7 @@ ul {
     height: auto;
   }
 
-  .InfoURL {
+  .info-url {
     font-size: 12px;
   }
   .hidden-box ul li {
