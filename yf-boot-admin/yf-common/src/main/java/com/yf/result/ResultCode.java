@@ -22,7 +22,7 @@ public enum ResultCode implements IResultCode, Serializable {
     SUCCESS("0000", "操作成功"),
 
     AUTH_TOKEN_INVALID("I001", "登录令牌(token)无效"),
-    AUTH_ACCESS_UNAUTHORIZED("I002", "演示环境部分接口无访问权限"),
+    AUTH_ACCESS_UNAUTHORIZED("I002", "抱歉 , 您无访问权限"),
     AUTH_PARAMETER_ERROR("I004", "授权参数错误"),
     AUTH_REGISTER_USER_ERROR("E499", "自动注册失败"),
     AUTH_LOGIN_ERROR("I005", "登录失败"),
