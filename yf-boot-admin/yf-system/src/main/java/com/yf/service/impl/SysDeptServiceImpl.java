@@ -3,12 +3,15 @@ package com.yf.service.impl;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yf.constants.SystemConstants;
 import com.yf.converter.DeptConverter;
+import com.yf.exception.ServiceException;
 import com.yf.mapper.system.SysDeptMapper;
 import com.yf.model.common.Option;
 import com.yf.model.system.entity.SysDept;
+import com.yf.model.system.entity.SysUser;
 import com.yf.model.system.form.DeptForm;
 import com.yf.model.system.query.DeptPageQuery;
 import com.yf.model.vo.DeptPageVo;
+import com.yf.result.ResultCode;
 import com.yf.service.ISysDeptService;
 import com.yf.utils.TreeNodeUtil;
 import lombok.RequiredArgsConstructor;
@@ -34,6 +37,7 @@ import java.util.stream.Collectors;
 public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> implements ISysDeptService {
 
     private final DeptConverter deptConverter;
+    private final SysUserServiceImpl userService;
 
     /**
      * @return 部门下拉列表
@@ -103,6 +107,15 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
      */
     @Override
     public boolean deleteDept(List<Integer> deptIds) {
+        if (deptIds.isEmpty()) {
+            return false;
+        }
+        // 1. 判断是否有用户绑定改部门
+        boolean exists = userService.lambdaQuery().in(SysUser::getDeptId, deptIds).exists();
+        if (exists) {
+            throw new ServiceException(ResultCode.DEPT_BIND_USER);
+        }
+        // 2. 删除部门
         // 注: 展示 mybatis-plus 的编写方式 ( 推荐 xml 编写 )
         return this.lambdaUpdate()
                 .in(SysDept::getId, deptIds)
