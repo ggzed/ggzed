@@ -169,7 +169,10 @@ public class SysDictDataServiceImpl extends ServiceImpl<SysDictDataMapper, SysDi
      */
     @Override
     public boolean updateDictDataStatus(Integer dictDataId, Boolean status) {
-        return false;
+        return this.lambdaUpdate()
+                .eq(SysDictData::getId, dictDataId)
+                .set(status != null, SysDictData::getStatus, status)
+                .update();
     }
 }
 
