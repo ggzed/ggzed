@@ -139,6 +139,7 @@ system:
     - /auth/refresh
     - /auth/*/redirect
     - /auth/*/code
+    - /oauth/support/platforms
     - /doc.html
     - /v3/api-docs/**
     - /webjars/**

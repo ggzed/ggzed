@@ -36,5 +36,12 @@ public interface ISysOauthService extends IService<SysOauth> {
      * @return 是否删除成功
      */
     boolean deleteOauth(List<Long> ids);
+
+    /**
+     * 获取系统支持的第三方授权平台列表
+     *
+     * @return 第三方平台集合
+     */
+    List<String> getSupportPlatforms();
 }
 

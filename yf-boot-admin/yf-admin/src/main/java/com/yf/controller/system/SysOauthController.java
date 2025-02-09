@@ -19,6 +19,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.stream.Collectors;
 
 /**
@@ -46,6 +47,15 @@ public class SysOauthController {
         IPage<OauthPageVO> result = oauthService.getOauthPage(queryParams);
         return PageResult.success(result);
     }
+
+    @Operation(summary = "获取系统支持的第三方授权平台列表")
+    @PreventDuplicateSubmit
+    @GetMapping("/support/platforms")
+    public Result<List<String>> getSupportPlatforms() {
+        List<String> result = oauthService.getSupportPlatforms();
+        return Result.success(result);
+    }
+
 
     @Operation(summary = "删除用户 Oauth 信息")
     @OperationLog(title = "删除用户 Oauth 信息", businessType = BusinessTypeEnum.DELETE)

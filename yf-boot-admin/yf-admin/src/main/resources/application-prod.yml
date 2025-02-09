@@ -143,6 +143,7 @@ system:
     - /auth/login/*
     - /auth/refresh
     - /auth/*/redirect
+    - /oauth/support/platforms
     - /auth/*/code
     - ${file.storage.local.access-url}/**
 

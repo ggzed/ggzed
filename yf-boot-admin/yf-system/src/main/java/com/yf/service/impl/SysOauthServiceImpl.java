@@ -3,6 +3,7 @@ package com.yf.service.impl;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.yf.configuration.JustAuthConfiguration;
 import com.yf.converter.OauthConverter;
 import com.yf.exception.ServiceException;
 import com.yf.mapper.system.SysOauthMapper;
@@ -33,6 +34,7 @@ public class SysOauthServiceImpl extends ServiceImpl<SysOauthMapper, SysOauth> i
 
     private final OauthConverter oauthConverter;
     private final ISysUserService userService;
+    private final JustAuthConfiguration justAuthConfiguration;
 
     /**
      * 第三方登录自动注册用户信息
@@ -92,6 +94,16 @@ public class SysOauthServiceImpl extends ServiceImpl<SysOauthMapper, SysOauth> i
         return this.lambdaUpdate()
                 .in(SysOauth::getId, ids)
                 .remove();
+    }
+
+    /**
+     * 获取系统支持的第三方授权平台列表
+     *
+     * @return 第三方平台集合
+     */
+    @Override
+    public List<String> getSupportPlatforms() {
+        return justAuthConfiguration.getType().keySet().stream().toList();
     }
 }
 
