@@ -16,9 +16,9 @@ import com.yf.service.ISysUserProfileService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
 import me.zhyd.oauth.model.AuthCallback;
+import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -65,7 +65,7 @@ public class SysProfileController {
     )
     @PatchMapping("/username")
     public Result<Void> updateUsername(@RequestParam
-                                       @Pattern(regexp = "^[a-zA-Z]+$", message = "用户名必须是英文")
+                                       @Length(min = 4, max = 24, message = "用户名长度为4-24位")
                                        String username) {
         boolean result = userProfileService.updateUsername(username);
         return Result.judge(result);
