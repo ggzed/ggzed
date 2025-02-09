@@ -31,6 +31,6 @@ public @interface PreventDuplicateSubmit {
      * <p>
      * 默认1秒内不允许重复提交
      */
-    int expire() default 1;
+    long expire() default 1;
 
 }
