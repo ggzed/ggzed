@@ -6,9 +6,9 @@
       draggable
       overflow
   >
-    <el-scrollbar max-height="600px">
+    <el-scrollbar max-height="400px">
       <el-tree
-          ref="menuRef"
+
           v-loading="loading"
           :data="menuList"
           :render-after-expand="false"
@@ -38,9 +38,13 @@
 <script lang="ts" setup>
 import {DeviceEnum} from "@/enums/DeviceEnum";
 import {MenuAPI} from "@/api/system/menu";
-import {RoleAPI} from "@/api/system/role";
 import {useDataLoader} from "@/hooks/useDataLoader";
-import {ElTree} from "element-plus";
+import {RoleAPI} from "@/api/system/role";
+// 组件定义
+defineOptions({
+  name: "RolePermissionDialog",
+  inheritAttrs: false,
+});
 // 组件 props & emits
 const props = withDefaults(defineProps<{
   // dialog-visible
@@ -60,7 +64,7 @@ const emits = defineEmits<{
 // hooks
 const visible = useVModel(props, 'visible', emits)
 // 数据
-const menuRef = ref(ElTree);                 // 数据Table
+const menuRef = ref<InstanceType<typeof ElTree>>()
 const {
   query,
   dataList: menuList,
