@@ -66,6 +66,7 @@ public class SysDeptServiceImpl extends ServiceImpl<SysDeptMapper, SysDept> impl
                         wrapper.like(StringUtils.hasText(keywords), SysDept::getName, keywords)// 模糊查询 Name
                 )
                 .eq(status != null, SysDept::getStatus, status)
+                .orderByAsc(SysDept::getSort)
                 .list();
         // 2. 构建树形结构
         // 2.1 获取到所有父元素
