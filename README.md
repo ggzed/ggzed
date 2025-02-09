@@ -218,8 +218,6 @@ java -jar target/yf-admin-<version>.jar > ??.log 2>&1 &
 
 欢迎 start , 欢迎交流技术 , 如果有任何不懂的地方可以联系我 , 可以无偿帮您解决 , 相当于大家互相交流学习
 
-QQ群 ： 957226269
-
 微信 （加好友后邀请进群）：
 
 <img src="https://foruda.gitee.com/images/1714351435556602409/7b1d097c_9026884.jpeg" width="235" height="220" alt="微信号"> 
