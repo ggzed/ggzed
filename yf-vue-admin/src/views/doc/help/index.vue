@@ -1,6 +1,6 @@
 <template>
   <div>
-    帮助文档
+    开发文档
   </div>
 </template>
 
@@ -16,7 +16,7 @@ defineOptions({
 
 // 生命周期
 onMounted(() => {
-  ElMessage.info("【帮助文档模块】功能正在编写中...")
+  ElMessage.info("【开发文档模块】功能正在不断完善中...")
 })
 </script>
 
