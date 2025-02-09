@@ -280,7 +280,7 @@ public class SysUserProfileServiceImpl implements ISysUserProfileService {
                 .select(SysUser::getPassword)
                 .eq(SysUser::getId, userId)
                 .one();
-        if (oldUserPassword.getPassword() != null) {
+        if (oldUserPassword != null) {
             // 2. 校验旧密码是否匹配  ( 无密码则不校验 )
             if (!passwordEncoder.matches(resetUserPasswordForm.getOldPassword(), oldUserPassword.getPassword())) {
                 throw new ServiceException(ResultCode.USER_RESET_OLD_PASSWORD);
@@ -307,7 +307,7 @@ public class SysUserProfileServiceImpl implements ISysUserProfileService {
         // 2. 返回用户是否有密码
         return userService.lambdaQuery()
                 .eq(SysUser::getId, userId)
-                .isNull(SysUser::getPassword)
+                .isNotNull(SysUser::getPassword)
                 .exists();
     }
 
