@@ -26,7 +26,7 @@ public class UserPageQuery extends BasePageQuery {
     private Integer status;
 
     @Schema(description = "部门ID")
-    private Long deptId;
+    private Integer deptId;
 
     @Schema(description = "创建时间-开始时间")
     @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")

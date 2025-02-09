@@ -38,9 +38,6 @@ public class UserForm {
     @Schema(description = "性别")
     private Integer gender;
 
-    @Schema(description = "用户头像")
-    private String avatar;
-
     @Schema(description = "邮箱")
     @Email
     private String email;
