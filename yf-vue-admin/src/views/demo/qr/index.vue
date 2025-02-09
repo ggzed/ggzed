@@ -78,7 +78,6 @@
 </template>
 
 <script lang="ts" setup>
-import {useFormManagement} from "@/hooks/useFormManagement";
 import {ErrorCorrectionLevel, GenQrCodeForm} from "@/api/demo/qr/type";
 import {FormInstance, FormRules, UploadRawFile, UploadRequestOptions} from "element-plus";
 import {QrAPI} from "@/api/demo/qr";
@@ -102,7 +101,7 @@ const initForm: GenQrCodeForm = {
 const tempImageUrl = ref<string>("");
 const qrFormRef = ref<FormInstance | null>(null);
 
-const initRules: FormRules = {
+const rules: FormRules = {
   content: [
     {required: true, message: '生成二维码的内容不能为空', trigger: 'blur'}
   ],
@@ -152,7 +151,7 @@ const initRules: FormRules = {
 }
 
 // 数据
-const {form, rules, resetForm, handleSubmit} = useFormManagement(initForm, initRules, qrFormRef);
+const form = ref<GenQrCodeForm>({...initForm});
 const result = ref<string>("");  // base64编码
 
 
@@ -187,15 +186,16 @@ function uploadFile(options: UploadRequestOptions) {
 }
 
 function submitForm() {
-  handleSubmit((form) => {
-    QrAPI.GEN.request(form).then(({data}) => {
-      result.value = data;
-    })
+  QrAPI.GEN.request(form).then(({data}) => {
+    result.value = data;
   })
 }
 
-function handleReset() {
-  resetForm();
+async function handleReset() {
+  await qrFormRef.value?.clearValidate();
+  await qrFormRef.value?.resetFields();
+  result.value = "";
+  Object.assign(form.valu, {...initForm})
 }
 
 // 生命周期

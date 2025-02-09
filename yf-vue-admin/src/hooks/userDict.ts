@@ -1,5 +1,5 @@
-import {DictDataAPI} from "@/api/system/dict/data";
-import {DictType} from "@/api/system/dict/data/type";
+import {DictDataAPI} from "@/api/system/dict-data";
+import {DictType} from "@/api/system/dict-data/type";
 
 /**
  *

@@ -30,12 +30,12 @@
 </template>
 
 <script lang="ts" setup>
-import {useDialogManagement} from "@/hooks/useDialogManagement";
+import {useDialogManage} from "@/hooks/useDialogManage";
 
 const {
   dialog: avatarDialog,
   openDialog: openAvatarDialog
-} = useDialogManagement();
+} = useDialogManage();
 
 const avatarData = ref<string>("");                           // 上传的头像
 const compositeAvatar = ref<string>("");                      // 合成后的头像

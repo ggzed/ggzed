@@ -9,6 +9,8 @@ const API_SUFFIXES = {
     PAGE: '/page',
     /** 删除授权信息 */
     DELETE: '/{oauthIds}',
+    /** 获取系统支持的第三方授权 */
+    SUPPORT_PLATFORMS: '/support/platforms',
 };
 
 export class OauthAPI {
@@ -44,4 +46,18 @@ export class OauthAPI {
             )
         }
     }
+    /**
+     * 获取系统支持的第三方授权
+     */
+    static SUPPORT_PLATFORMS = {
+        endpoint: `${API_BASE}${API_SUFFIXES.SUPPORT_PLATFORMS}`,
+        request: (): AxiosPromise<void> => {
+            return request<void>({
+                    url: OauthAPI.SUPPORT_PLATFORMS.endpoint,
+                    method: "get"
+                }
+            )
+        }
+    }
+
 }

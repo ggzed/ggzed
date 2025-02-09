@@ -1,10 +1,11 @@
 <template>
   <div>
-    Markdown : 采用字节的 markdown 组件( 优先考虑 ) , 或者 markdown-it 库等
+    Markdown : 采用字节的 markdown 组件( 优先考虑 ) , 或者 markdown-it 库等等
   </div>
 </template>
 
 <script lang="ts" setup>
+
 
 defineOptions({
   name: "Markdown",
@@ -22,4 +23,5 @@ onMounted(() => {
 
 <style lang="scss" scoped>
 /* 样式 */
+
 </style>

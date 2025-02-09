@@ -1,4 +1,4 @@
-export interface OperationLogQuery extends PageQuery {
+export interface OperationLogPageQuery extends PageQuery {
     /**
      * 业务类型（0其它 1新增 2修改 3删除 ...）
      */

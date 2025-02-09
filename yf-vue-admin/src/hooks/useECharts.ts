@@ -57,7 +57,7 @@ export function useECharts(
     // 组件挂载时初始化图表并添加窗口大小调整的事件监听器
     onMounted(() => {
         initChart(); // 初始化图表
-        window.addEventListener('resize', handleResize); // 监听窗口大小变化
+        window.addEventListener('resize', handleResize, {passive: true}); // 监听窗口大小变化
     });
 
     // 组件卸载时移除事件监听器并销毁图表实例
@@ -71,7 +71,7 @@ export function useECharts(
         if (!chartInstance.value) {
             initChart(); // 如果图表实例不存在，重新初始化
         }
-        window.addEventListener('resize', handleResize); // 监听窗口大小变化
+        window.addEventListener('resize', handleResize, {passive: true}); // 监听窗口大小变化
     });
 
     // 组件停用时移除事件监听器并销毁图表实例

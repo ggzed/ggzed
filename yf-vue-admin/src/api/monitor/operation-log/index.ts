@@ -1,6 +1,6 @@
 import request from "@/utils/request";
 import {AxiosPromise} from "axios";
-import {OperationLogQuery, OperationLogVO} from "@/api/monitor/operation-log/type";
+import {OperationLogPageQuery, OperationLogVO} from "@/api/monitor/operation-log/type";
 
 const API_BASE = '/log';
 
@@ -18,7 +18,7 @@ export class OperationLogAPI {
     static PAGE = {
         endpoint: `${API_BASE}${API_SUFFIXES.PAGE}`,
         permission: 'monitor:operation-log:list',
-        request: (params: OperationLogQuery): AxiosPromise<PageResult<OperationLogVO[]>> => {
+        request: (params: OperationLogPageQuery): AxiosPromise<PageResult<OperationLogVO[]>> => {
             return request<PageResult<OperationLogVO[]>>({
                 url: OperationLogAPI.PAGE.endpoint,
                 method: "get",

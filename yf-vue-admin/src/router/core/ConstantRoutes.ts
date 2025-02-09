@@ -2,15 +2,15 @@ import {RouteRecordRaw} from "vue-router";
 import {RouteConstant} from "@/constants/route";
 
 export const Layout = () => import("@/layout/index.vue");
-export const Home = () => import("@/views/home/index.vue");
-export const HotList = () => import("@/views/home/hot-list/index.vue");
-export const TodayAvatar = () => import("@/views/home/today-avatar/index.vue");
-export const UserProfile = () => import("@/views/system/user/profile/index.vue");
-export const Login = () => import("@/views/login/index.vue");
-export const OauthRedirect = () => import("@/views/oauth-redirect/index.vue");
-export const Redirect = () => import("@/views/redirect/index.vue");
-export const NotFound = () => import("@/views/error/404/index.vue");
-export const SERVER_ERROR = () => import("@/views/error/500/index.vue");
+export const Home = () => import("@/views/public/home/index.vue");
+export const HotList = () => import("@/views/public/hot-list/index.vue");
+export const TodayAvatar = () => import("@/views/public/today-avatar/index.vue");
+export const UserProfile = () => import("@/views/public/user-profile/index.vue");
+export const Login = () => import("@/views/public/login/index.vue");
+export const OauthRedirect = () => import("@/views/public/oauth-redirect/index.vue");
+export const Redirect = () => import("@/views/public/redirect/index.vue");
+export const NotFound = () => import("@/views/public/error/404/index.vue");
+export const SERVER_ERROR = () => import("@/views/public/error/500/index.vue");
 // 首页路由
 export const HOME_ROUTE_RAW: RouteRecordRaw = {
     path: RouteConstant.HOME_PATH.substring(1),

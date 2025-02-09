@@ -26,7 +26,7 @@ export interface UserPageQuery extends PageQuery {
     /**
      * 部门ID
      */
-    deptId?: string;
+    deptId?: number;
     /**
      * 关键字(用户名/昵称/手机号/邮箱)
      */

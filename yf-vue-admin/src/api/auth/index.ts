@@ -1,7 +1,7 @@
 import request from "@/utils/request";
 import {AxiosPromise} from "axios";
 import {CaptchaResult, LoginParams, LoginResult, RefreshTokenParams} from "./type"
-import {AuthFactory, LoginType} from "@/api/auth/factory";
+import {AuthFactory} from "@/api/auth/factory";
 
 
 const API_BASE = '/auth';
@@ -38,10 +38,10 @@ export class AuthAPI {
      * @param {object} params.oauth 第三方登录 Oauth 授权对象
      */
     static LOGIN = {
-        endpoint: (type: LoginType): string => {
+        endpoint: (type: string): string => {
             return `${API_BASE}${API_SUFFIXES.LOGIN.replace("{type}", type)}`;
         },
-        request: (type: LoginType, params: LoginParams): AxiosPromise<LoginResult> => {
+        request: (type: string, params: LoginParams): AxiosPromise<LoginResult> => {
             return request<LoginResult>({
                 url: AuthAPI.LOGIN.endpoint(type),
                 method: "post",
@@ -112,10 +112,10 @@ export class AuthAPI {
      * 第三方登录跳转
      */
     static REDIRECT_LOGIN = {
-        endpoint: (type: LoginType): string => {
+        endpoint: (type: string): string => {
             return `${API_BASE}${API_SUFFIXES.REDIRECT_LOGIN.replace("{type}", type)}`;
         },
-        request: (type: LoginType): AxiosPromise<string> => {
+        request: (type: string): AxiosPromise<string> => {
             return request<string>({
                 url: AuthAPI.REDIRECT_LOGIN.endpoint(type),
                 method: "get"

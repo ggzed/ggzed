@@ -1,7 +1,4 @@
 import {LoginParams} from "@/api/auth/type";
-import {ThirdPartyEnum} from "@/enums/ThirdPartyEnum";
-
-export type LoginType = 'USERNAME_PASSWORD' | 'PHONE' | 'EMAIL' | ThirdPartyEnum;
 
 class UsernamePasswordLogin {
     private username: string | undefined;
@@ -53,7 +50,7 @@ class OauthLogin {
 }
 
 export class AuthFactory {
-    static createLoginForm(type: LoginType, params: LoginParams) {
+    static createLoginForm(type: string, params: LoginParams) {
         switch (type) {
             case 'USERNAME_PASSWORD':
                 return new UsernamePasswordLogin(params);
@@ -61,8 +58,48 @@ export class AuthFactory {
                 return new PhoneLogin(params);
             case 'EMAIL':
                 return new EmailLogin(params);
-            case 'GITEE':
-            case 'GITHUB':
+            case "GITEE" :
+            case "GITHUB" :
+            case "WECHAT" :
+            case "WEIBO" :
+            case "QQ" :
+            case "DINGTALK" :
+            case "BAIDU" :
+            case "ALIPAY" :
+            case "AMAP" :
+            case "TENCENT" :
+            case "GOOGLE" :
+            case "FACEBOOK" :
+            case "TWITTER" :
+            case "LINKEDIN" :
+            case "INSTAGRAM" :
+            case "YAHOO" :
+            case "MICROSOFT" :
+            case "YANDEX" :
+            case "OKRU" :
+            case "VK" :
+            case "TELEGRAM" :
+            case "WHATSAPP" :
+            case "SKYPE" :
+            case "LINE" :
+            case "KAKAO" :
+            case "NAVER" :
+            case "PAYPAL" :
+            case "APPLE" :
+            case "GOOGLE_MAPS" :
+            case "YANDEX_MAPS" :
+            case "BAIDU_MAPS" :
+            case "TWITTER_MAPS" :
+            case "GOOGLE_DRIVE" :
+            case "DROPBOX" :
+            case "BOX" :
+            case "ONEDRIVE" :
+            case "MEETUP" :
+            case "SLACK" :
+            case "DISCORD" :
+            case "STEAM" :
+            case "SPOTIFY" :
+            case "APPLE_MUSIC":
                 return new OauthLogin(params);
             default:
                 throw new Error('Unsupported login type');
