@@ -170,8 +170,12 @@ public class SysUserProfileServiceImpl implements ISysUserProfileService {
                     .platformUserAvatar(loginData.getAvatar())
                     .build());
         } catch (Exception e) {
-            log.error("第三方平台 {} 绑定失败: ", type, e);
-            throw new ServiceException(ResultCode.AUTH_BIND_THIRD_PARTY_ERROR);
+            if (e instanceof ServiceException) {
+                throw (ServiceException) e;
+            } else {
+                log.error("第三方平台 {} 绑定失败: ", type, e);
+                throw new ServiceException(ResultCode.AUTH_BIND_THIRD_PARTY_ERROR);
+            }
         }
     }
 
