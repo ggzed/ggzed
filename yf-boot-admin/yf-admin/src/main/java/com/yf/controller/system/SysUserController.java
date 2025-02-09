@@ -60,7 +60,7 @@ public class SysUserController {
 
     @Operation(summary = "用户表单数据")
     @PreventDuplicateSubmit
-    @PreAuthorize("@permission.checker('system:user:list')")
+    @PreAuthorize("@permission.checker('system:user:update')")
     @GetMapping("/{userId}/form")
     public Result<UserForm> getUserForm(@PathVariable Long userId) {
         UserForm userForm = userService.getUserForm(userId);
@@ -114,6 +114,7 @@ public class SysUserController {
 
     @Operation(summary = "重置用户密码（管理员）")
     @OperationLog(title = "重置用户密码", businessType = BusinessTypeEnum.UPDATE, excludeParamNames = {"password"})
+    @PreAuthorize("@permission.checker('system:user:reset-pwd')")
     @PreventDuplicateSubmit
     @PatchMapping("/{userId}/reset-password")
     public Result<Void> resetUserPassword(
