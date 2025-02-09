@@ -1,12 +1,12 @@
 <template>
-  <el-config-provider :size="size" :locale="zhCn">
+  <el-config-provider :locale="zhCn" :size="size">
     <div class="app-container">
       <!-- 开启水印 z-index > el-affix(z-index = 100) 即可  :locale="'zh-cn'" -->
       <el-watermark
           v-if="watermarkEnabled"
-          :z-index="101"
-          :font="{ color: fontColor }"
           :content="defaultSettings.title"
+          :font="{ color: fontColor }"
+          :z-index="101"
       >
         <router-view/>
       </el-watermark>
@@ -16,7 +16,7 @@
   </el-config-provider>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import zhCn from 'element-plus/es/locale/lang/zh-cn'
 import {ThemeEnum} from "@/enums/ThemeEnum";
 import {SizeEnum} from "@/enums/SizeEnum";
@@ -60,7 +60,7 @@ onMounted(() => {
 })
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 //--el-font-size-extra-large: 20px;
 //--el-font-size-large: 18px;
 //--el-font-size-medium: 16px;
@@ -69,7 +69,6 @@ onMounted(() => {
 //--el-font-size-extra-small: 12px;
 // 使用 el-Scrollbar 组件时 , 会有 bug
 .app-container {
-  height: 100%;
   font-size: v-bind(fontStyle);
 }
 </style>

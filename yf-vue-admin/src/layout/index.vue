@@ -113,7 +113,7 @@ $transition__time: 0.25s;
   }
 
   &-main {
-    margin-top: $navbar-height !important;
+    padding-top: $navbar-height !important;
     margin-left: v-bind(pcAsideWidth);
     transition: all $transition__time;
   }
@@ -126,7 +126,7 @@ $transition__time: 0.25s;
   }
 
   .layout-container-main {
-    margin-top: calc($navbar-height + $tags-view-height) !important;
+    padding-top: calc($navbar-height + $tags-view-height) !important;
   }
 }
 
