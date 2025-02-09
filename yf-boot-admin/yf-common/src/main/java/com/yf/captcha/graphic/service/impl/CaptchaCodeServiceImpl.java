@@ -4,7 +4,6 @@ import cn.hutool.core.lang.UUID;
 import com.wf.captcha.*;
 import com.wf.captcha.base.Captcha;
 import com.yf.captcha.graphic.model.dto.CaptchaResult;
-import com.yf.captcha.graphic.model.enums.CaptchaType;
 import com.yf.captcha.graphic.model.form.CaptchaCodeForm;
 import com.yf.captcha.graphic.service.ICaptchaCodeService;
 import com.yf.configuration.CaptchaConfiguration;
@@ -71,9 +70,9 @@ public class CaptchaCodeServiceImpl implements ICaptchaCodeService {
         }
         // 2. 对于部分验证码进行大小写转换
         switch (captchaConfiguration.getType()) {
-            case CaptchaType.ARITHMETIC:
-            case CaptchaType.GIF:
-            case CaptchaType.SPEC:
+            case ARITHMETIC:
+            case GIF:
+            case SPEC:
                 code = code.toUpperCase();
                 captchaCodeForm.setVerifyCode(captchaCodeForm.getVerifyCode().toUpperCase());
         }
@@ -98,11 +97,11 @@ public class CaptchaCodeServiceImpl implements ICaptchaCodeService {
 
         Captcha captcha;
         switch (captchaConfiguration.getType()) {
-            case CaptchaType.ARITHMETIC -> captcha = new ArithmeticCaptcha(width, height, length, font);
-            case CaptchaType.CHINESE -> captcha = new ChineseCaptcha(width, height, length, font);
-            case CaptchaType.CHINESE_GIF -> captcha = new ChineseGifCaptcha(width, height, length, font);
-            case CaptchaType.GIF -> captcha = new GifCaptcha(width, height, length, font);
-            case CaptchaType.SPEC -> captcha = new SpecCaptcha(width, height, length, font);
+            case ARITHMETIC -> captcha = new ArithmeticCaptcha(width, height, length, font);
+            case CHINESE -> captcha = new ChineseCaptcha(width, height, length, font);
+            case CHINESE_GIF -> captcha = new ChineseGifCaptcha(width, height, length, font);
+            case GIF -> captcha = new GifCaptcha(width, height, length, font);
+            case SPEC -> captcha = new SpecCaptcha(width, height, length, font);
             // 默认为图形验证码 （预防调用者全部配置错误）
             default -> captcha = new GifCaptcha(width, height, length, font);
         }
