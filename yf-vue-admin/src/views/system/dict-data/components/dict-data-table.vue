@@ -29,7 +29,7 @@
                    :disabled="dictDataIds.length === 0"
                    plain
                    type="danger"
-                   @click="deleteData(dictDataIds, null, props.loadData)">
+                   @click="deleteData(dictDataIds, undefined, props.loadData)">
           <el-icon>
             <delete/>
           </el-icon>
@@ -66,7 +66,7 @@
         <template #default="scope">
           <el-tag v-show="scope.row.status !== null"
                   :type="EnableStatusEnum.TAG_STYLE[scope.row.status % 2]"
-                  @click="updateDataStatus([scope.row.id],scope.row.name,!scope.row.status,props.loadData)">
+                  @click="updateDataStatus(scope.row.id,scope.row.name,!scope.row.status,props.loadData)">
             {{ EnableStatusEnum.OPTIONS[scope.row.status] }}
           </el-tag>
         </template>
@@ -111,7 +111,7 @@
       <el-scrollbar>
         <Pagination v-model:current-page="query.pageNum"
                     v-model:page-size="query.pageSize"
-                    :total="props.total" @handle-page-change="props.loadData"/>
+                    :total="props.total" @handle-page-change="props.loadData()"/>
       </el-scrollbar>
     </template>
   </el-card>
@@ -168,7 +168,7 @@ const {
 const {
   deleteData,
   updateDataStatus
-} = useCrudActions<DictDataForm>(DictDataAPI.SAVE.request, DictDataAPI.UPDATE.request, DictDataAPI.DELETE.request, DictDataAPI.UPDATE_STATUS.request);
+} = useCrudActions<number, DictDataForm>(DictDataAPI.SAVE.request, DictDataAPI.UPDATE.request, DictDataAPI.DELETE.request, DictDataAPI.UPDATE_STATUS.request);
 // 数据
 const device = computed(() => useSystemStore().app.device)            // 设备类型
 const dataTableRef = ref<TableInstance | null>(null);                 // 数据Table

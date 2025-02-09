@@ -51,8 +51,8 @@ export class OauthAPI {
      */
     static SUPPORT_PLATFORMS = {
         endpoint: `${API_BASE}${API_SUFFIXES.SUPPORT_PLATFORMS}`,
-        request: (): AxiosPromise<void> => {
-            return request<void>({
+        request: (): AxiosPromise<string[]> => {
+            return request<string[]>({
                     url: OauthAPI.SUPPORT_PLATFORMS.endpoint,
                     method: "get"
                 }

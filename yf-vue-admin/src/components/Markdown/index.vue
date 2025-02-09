@@ -2,7 +2,7 @@
   <v-md-editor v-model="modelValue"
                :disabled-menus="[]"
                :height="props.height"
-               :include-level="props.includeLevel"
+               :include-level="[1, 2, 3, 4, 5, 6]"
                :left-toolbar="props.leftToolBar"
                :right-toolbar="props.rightToolBar"
                :toolbar="toolbar"
@@ -17,12 +17,10 @@ const props = withDefaults(defineProps<{
   modelValue: string;
   savePath: string;
   height?: string;
-  includeLevel?: number[];
   leftToolBar?: string;
   rightToolBar?: string;
 }>(), {
   height: "100%",
-  includeLevel: [1, 2, 3, 4, 5, 6],
   leftToolBar: "undo redo | h bold italic strikethrough quote | ul ol table hr customAlign | link image code | tip emoji customTodoList customToc| save",
   rightToolBar: "preview toc fullscreen"
 });

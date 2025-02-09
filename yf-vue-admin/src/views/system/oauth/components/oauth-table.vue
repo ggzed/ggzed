@@ -7,7 +7,7 @@
                    :disabled="oauthIds.length === 0"
                    plain
                    type="danger"
-                   @click="deleteData(oauthIds,null,props.loadData)">
+                   @click="deleteData(oauthIds,undefined,props.loadData)">
           <el-icon>
             <Link/>
           </el-icon>
@@ -59,7 +59,7 @@
       <el-scrollbar>
         <Pagination v-model:current-page="query.pageNum"
                     v-model:page-size="query.pageSize"
-                    :total="props.total" @handle-page-change="props.loadData"/>
+                    :total="props.total" @handle-page-change="props.loadData()"/>
       </el-scrollbar>
     </template>
   </el-card>
@@ -88,7 +88,7 @@ const query = useVModel(props, 'query', emits)
 
 const {
   deleteData,
-} = useCrudActions(null, null, OauthAPI.DELETE.request, null);
+} = useCrudActions(undefined, undefined, OauthAPI.DELETE.request, undefined);
 
 const dataTableRef = ref<TableInstance | null>(null);                 // 数据Table
 const {selectedIds: oauthIds, handleCellDblclick, handleSelectionChange} = useTableManagement<number>(dataTableRef);

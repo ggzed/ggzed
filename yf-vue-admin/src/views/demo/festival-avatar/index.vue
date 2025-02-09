@@ -24,7 +24,7 @@
     </div>
 
     <!--  头像上传-模态框  -->
-    <festival-avatar-upload-dialog v-model:dialog="avatarDialog" v-model:img="avatarData"/>
+    <festival-avatar-upload-dialog v-model:img="avatarData" v-model:visible="visible" :title="title"/>
 
   </div>
 </template>
@@ -33,7 +33,8 @@
 import {useDialogManage} from "@/hooks/useDialogManage";
 
 const {
-  dialog: avatarDialog,
+  title,
+  visible,
   openDialog: openAvatarDialog
 } = useDialogManage();
 

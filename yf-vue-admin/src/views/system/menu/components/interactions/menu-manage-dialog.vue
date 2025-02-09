@@ -176,7 +176,7 @@
     <template #footer>
       <div class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
-        <el-button @click="props.closeDialog">取 消</el-button>
+        <el-button @click="props.closeDialog()">取 消</el-button>
       </div>
     </template>
   </el-dialog>
@@ -209,12 +209,12 @@ const props = withDefaults(defineProps<{
   // dialog-title
   title: string;
   // 设备
-  device: DeviceEnum;
+  device?: DeviceEnum;
   // 加载数据
   loadData: (callback?: () => void) => Promise<void>;
   // 关闭弹窗
   closeDialog: (callback?: () => void) => void;
-}>(), {device: DeviceEnum.PC});
+}>(), {device: DeviceEnum.DESKTOP});
 
 const emits = defineEmits<{
   (event: "update:visible", visible: boolean): void
@@ -225,10 +225,11 @@ const visible = useVModel(props, 'visible', emits)
 const {
   saveData,
   updateData,
-} = useCrudActions<MenuForm>(MenuAPI.SAVE.request, MenuAPI.UPDATE.request, MenuAPI.DELETE.request, MenuAPI.UPDATE_HIDDEN.request);
+} = useCrudActions<number, MenuForm>(MenuAPI.SAVE.request, MenuAPI.UPDATE.request, MenuAPI.DELETE.request, MenuAPI.UPDATE_HIDDEN.request);
 // 初始化数据
 const initialForm: MenuForm = {
   name: undefined,
+  parentId: 0,
   component: undefined,
   icon: undefined,
   permission: undefined,
@@ -276,9 +277,9 @@ async function submitForm() {
  * 校验文件路径
  */
 function validatePath(rule: any, value: any, callback: any) {
-  if (form.type === MenuTypeEnum.EXT_LINK && !value) {
+  if (form.value.type === MenuTypeEnum.EXT_LINK && !value) {
     callback(new Error('请输入外联地址'));
-  } else if (form.type !== MenuTypeEnum.BUTTON && !value) {
+  } else if (form.value.type !== MenuTypeEnum.BUTTON && !value) {
     callback(new Error('请输入路由路径'));
   } else {
     callback();
@@ -291,7 +292,7 @@ function validatePath(rule: any, value: any, callback: any) {
 function validateName(rule: any, value: any, callback: any) {
   if (!value) {
     if (!value) {
-      if (form.type === MenuTypeEnum.BUTTON) {
+      if (form.value.type === MenuTypeEnum.BUTTON) {
         callback(new Error('请输入按钮名称'));
       } else {
         callback(new Error('请输入菜单名称'));

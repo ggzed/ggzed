@@ -54,7 +54,7 @@ export interface RoleForm {
     /**
      * 角色名称
      */
-    name: string;
+    name?: string;
     /**
      * 显示顺序
      */

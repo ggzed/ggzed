@@ -35,7 +35,7 @@ const oauthStore = useOauthStore();                   // oauth 信息
 const loading = ref(false);                           // 加载状态
 
 // 方法
-async function loadData() {
+async function loadData(callback?: () => void): Promise<void> {
   loading.value = true;
   try {
     await UserProfileAPI.INFO.request().then(({data}) => {

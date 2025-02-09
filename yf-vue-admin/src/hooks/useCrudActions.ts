@@ -1,14 +1,17 @@
-import {AxiosResponse} from "axios";
+import {AxiosPromise} from "axios";
 
-export function useCrudActions<T>(
+/**
+ * KEY 主键类型 , T 表单类型
+ */
+export function useCrudActions<KEY, T>(
     // 新增数据 API
-    saveDataApi?: (data: T) => Promise<AxiosResponse<void>>,
+    saveDataApi?: (data: T) => AxiosPromise<number>,
     // 修改数据 API
-    updateDataApi?: (id: string | number, data: T) => Promise<AxiosResponse<void>>,
+    updateDataApi?: (id: KEY, data: T) => AxiosPromise<void>,
     // 删除数据 API
-    deleteDataApi?: (ids: Array<string | number>) => Promise<AxiosResponse<void>>,
+    deleteDataApi?: (ids: string) => AxiosPromise<void>,
     // 修改数据状态 API
-    updateStatusApi?: (id: string | number, status: boolean) => Promise<AxiosResponse<void>>,
+    updateStatusApi?: (id: KEY, status: boolean) => AxiosPromise<void>,
 ) {
 
     /**
@@ -30,7 +33,7 @@ export function useCrudActions<T>(
      * 根据是否需要确认弹窗调用不同的逻辑
      */
     async function handleAction(
-        apiFn: () => Promise<void>,
+        apiFn: () => AxiosPromise | undefined,
         message: string | null, // 如果有 message 则需要确认操作
         successMessage: string,
         onSuccess?: () => void,
@@ -61,7 +64,7 @@ export function useCrudActions<T>(
      * @param onError 失败回调
      */
     async function updateDataStatus(
-        id: string | number,
+        id: KEY,
         name: string,
         status: boolean,
         onSuccess?: () => void,
@@ -79,7 +82,7 @@ export function useCrudActions<T>(
      * @param onError 失败回调
      */
     async function deleteData(
-        ids: Array<string | number>,
+        ids: Array<KEY>,
         name?: string,
         onSuccess?: () => void,
         onError?: (error: any) => void
@@ -94,7 +97,7 @@ export function useCrudActions<T>(
         await handleAction(() => saveDataApi?.(data), null, '新增数据成功', onSuccess, onError);
     }
 
-    async function updateData(id: string | number, data: T, onSuccess?: () => void, onError?: (error: any) => void): Promise<void> {
+    async function updateData(id: KEY, data: T, onSuccess?: () => void, onError?: (error: any) => void): Promise<void> {
         await handleAction(() => updateDataApi?.(id, data), null, '修改数据成功', onSuccess, onError);
     }
 

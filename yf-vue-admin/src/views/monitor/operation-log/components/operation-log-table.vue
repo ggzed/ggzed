@@ -7,7 +7,7 @@
                    :disabled="logIds.length === 0"
                    plain
                    type="danger"
-                   @click="deleteData(logIds,'',onSuccess)">
+                   @click="deleteData(logIds,undefined,onSuccess)">
           <el-icon>
             <delete/>
           </el-icon>
@@ -93,7 +93,7 @@
       <el-scrollbar>
         <Pagination v-model:current-page="query.pageNum"
                     v-model:page-size="query.pageSize"
-                    :total="props.total" @handle-page-change="props.loadData"/>
+                    :total="props.total" @handle-page-change="props.loadData()"/>
       </el-scrollbar>
     </template>
   </el-card>
@@ -117,8 +117,6 @@ import {useDialogManage} from "@/hooks/useDialogManage";
 import {TableInstance} from "element-plus";
 import {useTableManagement} from "@/hooks/useTableManagement";
 import {useCrudActions} from "@/hooks/useCrudActions";
-import {DeptForm} from "@/api/system/dept/type";
-import {DeptAPI} from "@/api/system/dept";
 import {useSystemStore} from "@/store/modules/system";
 // 组件定义
 defineOptions({
@@ -149,7 +147,7 @@ const {
 const dataTableRef = ref<TableInstance | null>(null);
 const {
   deleteData
-} = useCrudActions<DeptForm>(null, null, DeptAPI.DELETE.request, null);
+} = useCrudActions<number, any>(undefined, undefined, OperationLogAPI.DELETE.request, undefined);
 
 const {selectedIds: logIds, handleCellDblclick, handleSelectionChange} = useTableManagement<number>(dataTableRef);
 

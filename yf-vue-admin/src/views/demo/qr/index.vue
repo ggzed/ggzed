@@ -98,6 +98,9 @@ const initForm: GenQrCodeForm = {
   ratio: 5
 }
 
+// 数据
+const form = ref<GenQrCodeForm>({...initForm});
+const result = ref<string>("");  // base64编码
 const tempImageUrl = ref<string>("");
 const qrFormRef = ref<FormInstance | null>(null);
 
@@ -134,7 +137,7 @@ const rules: FormRules = {
   ratio: [
     {
       validator: (rule, value, callback) => {
-        if (form.logo && !value) {
+        if (form.value.logo && !value) {
           callback(new Error('有Logo时必须填写缩放系数'));
         } else {
           callback();
@@ -149,10 +152,6 @@ const rules: FormRules = {
     }
   ]
 }
-
-// 数据
-const form = ref<GenQrCodeForm>({...initForm});
-const result = ref<string>("");  // base64编码
 
 
 function beforeFileUpload(rawFile: UploadRawFile) {
@@ -174,7 +173,7 @@ function uploadFile(options: UploadRequestOptions) {
   return new Promise((resolve) => {
     // 1. 执行上传操作
     const file = options.file;
-    form.logo = file;
+    form.value.logo = file;
     // 2. 删除临时文件，新增新文件
     if (tempImageUrl.value != "") {
       URL.revokeObjectURL(tempImageUrl.value);
@@ -186,7 +185,7 @@ function uploadFile(options: UploadRequestOptions) {
 }
 
 function submitForm() {
-  QrAPI.GEN.request(form).then(({data}) => {
+  QrAPI.GEN.request(form.value).then(({data}) => {
     result.value = data;
   })
 }
@@ -195,7 +194,7 @@ async function handleReset() {
   await qrFormRef.value?.clearValidate();
   await qrFormRef.value?.resetFields();
   result.value = "";
-  Object.assign(form.valu, {...initForm})
+  Object.assign(form.value, {...initForm})
 }
 
 // 生命周期

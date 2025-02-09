@@ -5,7 +5,7 @@
       :width="device === DeviceEnum.MOBILE ? '90%' : '30%'"
       draggable
       overflow
-      @close="props.closeDialog"
+      @close="props.closeDialog()"
   >
     <el-form
         ref="updatePasswordFormRef"
@@ -26,7 +26,7 @@
     <template #footer>
       <div class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
-        <el-button @click="props.closeDialog">取 消</el-button>
+        <el-button @click="props.closeDialog()">取 消</el-button>
       </div>
     </template>
   </el-dialog>

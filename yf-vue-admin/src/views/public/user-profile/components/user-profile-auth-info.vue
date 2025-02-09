@@ -65,9 +65,11 @@
 <script lang="ts" setup>
 import {OauthAPI} from "@/api/system/oauth";
 import {AuthAPI} from "@/api/auth";
-import {UserProfileInfoVO} from "@/api/system/user-profile/type";
+import {UserProfileInfoVO, UserProfileOauthVo} from "@/api/system/user-profile/type";
 import {useDialogManage} from "@/hooks/useDialogManage";
 import {UserProfileAPI} from "@/api/system/user-profile";
+import {useRoute} from "vue-router";
+import {useOauthStore} from "@/store/modules/oauth";
 // 组件定义
 defineOptions({
   name: "UserProfileAuthInfo",
@@ -75,8 +77,8 @@ defineOptions({
 });
 // props & emits
 const props = withDefaults(defineProps<{
-  userProfileInfo: UserProfileInfoVO,
-  loadData: () => void,
+  userProfileInfo: UserProfileInfoVO;
+  loadData: (callback?: () => void) => Promise<void>;
 }>(), {});
 
 const emits = defineEmits<{
@@ -92,8 +94,10 @@ const {
   closeDialog
 } = useDialogManage();
 // 数据
+const route = useRoute()
+const oauthStore = useOauthStore();                   // oauth 信息
 const supportOauthPlatforms = ref<string[]>([]) // 支持的 oauth 平台
-const oauthProviders = computed(() => userProfileInfo.oauthInfo?.map(info => info.platformName))
+const oauthProviders = computed(() => userProfileInfo.value.oauthInfo?.map((info: UserProfileOauthVo) => info.platformName))
 
 // 方法
 /**

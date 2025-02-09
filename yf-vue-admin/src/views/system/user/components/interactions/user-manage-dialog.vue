@@ -73,7 +73,6 @@ import {DeviceEnum} from "@/enums/DeviceEnum";
 import {EnableStatusEnum} from "@/constants/system";
 import {FormInstance, FormRules} from "element-plus";
 import {useCrudActions} from "@/hooks/useCrudActions";
-import {DictTypeForm} from "@/api/system/dict-type/type";
 import {UserAPI} from "@/api/system/user";
 import {UserForm} from "@/api/system/user/type";
 // 组件定义
@@ -84,13 +83,13 @@ defineOptions({
 // 组件 props & emits
 const props = withDefaults(defineProps<{
   // 当前点击节点ID
-  currentClickRowId: number | undefined;
+  currentClickRowId?: string;
   // dialog-visible
   visible: boolean;
   // dialog-title
   title: string;
   // 设备
-  device: DeviceEnum;
+  device?: DeviceEnum;
   // 部门集合
   deptOptions: OptionType[];
   // 角色集合
@@ -101,7 +100,7 @@ const props = withDefaults(defineProps<{
   loadData: (callback?: () => void) => Promise<void>;
   // 关闭弹窗
   closeDialog: (callback?: () => void) => void;
-}>(), {device: DeviceEnum.PC});
+}>(), {device: DeviceEnum.DESKTOP});
 
 const emits = defineEmits<{
   (event: "update:visible", visible: boolean): void
@@ -112,10 +111,11 @@ const visible = useVModel(props, 'visible', emits)
 const {
   saveData,
   updateData,
-} = useCrudActions<DictTypeForm>(UserAPI.SAVE.request, UserAPI.UPDATE.request, UserAPI.DELETE.request, UserAPI.UPDATE_STATUS.request);
+} = useCrudActions<string, UserForm>(UserAPI.SAVE.request, UserAPI.UPDATE.request, UserAPI.DELETE.request, UserAPI.UPDATE_STATUS.request);
 
 // 初始校验规则
 const initialForm: UserForm = {
+  id: undefined,
   deptId: undefined,
   username: "",
   nickname: "",
@@ -144,7 +144,7 @@ const rules: FormRules = {
   roleIds: [{required: true, message: "用户角色不能为空", trigger: "blur"}]
 }
 // 数据
-const form = ref<DictTypeForm>({...initialForm});
+const form = ref<UserForm>({...initialForm});
 const userFormRef = ref<FormInstance | null>(null);          // 字典数据表单
 // 方法
 async function submitForm() {

@@ -127,7 +127,7 @@ const {
 const {
   deleteData,
   updateDataStatus
-} = useCrudActions<DeptForm>(DeptAPI.SAVE.request, DeptAPI.UPDATE.request, DeptAPI.DELETE.request, DeptAPI.UPDATE_STATUS.request);
+} = useCrudActions<number, DeptForm>(DeptAPI.SAVE.request, DeptAPI.UPDATE.request, DeptAPI.DELETE.request, DeptAPI.UPDATE_STATUS.request);
 // 数据
 const clickParentId = ref<number | undefined>();              // 打开 dialog 点击的 row
 const currentClickRowId = ref<number | undefined>();          // 打开 dialog 点击的 row

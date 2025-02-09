@@ -12,7 +12,7 @@
   "dependencies": {
     "@element-plus/icons-vue": "^2.3.1",
     "@kangc/v-md-editor": "^2.3.18",
-    "@types/lodash": "^4.17.7",
+    "@types/lodash": "^4.17.15",
     "@vueuse/core": "^10.9.0",
     "axios": "^1.6.8",
     "echarts": "^5.5.1",
@@ -31,6 +31,7 @@
   "devDependencies": {
     "@iconify-json/ep": "^1.1.15",
     "@types/nprogress": "^0.2.3",
+    "@types/prismjs": "^1.26.5",
     "@vitejs/plugin-vue": "^5.0.4",
     "animate.css": "^4.1.1",
     "sass": "^1.72.0",

@@ -39,8 +39,8 @@
 import {DeviceEnum} from "@/enums/DeviceEnum";
 import {MenuAPI} from "@/api/system/menu";
 import {RoleAPI} from "@/api/system/role";
-import {TableInstance} from "element-plus";
 import {useDataLoader} from "@/hooks/useDataLoader";
+import {ElTree} from "element-plus";
 // 组件 props & emits
 const props = withDefaults(defineProps<{
   // dialog-visible
@@ -48,32 +48,31 @@ const props = withDefaults(defineProps<{
   // dialog-title
   title: string;
   // 设备
-  device: DeviceEnum;
+  device?: DeviceEnum;
   // 当前选中角色ID
   currentClickRoleId: number;
   // 关闭弹窗
   closeDialog: (callback?: () => void) => void;
-}>(), {device: DeviceEnum.PC});
+}>(), {device: DeviceEnum.DESKTOP});
 const emits = defineEmits<{
   (event: "update:visible", visible: boolean): void
 }>()
 // hooks
 const visible = useVModel(props, 'visible', emits)
 // 数据
-const menuRef = ref<TableInstance | null>(null);                 // 数据Table
+const menuRef = ref(ElTree);                 // 数据Table
 const {
   query,
   dataList: menuList,
   total,
   loading,
   loadData
-} = useDataLoader<OptionType[], object>(MenuAPI.OPTIONS.request, {});
+} = useDataLoader<OptionType, object>(MenuAPI.OPTIONS.request, {});
 
 // 方法
 function onSubmit() {
   // 2. 获取选中节点id
-  const checkedMenuIds: number[] = menuRef.value
-      .getCheckedNodes(false, true)
+  const checkedMenuIds: number[] = menuRef.value?.getCheckedNodes(false, true)
       .map((node: OptionType) => node.value);
   // 3. 给选中角色分配菜单权限
   RoleAPI.UPDATE_MENUS.request(props.currentClickRoleId, checkedMenuIds).then(() => {
@@ -93,7 +92,7 @@ onMounted(async () => {
     // 2. 获取当前选中的角色菜单
     await RoleAPI.MENU_IDS.request(props.currentClickRoleId).then(({data}) => {
       data.forEach(menuId => {
-        menuRef.value.setChecked(menuId, true, false);
+        menuRef.value?.setChecked(menuId, true, false);
       })
     });
   } finally {

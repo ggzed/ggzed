@@ -29,7 +29,7 @@
                    :disabled="roleIds.length === 0"
                    plain
                    type="danger"
-                   @click="deleteData(roleIds,null, props.loadData)">
+                   @click="deleteData(roleIds,undefined, props.loadData)">
           <el-icon>
             <delete/>
           </el-icon>
@@ -56,7 +56,7 @@
         <template #default="scope">
           <el-tag v-show="scope.row.status !== null"
                   :type="EnableStatusEnum.TAG_STYLE[scope.row.status % 2]"
-                  @click="updateDataStatus([scope.row.id],scope.row.name,!scope.row.status,props.loadData)">
+                  @click="updateDataStatus(scope.row.id,scope.row.name,!scope.row.status,props.loadData)">
             {{ EnableStatusEnum.OPTIONS[scope.row.status] }}
           </el-tag>
         </template>
@@ -113,7 +113,7 @@
       <el-scrollbar>
         <Pagination v-model:current-page="query.pageNum"
                     v-model:page-size="query.pageSize"
-                    :total="props.total" @handle-page-change="props.loadData"/>
+                    :total="props.total" @handle-page-change="props.loadData()"/>
       </el-scrollbar>
     </template>
   </el-card>
@@ -193,7 +193,7 @@ const {
 const {
   deleteData,
   updateDataStatus
-} = useCrudActions<RoleForm>(RoleAPI.SAVE.request, RoleAPI.UPDATE.request, RoleAPI.DELETE.request, RoleAPI.UPDATE_STATUS.request);
+} = useCrudActions<number, RoleForm>(RoleAPI.SAVE.request, RoleAPI.UPDATE.request, RoleAPI.DELETE.request, RoleAPI.UPDATE_STATUS.request);
 // 数据
 const device = computed(() => useSystemStore().app.device)            // 设备类型
 const currentClickRoleId = ref<number>(0)                     // 当前选中的角色id

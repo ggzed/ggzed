@@ -35,7 +35,7 @@ interface DataLoader<T, E> {
 /**
  * 数据加载器 :
  */
-export function useDataLoader<T, E>(fetchData: (...params: any) => Promise<AxiosResponse<any>>, initialQuery: E): DataLoader<T, E> {
+export function useDataLoader<T, E extends object>(fetchData: (...params: any) => Promise<AxiosResponse<any>>, initialQuery: E): DataLoader<T, E> {
     const dataList = ref<T[]>([]) as Ref<T[]>;
     const total = ref(0);
     const loading = ref(false);

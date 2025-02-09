@@ -1,7 +1,7 @@
 <template>
   <el-dialog
-      v-model="dialog.visible"
-      :title="dialog.title"
+      v-model="visible"
+      :title="props.title"
       :width="device === DeviceEnum.MOBILE ? '95%' : '42%'"
       class="festival-avatar-upload-dialog"
       destroy-on-close
@@ -53,7 +53,6 @@
 </template>
 
 <script lang="ts" setup>
-import {Dialog} from "@/hooks/useDialogManagement";
 import {DeviceEnum} from "@/enums/DeviceEnum";
 import {useSystemStore} from "@/store/modules/system";
 
@@ -63,18 +62,19 @@ defineOptions({
 });
 
 const props = withDefaults(defineProps<{
-  dialog: Dialog,
+  visible: boolean,
+  title: string,
   img: string
 }>(), {});
 
 const emit = defineEmits<{
   (event: 'update:img', value: string): void;
-  (event: 'update:dialog', value: Dialog): void;
+  (event: 'update:visible', value: boolean): void;
   (event: 'avatarChanged', value: string): void;    // 头像修改事件
 }>();
 
 const img = useVModel(props, 'img', emit)
-const dialog = useVModel(props, 'dialog', emit)
+const visible = useVModel(props, 'visible', emit)
 const imgTemp = ref<string>("")
 
 const device = computed(() => useSystemStore().app.device)    // 设备类型
@@ -136,7 +136,7 @@ const rotateRight = () => {
 const submitForm = () => {
   cropper.value?.getCropData((data: string) => {
     img.value = data
-    dialog.value.visible = false;
+    visible.value = false;
 
     // 触发 avatarChanged 事件
     emit('avatarChanged', data);

@@ -84,12 +84,12 @@ const props = withDefaults(defineProps<{
   // dialog-title
   title: string;
   // 设备
-  device: DeviceEnum;
+  device?: DeviceEnum;
   // 关闭弹窗
   closeDialog: (callback?: () => void) => void;
   // 加载数据
   loadData: (callback?: () => void) => Promise<void>;
-}>(), {device: DeviceEnum.PC});
+}>(), {device: DeviceEnum.DESKTOP});
 
 const emits = defineEmits<{
   (event: "update:visible", visible: boolean): void
@@ -100,7 +100,7 @@ const visible = useVModel(props, 'visible', emits)
 const {
   saveData,
   updateData
-} = useCrudActions<DictDataForm>(DictDataAPI.SAVE.request, DictDataAPI.UPDATE.request, DictDataAPI.DELETE.request, DictDataAPI.UPDATE_STATUS.request);
+} = useCrudActions<number, DictDataForm>(DictDataAPI.SAVE.request, DictDataAPI.UPDATE.request, DictDataAPI.DELETE.request, DictDataAPI.UPDATE_STATUS.request);
 // 初始校验规则
 const initialForm: DictDataForm = {
   id: undefined,

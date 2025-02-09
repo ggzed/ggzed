@@ -120,8 +120,8 @@ const props = withDefaults(defineProps<{
   // dialog-title
   title: string;
   // 设备
-  device: DeviceEnum;
-}>(), {device: DeviceEnum.PC});
+  device?: DeviceEnum;
+}>(), {device: DeviceEnum.DESKTOP});
 const emits = defineEmits<{
   (event: "update:visible", visible: boolean): void
 }>()

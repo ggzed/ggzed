@@ -29,7 +29,7 @@
                    :disabled="dictTypeIds.length === 0"
                    plain
                    type="danger"
-                   @click="deleteData(dictTypeIds,null, props.loadData)">
+                   @click="deleteData(dictTypeIds,undefined, props.loadData)">
           <el-icon>
             <delete/>
           </el-icon>
@@ -58,7 +58,7 @@
         <template #default="scope">
           <el-tag v-show="scope.row.status !== null"
                   :type="EnableStatusEnum.TAG_STYLE[scope.row.status % 2]"
-                  @click="updateDataStatus([scope.row.id],scope.row.name,!scope.row.status,props.loadData)">
+                  @click="updateDataStatus(scope.row.id,scope.row.name,!scope.row.status,props.loadData)">
             {{ EnableStatusEnum.OPTIONS[scope.row.status] }}
           </el-tag>
         </template>
@@ -115,7 +115,7 @@
       <el-scrollbar>
         <Pagination v-model:current-page="query.pageNum"
                     v-model:page-size="query.pageSize"
-                    :total="total" @handle-page-change="props.loadData"/>
+                    :total="total" @handle-page-change="props.loadData()"/>
       </el-scrollbar>
     </template>
   </el-card>
@@ -172,7 +172,7 @@ const {
   updateData,
   deleteData,
   updateDataStatus
-} = useCrudActions<DictTypeForm>(DictTypeAPI.SAVE.request, DictTypeAPI.UPDATE.request, DictTypeAPI.DELETE.request, DictTypeAPI.UPDATE_STATUS.request);
+} = useCrudActions<number, DictTypeForm>(DictTypeAPI.SAVE.request, DictTypeAPI.UPDATE.request, DictTypeAPI.DELETE.request, DictTypeAPI.UPDATE_STATUS.request);
 const dataTableRef = ref<TableInstance | null>(null);
 const {selectedIds: dictTypeIds, handleCellDblclick, handleSelectionChange} = useTableManagement<number>(dataTableRef);
 

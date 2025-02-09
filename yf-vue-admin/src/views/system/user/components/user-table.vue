@@ -29,7 +29,7 @@
                    :disabled="userIds.length === 0"
                    plain
                    type="danger"
-                   @click="deleteData(userIds,null,props.loadData)">
+                   @click="deleteData(userIds,undefined,props.loadData)">
           <el-icon>
             <delete/>
           </el-icon>
@@ -78,7 +78,7 @@
         <template #default="scope">
           <el-tag v-show="scope.row.status !== null"
                   :type="EnableStatusEnum.TAG_STYLE[scope.row.status % 2]"
-                  @click="updateDataStatus([scope.row.id],scope.row.username,!scope.row.status,props.loadData)">
+                  @click="updateDataStatus(scope.row.id,scope.row.username,!scope.row.status,props.loadData)">
             {{ EnableStatusEnum.OPTIONS[scope.row.status] }}
           </el-tag>
         </template>
@@ -133,7 +133,7 @@
       <el-scrollbar>
         <Pagination v-model:current-page="query.pageNum"
                     v-model:page-size="query.pageSize"
-                    :total="props.total" @handle-page-change="props.loadData"/>
+                    :total="props.total" @handle-page-change="props.loadData()"/>
       </el-scrollbar>
     </template>
   </el-card>
@@ -153,7 +153,6 @@
 </template>
 
 <script lang="ts" setup>
-import {DictTypeForm} from "@/api/system/dict-type/type";
 import {UserAPI} from "@/api/system/user";
 import {DeviceEnum} from "@/enums/DeviceEnum";
 import {EnableStatusEnum} from "@/constants/system";
@@ -162,7 +161,7 @@ import {useCrudActions} from "@/hooks/useCrudActions";
 import {TableInstance} from "element-plus";
 import {useTableManagement} from "@/hooks/useTableManagement";
 import {useSystemStore} from "@/store/modules/system";
-import {UserPageQuery, UserPageVO} from "@/api/system/user/type";
+import {UserForm, UserPageQuery, UserPageVO} from "@/api/system/user/type";
 
 defineOptions({
   name: "UserTable",
@@ -195,13 +194,13 @@ const {
 const {
   deleteData,
   updateDataStatus
-} = useCrudActions<DictTypeForm>(UserAPI.SAVE.request, UserAPI.UPDATE.request, UserAPI.DELETE.request, UserAPI.UPDATE_STATUS.request);
+} = useCrudActions<string, UserForm>(UserAPI.SAVE.request, UserAPI.UPDATE.request, UserAPI.DELETE.request, UserAPI.UPDATE_STATUS.request);
 const dataTableRef = ref<TableInstance | null>(null);
-const {selectedIds: userIds, handleCellDblclick, handleSelectionChange} = useTableManagement<number>(dataTableRef);
+const {selectedIds: userIds, handleCellDblclick, handleSelectionChange} = useTableManagement<string>(dataTableRef);
 
 // 数据
 const device = computed(() => useSystemStore().app.device)            // 设备类型
-const currentClickRowId = ref<number | undefined>();                  // 打开 dialog 点击的 row
+const currentClickRowId = ref<string | undefined>();                  // 打开 dialog 点击的 row
 
 // 方法
 /**
@@ -226,7 +225,7 @@ function openUserDialog(userId?: string) {
  * @param userId 用户Id
  * @param username 用户名
  */
-function resetPassword(userId: number, username: string) {
+function resetPassword(userId: string, username: string) {
   ElMessageBox.prompt(`您正在重置【 <b> ${username} </b> 】 用户的密码`, '⚠️ 警告', {
     confirmButtonText: '确认',
     cancelButtonText: '取消',

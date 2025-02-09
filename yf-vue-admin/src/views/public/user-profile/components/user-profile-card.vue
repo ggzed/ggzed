@@ -159,8 +159,8 @@ defineOptions({
 });
 // props & emits
 const props = withDefaults(defineProps<{
-  userProfileInfo: UserProfileInfoVO,
-  loadData: () => void,
+  userProfileInfo: UserProfileInfoVO;
+  loadData: (callback?: () => void) => Promise<void>;
 }>(), {});
 
 const emits = defineEmits<{

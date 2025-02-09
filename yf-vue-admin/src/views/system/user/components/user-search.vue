@@ -46,18 +46,18 @@
             :data="props.deptOptions"
             check-strictly
             clearable
-            @focus="props.loadDeptData"
+            @focus="props.loadDeptData()"
         >
         </el-tree-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="props.loadData">
+        <el-button type="primary" @click="props.loadData()">
           <template #icon>
             <search/>
           </template>
           搜索
         </el-button>
-        <el-button plain type="primary" @click="props.resetQuery">
+        <el-button plain type="primary" @click="props.resetQuery()">
           <template #icon>
             <refresh/>
           </template>
@@ -82,6 +82,7 @@ defineOptions({
 const props = withDefaults(defineProps<{
   query: UserPageQuery;
   deptOptions: OptionType[];                                             // 部门集合
+  loadDeptData: (callback?: () => void) => Promise<void>;                // 加载部门数据
   loadData: (callback?: () => void) => Promise<void>;                    // 加载数据函数
   resetQuery: (callback?: () => void) => Promise<void>;                  // 重置查询条件
 }>(), {});

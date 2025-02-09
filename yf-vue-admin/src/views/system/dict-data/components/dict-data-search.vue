@@ -28,13 +28,13 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="props.loadData">
+        <el-button type="primary" @click="props.loadData()">
           <template #icon>
             <search/>
           </template>
           搜索
         </el-button>
-        <el-button plain type="primary" @click="props.resetQuery">
+        <el-button plain type="primary" @click="props.resetQuery()">
           <template #icon>
             <refresh/>
           </template>

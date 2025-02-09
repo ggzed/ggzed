@@ -58,7 +58,7 @@
         <template #default="scope">
           <el-tag v-show="scope.row.hidden !== null"
                   :type="HiddenStatusEnum.TAG_STYLE[scope.row.hidden % 2]"
-                  @click="updateDataStatus([scope.row.id],scope.row.name,!scope.row.hidden,props.loadData)">
+                  @click="updateDataStatus(scope.row.id,scope.row.name,!scope.row.hidden,props.loadData)">
             {{ HiddenStatusEnum.OPTIONS[scope.row.hidden] }}
           </el-tag>
         </template>
@@ -162,7 +162,7 @@ const {
 const {
   deleteData,
   updateDataStatus
-} = useCrudActions<MenuForm>(MenuAPI.SAVE.request, MenuAPI.UPDATE.request, MenuAPI.DELETE.request, MenuAPI.UPDATE_HIDDEN.request);
+} = useCrudActions<number, MenuForm>(MenuAPI.SAVE.request, MenuAPI.UPDATE.request, MenuAPI.DELETE.request, MenuAPI.UPDATE_HIDDEN.request);
 // 数据
 const clickParentId = ref<number | undefined>();              // 打开 dialog 点击的 row
 const currentClickRowId = ref<number | undefined>();          // 打开 dialog 点击的 row

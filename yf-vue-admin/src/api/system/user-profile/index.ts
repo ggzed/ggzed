@@ -70,7 +70,7 @@ export class UserProfileAPI {
     static CHECK_PASSWORD_EXISTENCE = {
         endpoint: `${API_BASE}${API_SUFFIXES.CHECK_PASSWORD_EXISTENCE}`,
         request: (): AxiosPromise<boolean> => {
-            return request<void>({
+            return request<boolean>({
                 url: UserProfileAPI.CHECK_PASSWORD_EXISTENCE.endpoint,
                 method: "get"
             })

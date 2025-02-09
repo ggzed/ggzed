@@ -36,7 +36,7 @@
     <template #footer>
       <div class="dialog-footer">
         <el-button type="primary" @click="submitForm">确 定</el-button>
-        <el-button @click="props.closeDialog">取 消</el-button>
+        <el-button @click="props.closeDialog()">取 消</el-button>
       </div>
     </template>
   </el-dialog>
@@ -64,12 +64,12 @@ const props = withDefaults(defineProps<{
   // 当前点击的 id
   currentClickRowId: number | undefined;
   // 设备
-  device: DeviceEnum;
+  device?: DeviceEnum;
   // 关闭弹窗
   closeDialog: (callback?: () => void) => void;
   // 加载数据
   loadData: (callback?: () => void) => Promise<void>;
-}>(), {device: DeviceEnum.PC});
+}>(), {device: DeviceEnum.DESKTOP});
 
 const emits = defineEmits<{
   (event: "update:visible", visible: boolean): void
@@ -80,7 +80,7 @@ const visible = useVModel(props, 'visible', emits)
 const {
   saveData,
   updateData
-} = useCrudActions<DictTypeForm>(DictTypeAPI.SAVE.request, DictTypeAPI.UPDATE.request, DictTypeAPI.DELETE.request, DictTypeAPI.UPDATE_STATUS.request);
+} = useCrudActions<number, DictTypeForm>(DictTypeAPI.SAVE.request, DictTypeAPI.UPDATE.request, DictTypeAPI.DELETE.request, DictTypeAPI.UPDATE_STATUS.request);
 // 初始校验规则 & 表单
 const initialForm: DictTypeForm = {
   id: undefined,

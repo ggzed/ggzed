@@ -6,7 +6,7 @@
             v-model="query.name"
             clearable
             placeholder="字典名称搜索"
-            @keyup.enter="loadData"
+            @keyup.enter="props.loadData()"
         />
       </el-form-item>
       <el-form-item label="字典类型 :" prop="type">
@@ -14,7 +14,7 @@
             v-model="query.type"
             clearable
             placeholder="字典类型搜索"
-            @keyup.enter="loadData"
+            @keyup.enter="props.loadData()"
         />
       </el-form-item>
       <el-form-item label="状态 :" prop="status">
@@ -27,13 +27,13 @@
         </el-select>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="props.loadData">
+        <el-button type="primary" @click="props.loadData()">
           <template #icon>
             <search/>
           </template>
           搜索
         </el-button>
-        <el-button plain type="primary" @click="props.resetQuery">
+        <el-button plain type="primary" @click="props.resetQuery()">
           <template #icon>
             <refresh/>
           </template>
