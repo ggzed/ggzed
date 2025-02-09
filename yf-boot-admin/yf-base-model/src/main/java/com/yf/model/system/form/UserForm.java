@@ -23,7 +23,7 @@ public class UserForm {
 
     @Schema(description = "用户名")
     @NotBlank(message = "用户名不能为空")
-    @Length(max = 24, message = "用户名过长")
+    @Length(min = 4, max = 24, message = "username 在 4~24 个字符之间")
     private String username;
 
     @Schema(description = "昵称")

@@ -60,4 +60,19 @@ public interface ISysUserProfileService {
      * @return 是否修改整个
      */
     boolean updateUserPassword(ResetUserPasswordForm resetUserPasswordForm);
+
+    /**
+     * 校验用户是否有密码
+     *
+     * @return 是否有密码
+     */
+    boolean checkPasswordExistence();
+
+    /**
+     * 修改用户名 7天 一次
+     *
+     * @param username 用户名
+     * @return 是否修改成功
+     */
+    boolean updateUsername(String username);
 }

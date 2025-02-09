@@ -49,11 +49,11 @@ public class UsernamePasswordStrategy implements ILoginProcessStrategy {
         String verifyCode = principal.getVerifyCode();
         String verifyCodeKey = principal.getVerifyCodeKey();
         // 1. 校验用户名
-        if (username == null || username.length() < 4) {
+        if (username == null || username.length() < 4 || username.length() > 24) {
             return false;
         }
         // 2. 校验密码
-        if (password == null || password.length() < 6) {
+        if (password == null || password.length() < 8 || password.length() > 16) {
             return false;
         }
         // 3. 校验验证码

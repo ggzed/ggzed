@@ -15,7 +15,6 @@ import org.hibernate.validator.constraints.Length;
 public class ResetUserPasswordForm {
 
     @Schema(description = "旧密码")
-    @Length(min = 8, max = 16, message = "密码长度在 8 ~ 16")
     private String oldPassword;
 
     @Schema(description = "新密码")

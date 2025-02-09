@@ -36,6 +36,7 @@ public enum ResultCode implements IResultCode, Serializable {
     AUTH_MALICIOUS_TOKEN_REFRESH("W002", "恶意刷新token"),
     AUTH_MALICIOUS_LOGIN("W006", "恶意登录"),
     AUTH_USER_INFO_ERROR("W003", "用户信息被删除,请联系管理员"),
+    AUTH_USER_NOT_FOUND("I012", "未找到改用户"),
     AUTH_BIND_THIRD_PARTY_ERROR("W009", "绑定第三方平台失败,请联系管理员"),
     AUTH_ALREADY_BIND_ERROR("I018", "账号已经被绑定,请解绑后尝试"),
 
@@ -46,6 +47,7 @@ public enum ResultCode implements IResultCode, Serializable {
     USER_RESET_OLD_PASSWORD("I105", "旧密码错误"),
     USER_AUTO_REGISTER("I106", "用户自动注册失败"),
     USER_PASSWORD_LENGTH("I107", "密码长度在 8 ~ 16"),
+    USER_UPDATE_USERNAME_TIMES("I108", "7天内只能修改一次用户名"),
 
     ROLE_CODE_DUPLICATE("I111", "含有相同角色编码的角色"),
     ROLE_BIND_USER("I112", "有用户为该角色,不能删除"),

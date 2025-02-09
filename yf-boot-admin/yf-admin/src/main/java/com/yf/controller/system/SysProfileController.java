@@ -7,16 +7,23 @@ import com.yf.model.system.form.UserProfileForm;
 import com.yf.model.vo.UserProfileInfoVO;
 import com.yf.oss.constraints.MultipartFileValid;
 import com.yf.rate_limiting.annotation.PreventDuplicateSubmit;
+import com.yf.rate_limiting.annotation.RateLimiter;
+import com.yf.rate_limiting.annotation.RateLimiters;
+import com.yf.rate_limiting.annotation.RateRule;
 import com.yf.result.Result;
+import com.yf.result.ResultCode;
 import com.yf.service.ISysUserProfileService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.constraints.Pattern;
 import lombok.RequiredArgsConstructor;
 import me.zhyd.oauth.model.AuthCallback;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * 个人中心
@@ -38,6 +45,30 @@ public class SysProfileController {
     public Result<UserProfileInfoVO> getUserProfileInfo() {
         UserProfileInfoVO userProfileInfo = userProfileService.getUserProfileInfo();
         return Result.success(userProfileInfo);
+    }
+
+    @Operation(summary = "检查密码是否存在")
+    @PreventDuplicateSubmit
+    @GetMapping("/password/existence")
+    public Result<Boolean> checkPasswordExistence() {
+        boolean result = userProfileService.checkPasswordExistence();
+        return Result.success(result);
+    }
+
+    @Operation(summary = "修改用户名")
+    @RateLimiters(
+            rateLimiters = {
+                    @RateLimiter(rateRules = {
+                            @RateRule(limit = 1, timeUnit = TimeUnit.DAYS, timeDuration = 7)
+                    }, message = ResultCode.USER_UPDATE_USERNAME_TIMES)
+            }
+    )
+    @PatchMapping("/username")
+    public Result<Void> updateUsername(@RequestParam
+                                       @Pattern(regexp = "^[a-zA-Z]+$", message = "用户名必须是英文")
+                                       String username) {
+        boolean result = userProfileService.updateUsername(username);
+        return Result.judge(result);
     }
 
     @Operation(summary = "修改个人信息")

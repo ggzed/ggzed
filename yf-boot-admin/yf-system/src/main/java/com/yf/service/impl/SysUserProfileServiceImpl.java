@@ -271,14 +271,16 @@ public class SysUserProfileServiceImpl implements ISysUserProfileService {
         if (!resetUserPasswordForm.getNewPassword().equals(resetUserPasswordForm.getCheckPassword())) {
             throw new ServiceException(ResultCode.USER_RESET_PASSWORD);
         }
-        // 1. 查询用户旧密码
+        // 1. 查询用户信息
         SysUser oldUserPassword = userService.lambdaQuery()
                 .select(SysUser::getPassword)
                 .eq(SysUser::getId, userId)
                 .one();
-        // 2. 校验旧密码是否匹配
-        if (!passwordEncoder.matches(resetUserPasswordForm.getOldPassword(), oldUserPassword.getPassword())) {
-            throw new ServiceException(ResultCode.USER_RESET_OLD_PASSWORD);
+        if (oldUserPassword.getPassword() != null) {
+            // 2. 校验旧密码是否匹配  ( 无密码则不校验 )
+            if (!passwordEncoder.matches(resetUserPasswordForm.getOldPassword(), oldUserPassword.getPassword())) {
+                throw new ServiceException(ResultCode.USER_RESET_OLD_PASSWORD);
+            }
         }
         // 3. 加密新密码
         String newPassword = passwordEncoder.encode(resetUserPasswordForm.getNewPassword());
@@ -286,6 +288,39 @@ public class SysUserProfileServiceImpl implements ISysUserProfileService {
         return userService.lambdaUpdate()
                 .eq(SysUser::getId, userId)
                 .set(SysUser::getPassword, newPassword)
+                .update();
+    }
+
+    /**
+     * 校验用户是否有密码
+     *
+     * @return 是否有密码
+     */
+    @Override
+    public boolean checkPasswordExistence() {
+        // 1. 获取当前用户Id
+        Long userId = SecurityUtil.getUserId();
+        // 2. 返回用户是否有密码
+        return userService.lambdaQuery()
+                .eq(SysUser::getId, userId)
+                .isNull(SysUser::getPassword)
+                .exists();
+    }
+
+    /**
+     * 修改用户名 7天 一次
+     *
+     * @param username 用户名
+     * @return 是否修改成功
+     */
+    @Override
+    public boolean updateUsername(String username) {
+        // 1. 获取当前用户
+        Long userId = SecurityUtil.getUserId();
+        // 2. 修改用户名
+        return userService.lambdaUpdate()
+                .eq(SysUser::getId, userId)
+                .set(SysUser::getUsername, username)
                 .update();
     }
 
