@@ -8,7 +8,7 @@
   >
     <el-scrollbar max-height="400px">
       <el-tree
-
+          ref="menuRef"
           v-loading="loading"
           :data="menuList"
           :render-after-expand="false"
@@ -64,7 +64,7 @@ const emits = defineEmits<{
 // hooks
 const visible = useVModel(props, 'visible', emits)
 // 数据
-const menuRef = ref<InstanceType<typeof ElTree>>()
+const menuRef = ref()
 const {
   query,
   dataList: menuList,
@@ -76,7 +76,7 @@ const {
 // 方法
 function onSubmit() {
   // 2. 获取选中节点id
-  const checkedMenuIds: number[] = menuRef.value?.getCheckedNodes(false, true)
+  const checkedMenuIds: number[] = menuRef.value.getCheckedNodes(false, true)
       .map((node: OptionType) => node.value);
   // 3. 给选中角色分配菜单权限
   RoleAPI.UPDATE_MENUS.request(props.currentClickRoleId, checkedMenuIds).then(() => {
@@ -96,7 +96,7 @@ onMounted(async () => {
     // 2. 获取当前选中的角色菜单
     await RoleAPI.MENU_IDS.request(props.currentClickRoleId).then(({data}) => {
       data.forEach(menuId => {
-        menuRef.value?.setChecked(menuId, true, false);
+        menuRef.value.setChecked(menuId, true, false);
       })
     });
   } finally {
