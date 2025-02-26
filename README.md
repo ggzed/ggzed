@@ -35,10 +35,10 @@
 
 ## 项目展示
 
-| 地址      | 链接                                                                            |
-|---------|-------------------------------------------------------------------------------|
+| 地址      | 链接                                                         |
+| --------- | ------------------------------------------------------------ |
 | 网站      | <a href="http://8.137.57.215/yf-vue-admin" target="_blank">yf-vue-admin</a> |
-| Gitee源码 | <a href="https://gitee.com/fateyifei/yf" target="_blank">YF</a>               |
+| Gitee源码 | <a href="https://gitee.com/fateyifei/yf" target="_blank">YF</a> |
 
 ## 项目文档更新
 
@@ -80,13 +80,13 @@
 
 ### 项目环境
 
-| 环境    | 版本  |
-|-------|-----|
-| Java  | 17+ |
-| Maven | 3+  |
-| Node  | 18+ |
-| Redis | 5+  |
-| Mysql | 5+  |
+| 环境  | 版本 |
+| ----- | ---- |
+| Java  | 17+  |
+| Maven | 3+   |
+| Node  | 18+  |
+| Redis | 5+   |
+| Mysql | 5+   |
 
 ### 运行命令
 
@@ -97,19 +97,19 @@ git clone https://gitee.com/fateyifei/yf.git
 
 ### yf-vue-admin ( 前端服务 )
 
-- 前提 : 需要有node环境,系统中安装过yarn
+- 前提：需要有 Node 环境，系统中安装过 pnpm
 
 ```shell
-## 已经安装 yarn 则可不执行
-npm install yarn -g
+## 已经安装 pnpm 则可不执行
+npm install pnpm -g
 ## 切换目录
 cd yf/yf-vue-admin
 ## 安装依赖
-yarn install
+pnpm install
 ## 启动项目
-yarn run dev
+pnpm run dev
 
-## 接下来会自动打开项目到网页 , 如果未部署后端服务请设置 .env.production 中 VITE_APP_API_URL = http://yf.wiki/api
+## 接下来会自动打开项目到网页，如果未部署后端服务请设置 .env.production 中 VITE_APP_API_URL = http://yf.wiki/api
 ```
 
 ### yf-boot-admin ( 后端服务 )
@@ -194,17 +194,17 @@ java -jar target/yf-admin-<version>.jar > ??.log 2>&1 &
 
 ### 提交规范
 
-| 前缀           | 描述                        |
-|--------------|---------------------------|
-| feat: ✨      | 新功能                       |
-| fix: 🐛      | bug修复                     |
-| docs: 📚     | 仅文档更改                     |
+| 前缀        | 描述                                               |
+| ----------- | -------------------------------------------------- |
+| feat: ✨     | 新功能                                             |
+| fix: 🐛      | bug修复                                            |
+| docs: 📚     | 仅文档更改                                         |
 | style: 🌈    | 不影响代码含义的更改（空白、格式设置、缺失分号等） |
-| refactor: ♻️ | 既不修复bug也不添加特性的代码更改        |
-| perf: 🚀     | 改进性能的代码更改                 |
-| test: 🧪     | 添加缺少的测试或更正现有测试            |
-| chore: 🔨    | 对构建过程或辅助工具和库（如文档）的更改      |
-| revert: ↩️   | 回滚 commit                 |
+| refactor: ♻️ | 既不修复bug也不添加特性的代码更改                  |
+| perf: 🚀     | 改进性能的代码更改                                 |
+| test: 🧪     | 添加缺少的测试或更正现有测试                       |
+| chore: 🔨    | 对构建过程或辅助工具和库（如文档）的更改           |
+| revert: ↩️   | 回滚 commit                                        |
 
 ### 登录/注册功能
 
