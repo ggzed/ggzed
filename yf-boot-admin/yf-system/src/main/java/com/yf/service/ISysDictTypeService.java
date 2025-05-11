@@ -3,6 +3,7 @@ package com.yf.service;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.IService;
+import com.yf.model.common.Option;
 import com.yf.model.system.entity.SysDictType;
 import com.yf.model.system.form.DictTypeForm;
 import com.yf.model.system.query.DictTypePageQuery;
@@ -66,5 +67,12 @@ public interface ISysDictTypeService extends IService<SysDictType> {
      * @return 是否字典类型状态修改成功
      */
     boolean updateDictTypeStatus(Integer dictTypeId, Boolean status);
+
+    /**
+     * 获取字典类型下拉列表
+     *
+     * @return 字典类型下拉列表
+     */
+    List<Option<String>> listDictOptions();
 }
 

@@ -1,8 +1,10 @@
 package com.yf.security.model.dto;
 
 import cn.hutool.core.util.ObjectUtil;
+import com.yf.exception.ServiceException;
 import com.yf.model.common.dto.UserAuthInfo;
 import com.yf.model.common.enums.EnableStatusEnum;
+import com.yf.result.ResultCode;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -65,6 +67,9 @@ public class SysUserDetails implements UserDetails {
      * @param userAuthInfo 通过其创建 SysUserDetails
      */
     public SysUserDetails(UserAuthInfo userAuthInfo) {
+        if (userAuthInfo == null) {
+            throw new ServiceException(ResultCode.AUTH_USER_NOT_FOUND);
+        }
         this.userId = userAuthInfo.getUserId();                 // 设置用户ID
         this.username = userAuthInfo.getUsername();             // 设置用户名
 

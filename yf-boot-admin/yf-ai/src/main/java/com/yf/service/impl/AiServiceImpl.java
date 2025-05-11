@@ -10,7 +10,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.ai.chat.messages.*;
 import org.springframework.ai.chat.prompt.Prompt;
 import org.springframework.ai.ollama.OllamaChatModel;
-import org.springframework.ai.ollama.api.OllamaOptions;
 import org.springframework.stereotype.Service;
 import reactor.core.publisher.Flux;
 
@@ -39,12 +38,12 @@ public class AiServiceImpl implements AiService {
         // 1. 聚合消息
         List<AbstractMessage> messages = this.aggregateMessages(messageQuery.getMessages());
         // 2. 构建 Prompt
-        Prompt prompt = new Prompt(List.of(messages.toArray(new Message[0])),
-                OllamaOptions.create()
-                        .withModel(messageQuery.getModel())
-                        .withTemperature(messageQuery.getTemperature())
-                        .withTopP(messageQuery.getTopP())
-                        .withRepeatPenalty(messageQuery.getRepeatPenalty())
+        Prompt prompt = new Prompt(List.of(messages.toArray(new Message[0])), null
+//                OllamaOptions.builder()
+//                        .withModel(messageQuery.getModel())
+//                        .withTemperature(messageQuery.getTemperature())
+//                        .withTopP(messageQuery.getTopP())
+//                        .withRepeatPenalty(messageQuery.getRepeatPenalty())
         );
         // 3. 回复问题
         return ollamaChatModel.stream(prompt).map(chatResponse -> chatResponse.getResult().getOutput());
@@ -64,12 +63,13 @@ public class AiServiceImpl implements AiService {
         SystemMessage systemMessage = new SystemMessage(ChatRequestConstant.SYSTEM_SIMPLIFICATION);
         messages.add(systemMessage);
         // 3. 构建 Prompt
-        Prompt prompt = new Prompt(List.of(messages.toArray(new Message[0])),
-                OllamaOptions.create()
-                        .withModel(messageQuery.getModel())
-                        .withTemperature(messageQuery.getTemperature())
-                        .withTopP(messageQuery.getTopP())
-                        .withRepeatPenalty(messageQuery.getRepeatPenalty())
+        Prompt prompt = new Prompt(List.of(messages.toArray(new Message[0])), null
+//                OllamaOptions.builder()
+//                        .model()
+//                        .withModel(messageQuery.getModel())
+//                        .withTemperature(messageQuery.getTemperature())
+//                        .withTopP(messageQuery.getTopP())
+//                        .withRepeatPenalty(messageQuery.getRepeatPenalty())
         );
         // 4. 回复问题
         return ollamaChatModel.stream(prompt).map(chatResponse -> chatResponse.getResult().getOutput());

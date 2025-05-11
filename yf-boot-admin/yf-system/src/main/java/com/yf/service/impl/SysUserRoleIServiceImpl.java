@@ -58,7 +58,10 @@ public class SysUserRoleIServiceImpl extends ServiceImpl<SysUserRoleMapper, SysU
         }
         if (!CollectionUtils.isEmpty(toAdd)) {
             List<SysUserRole> userRolesToAdd = toAdd.stream()
-                    .map(roleId -> new SysUserRole(userId, roleId))
+                    .map(roleId -> SysUserRole.builder()
+                            .userId(userId)
+                            .roleId(roleId)
+                            .build())
                     .collect(Collectors.toList());
             this.saveBatch(userRolesToAdd);
         }

@@ -1,8 +1,8 @@
 package com.yf.controller.file;
 
 import com.yf.constants.RedisKeyConstants;
-import com.yf.oss.constraints.MultipartFileValid;
-import com.yf.oss.storage.FileStorageService;
+import com.yf.file.constraints.MultipartFileValid;
+import com.yf.file.storage.FileStorageService;
 import com.yf.rate_limiting.annotation.RateLimiter;
 import com.yf.rate_limiting.annotation.RateLimiters;
 import com.yf.rate_limiting.annotation.RateRule;
@@ -42,26 +42,22 @@ public class FileStorageController {
     /**
      * key : save_path , value : 需要的权限
      */
-    public static final Map<String, String> permissionCheckMap = Map.of(
-            "demo/markdown", "demo:markdown:list"
-    );
+    public static final Map<String, String> permissionCheckMap = Map.of("demo/markdown", "demo:markdown:list");
 
     private final FileStorageService fileStorageService;
     private final RedisUtil redisUtil;
 
+    /**
+     * 上传文件 , 注 : 如需限制用户上传数量，请把 LimitTypeEnum.IP 改为 LimitTypeEnum.USER_ID
+     *
+     * @param savePath 存储路径
+     * @param file     文件
+     * @return 文件路径
+     */
     @PostMapping("/upload")
     @Operation(summary = "上传文件")
-    @RateLimiters(rateLimiters = {
-            @RateLimiter(limitTypeEnum = LimitTypeEnum.IP,
-                    rateRules = {
-                            @RateRule,
-                            @RateRule(limit = 100, timeDuration = 1, timeUnit = TimeUnit.DAYS)
-                    }),
-    })
-    public Result<String> uploadFile(
-            @RequestParam(required = false, defaultValue = "")
-            @Pattern(regexp = "^(?!/).*$", message = "存储路径不能以'/'开头") String savePath,
-            @RequestParam @MultipartFileValid MultipartFile file) {
+    @RateLimiters(rateLimiters = {@RateLimiter(limitTypeEnum = LimitTypeEnum.IP, rateRules = {@RateRule, @RateRule(limit = 100, timeDuration = 1, timeUnit = TimeUnit.DAYS)}),})
+    public Result<String> uploadFile(@RequestParam(required = false, defaultValue = "") @Pattern(regexp = "^(?!/).*$", message = "存储路径不能以'/'开头") String savePath, @RequestParam @MultipartFileValid MultipartFile file) {
         // 1. 校验权限
         String permission = permissionCheckMap.get(savePath);
         if (permission == null) {
@@ -75,6 +71,23 @@ public class FileStorageController {
         }
         // 2. 保存图片
         return Result.success(fileStorageService.uploadFile(savePath, file));
+    }
+
+    /**
+     * 公开文件上传接口
+     * TODO 注 : 非常不建议使用这个接口，因为这个接口没有权限校验，任何人都可以上传文件。并且会成为系统漏洞。正式环境请关闭这个接口。
+     *
+     * @param file 文件
+     * @return 文件路径
+     */
+    @PostMapping("/unsafe/upload")
+    @Operation(summary = "公开文件上传接口")
+    @RateLimiters(rateLimiters = {@RateLimiter(limitTypeEnum = LimitTypeEnum.IP,
+            rateRules = {@RateRule, @RateRule(limit = 30, timeDuration = 1, timeUnit = TimeUnit.DAYS)})}
+    )
+    public Result<String> commonUploadFile(@RequestParam MultipartFile file) {
+        // 保存文件
+        return Result.success(fileStorageService.uploadFile("unsafe", file));
     }
 //
 //    @PostMapping("/uploads")

@@ -1,6 +1,6 @@
 package com.yf;
 
-import com.yf.oss.utils.NSFWAnalyzerUtils;
+import com.yf.file.utils.NSFWAnalyzerUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

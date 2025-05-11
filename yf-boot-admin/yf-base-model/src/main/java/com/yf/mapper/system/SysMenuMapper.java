@@ -43,5 +43,13 @@ public interface SysMenuMapper extends BaseMapper<SysMenu> {
      * @return 菜单Id
      */
     List<MenuAndChildrenBo> getMenuAndChildrenByIds(@Param("menuIds") List<Integer> menuIds);
+
+    /**
+     * 批量保存菜单
+     *
+     * @param list 菜单列表
+     * @return 影响行数
+     */
+    Integer saveBatch(@Param("list") List<SysMenu> list);
 }
 

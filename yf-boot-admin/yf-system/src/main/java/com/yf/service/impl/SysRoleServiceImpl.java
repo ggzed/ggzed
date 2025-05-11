@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yf.constants.RedisKeyConstants;
+import com.yf.constants.SystemConstants;
 import com.yf.converter.RoleConverter;
 import com.yf.exception.ServiceException;
 import com.yf.mapper.system.SysRoleMapper;
@@ -102,6 +103,11 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         if (CollectionUtils.isEmpty(roleIds)) {
             return false;
         }
+        // 无法删除管理员角色
+        SysRole adminRole = getAdminRole();
+        if (adminRole != null && roleIds.contains(adminRole.getId())) {
+            throw new ServiceException(ResultCode.ROLE_ADMIN_NOT_MODIFY);
+        }
         // 1. 查询角色是否绑定用户
         boolean exists = userRoleService.lambdaQuery().in(SysUserRole::getRoleId, roleIds).exists();
         if (exists) {
@@ -137,6 +143,11 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
      */
     @Override
     public boolean updateRoleStatus(Integer roleId, Boolean status) {
+        // 无法修改管理员角色
+        SysRole adminRole = getAdminRole();
+        if (adminRole != null && roleId.equals(adminRole.getId())) {
+            throw new ServiceException(ResultCode.ROLE_ADMIN_NOT_MODIFY);
+        }
         return this.lambdaUpdate().eq(SysRole::getId, roleId).set(SysRole::getStatus, status).update();
     }
 
@@ -149,6 +160,11 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
      */
     @Override
     public boolean updateRole(Integer roleId, RoleForm roleForm) {
+        // 无法修改管理员角色
+        SysRole adminRole = getAdminRole();
+        if (adminRole != null && roleId.equals(adminRole.getId())) {
+            throw new ServiceException(ResultCode.ROLE_ADMIN_NOT_MODIFY);
+        }
         // 1. 判断是否重复
         isDuplicate(roleId, roleForm);
         // 2. 修改到数据库
@@ -177,6 +193,11 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
     @Transactional
     @CacheEvict(cacheNames = RedisKeyConstants.SYSTEM_ROUTE_CACHE_PREFIX, key = "'routes'")
     public boolean updateRoleMenus(Integer roleId, List<Integer> menuIds) {
+        // 无法修改管理员角色
+        SysRole adminRole = getAdminRole();
+        if (adminRole != null && roleId.equals(adminRole.getId())) {
+            throw new ServiceException(ResultCode.ROLE_ADMIN_NOT_MODIFY);
+        }
         // 注 : 未考虑重新分配权限后的实时性 ， 已登录的用户不会受到本地权限分配的影响
         // 解决方案可考虑 : 异步踢出拥有该权限的用户
         return roleMenuService.saveRoleMenu(roleId, menuIds);
@@ -211,6 +232,17 @@ public class SysRoleServiceImpl extends ServiceImpl<SysRoleMapper, SysRole> impl
         if (hasCode && roleForm.getCode().equals(oneSysRole.getCode())) {
             throw new ServiceException(ResultCode.ROLE_CODE_DUPLICATE);
         }
+    }
+
+    /**
+     * 获取管理员角色
+     *
+     * @return 管理员角色
+     */
+    public SysRole getAdminRole() {
+        return this.lambdaQuery()
+                .eq(SysRole::getCode, SystemConstants.ADMIN_CODE)
+                .one();
     }
 }
 

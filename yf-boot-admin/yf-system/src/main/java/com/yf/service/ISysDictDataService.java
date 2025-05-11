@@ -9,6 +9,7 @@ import com.yf.model.system.query.DictDataPageQuery;
 import com.yf.model.vo.DictDataPageVO;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 字典数据表-SysDictDataService
@@ -20,10 +21,10 @@ public interface ISysDictDataService extends IService<SysDictData> {
     /**
      * 字典下拉列表
      *
-     * @param type 字典类型
+     * @param types 字典类型
      * @return 字典列表
      */
-    List<Option<Integer>> listDictOptions(String type);
+    Map<String, List<Option<String>>> listDictOptions(List<String> types);
 
     /**
      * 查询字典数据

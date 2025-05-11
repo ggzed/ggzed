@@ -53,6 +53,7 @@ public enum ResultCode implements IResultCode, Serializable {
     ROLE_CODE_DUPLICATE("I111", "含有相同角色编码的角色"),
     ROLE_BIND_USER("I112", "有用户绑定被删除角色,请解绑后删除"),
     ROLE_NOT_ASSIGNED("W011", "用户未分配角色，无法登录，请联系管理员"),
+    ROLE_ADMIN_NOT_MODIFY("I110", "禁止修改管理员角色信息"),
 
     DEPT_BIND_USER("I111", "有用户绑定被删除部门,请解绑后删除"),
 
@@ -76,10 +77,17 @@ public enum ResultCode implements IResultCode, Serializable {
     FILE_MAX_UPLOAD_SIZE("I418", "文件大小超过平台阈值"),
     FILE_ANALYZER_ERROR("I409", "文件解析错误,文件可能更改原后缀名"),
 
+    GEN_TABLE_ALREADY_EXIST("I201", "生成表已经存在"),
+    GEN_TABLE_NOT_EXIST("I202", "生成表不存在"),
+    GEN_TABLE_FIELDS_NOT_EXIST("I203", "生成表字段不存在"),
+    GEN_CODE_ZIP_ERROR("W204", "代码生成失败 , 请检查配置是否出错"),
+    TEMPLATE_NOT_EXIST("E201", "模板不存在"),
+
     DB_SERVER_NOT_ENABLED("I500", "数据库服务并未开启"),
 
     FAIL("E500", "操作失败"),
-    SYSTEM_EXECUTION_ERROR("E500", "系统执行错误");
+    SYSTEM_EXECUTION_ERROR("E500", "系统执行错误"),
+    ;
 
 
     private String code;

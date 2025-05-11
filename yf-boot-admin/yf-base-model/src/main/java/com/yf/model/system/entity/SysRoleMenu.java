@@ -1,5 +1,7 @@
 package com.yf.model.system.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -26,6 +28,14 @@ public class SysRoleMenu implements Serializable {
 
     @Serial
     private static final long serialVersionUID = 708406389758302323L;
+
+
+    /**
+     * 主键ID
+     */
+    @TableId(type = IdType.AUTO)
+    @Schema(description = "主键ID")
+    private Integer id;
 
     /**
      * 角色ID

@@ -1,16 +1,22 @@
 package com.yf.converter;
 
-import com.yf.model.generate.bo.SyncGenTableFieldsBo;
 import com.yf.model.generate.entity.GenTableFields;
+import com.yf.model.generate.form.GenTableFieldsForm;
 import org.mapstruct.Mapper;
 
+import java.util.Collection;
+import java.util.List;
+
 /**
- * 表字段转换器
+ * GenTableFields 转换器
  *
  * @author : YiFei
- * @since : 2024/6/25 12:17
+ * @since : 2025/4/10 12:20
  */
 @Mapper(componentModel = "spring")
 public interface GenTableFieldsConverter {
-    GenTableFields bo2entity(SyncGenTableFieldsBo tableFieldsBo);
+
+    Collection<GenTableFields> forms2Entities(List<GenTableFieldsForm> forms);
+
+    List<GenTableFieldsForm> entities2Forms(List<GenTableFields> list);
 }

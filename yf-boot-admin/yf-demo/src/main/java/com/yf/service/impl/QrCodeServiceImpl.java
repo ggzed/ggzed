@@ -2,8 +2,8 @@ package com.yf.service.impl;
 
 import cn.hutool.extra.qrcode.QrConfig;
 import com.yf.exception.ServiceException;
+import com.yf.file.utils.NSFWAnalyzerUtils;
 import com.yf.model.form.GenQrCodeForm;
-import com.yf.oss.utils.NSFWAnalyzerUtils;
 import com.yf.result.ResultCode;
 import com.yf.service.IQrCodeService;
 import com.yf.utils.QrCodeUtils;

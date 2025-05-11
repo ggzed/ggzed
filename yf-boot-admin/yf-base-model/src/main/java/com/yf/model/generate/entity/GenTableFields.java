@@ -21,8 +21,8 @@ import java.io.Serializable;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode(callSuper = true)
-@Schema(description = "")
-@TableName("gen_table_fields")
+@Schema(description = "GenTableFields" )
+@TableName("gen_table_fields" )
 public class GenTableFields extends BaseEntity implements Serializable {
 
     @Serial
@@ -31,116 +31,128 @@ public class GenTableFields extends BaseEntity implements Serializable {
     /**
      * 主键
      */
-    @Schema(description = "主键")
+    @Schema(description = "主键" )
     @TableId(type = IdType.AUTO)
     private Integer id;
 
     /**
      * 所属表ID
      */
-    @Schema(description = "所属表ID")
+    @Schema(description = "所属表ID" )
     private Integer tableId;
+
+    /**
+     * 表格展示列名
+     */
+    @Schema(description = "表格展示列名" )
+    private String showName;
 
     /**
      * 数据库列名
      */
-    @Schema(description = "数据库列名")
+    @Schema(description = "数据库列名" )
     private String columnName;
 
     /**
      * 数据库字段描述
      */
-    @Schema(description = "数据库字段描述")
+    @Schema(description = "数据库字段描述" )
     private String columnComment;
 
     /**
      * 数据库类型
      */
-    @Schema(description = "数据库类型")
+    @Schema(description = "数据库类型" )
     private String columnType;
 
     /**
      * JAVA类型
      */
-    @Schema(description = "JAVA类型")
+    @Schema(description = "JAVA类型" )
     private String javaType;
 
     /**
-     * JAVA字段名
+     * JAVA&TS字段名
      */
-    @Schema(description = "JAVA字段名")
-    private String javaField;
+    @Schema(description = "JAVA&TS字段名" )
+    private String javaTsFieldName;
 
     /**
      * TypeScript类型
      */
-    @Schema(description = "TypeScript类型")
-    private String TsType;
-
-    /**
-     * TypeScript字段名
-     */
-    @Schema(description = "TypeScript字段名")
-    private String TsField;
+    @Schema(description = "TypeScript类型" )
+    private String tsType;
 
     /**
      * 是否主键（1:是,0:否）
      */
-    @Schema(description = "是否主键（1:是,0:否）")
-    private Integer isPk;
+    @Schema(description = "是否主键（1:是,0:否）" )
+    private Boolean isPk;
 
     /**
      * 是否自增（1:是,0:否）
      */
-    @Schema(description = "是否自增（1:是,0:否）")
-    private Integer isIncrement;
+    @Schema(description = "是否自增（1:是,0:否）" )
+    private Boolean isIncrement;
 
     /**
      * 是否必填（1:是,0:否）
      */
-    @Schema(description = "是否必填（1:是,0:否）")
-    private Integer isRequired;
+    @Schema(description = "是否必填（1:是,0:否）" )
+    private Boolean isRequired;
 
     /**
-     * 是否为插入/修改字段（1:是,0:否）
+     * 是否表单字段（1:是,0:否）
      */
-    @Schema(description = "是否为插入/修改字段（1:是,0:否）")
-    private Integer isInsertEdit;
+    @Schema(description = "是否表单字段（1:是,0:否）" )
+    private Boolean isForm;
 
     /**
      * 是否展示字段（1:是,0:否）
      */
-    @Schema(description = "是否展示字段（1:是,0:否）")
-    private Integer isShow;
+    @Schema(description = "是否展示字段（1:是,0:否）" )
+    private Boolean isShow;
 
     /**
      * 是否查询字段（1:是,0:否）
      */
-    @Schema(description = "是否查询字段（1:是,0:否）")
-    private Integer isQuery;
+    @Schema(description = "是否查询字段（1:是,0:否）" )
+    private Boolean isQuery;
+
+    /**
+     * 展示类型 ( JSON、文本、Markdown、Tag、图片... )
+     */
+    @Schema(description = "展示类型 ( JSON、文本、Markdown、Tag、图片... )" )
+    private String showType;
 
     /**
      * 查询方式（等于、不等于、大于、小于、范围）
      */
-    @Schema(description = "查询方式（等于、不等于、大于、小于、范围）")
+    @Schema(description = "查询方式（等于、不等于、大于、小于、范围）" )
     private String queryType;
 
     /**
      * 显示类型（文本框、文本域、下拉框、复选框、单选框、日期控件）
      */
-    @Schema(description = "显示类型（文本框、文本域、下拉框、复选框、单选框、日期控件）")
-    private String htmlType;
+    @Schema(description = "显示类型（文本框、文本域、下拉框、复选框、单选框、日期控件）" )
+    private String queryFormType;
+
+    /**
+     * 表单类型（文本框、文本域、下拉框、复选框、单选框、日期控件）
+     */
+    @Schema(description = "表单类型（文本框、文本域、下拉框、复选框、单选框、日期控件）" )
+    private String saveFormType;
 
     /**
      * 字典类型
      */
-    @Schema(description = "字典类型")
-    private String dictType;
+    @Schema(description = "字典类型" )
+    private String dictTypeName;
 
     /**
      * 排序
      */
-    @Schema(description = "排序")
+    @Schema(description = "排序" )
     private Integer sort;
 
 }

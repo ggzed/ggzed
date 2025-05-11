@@ -100,5 +100,46 @@
         </where>
     </select>
 
+    <!-- 批量保存菜单 -->
+    <insert id="saveBatch">
+        INSERT INTO sys_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="list[0].parentId != null">parent_id,</if>
+            <if test="list[0].treePath != null">tree_path,</if>
+            <if test="list[0].name != null">`name`,</if>
+            <if test="list[0].type != null">`type`,</if>
+            <if test="list[0].path != null">`path`,</if>
+            <if test="list[0].component != null">component,</if>
+            <if test="list[0].permission != null">permission,</if>
+            <if test="list[0].hidden != null">hidden,</if>
+            <if test="list[0].keepAlive != null">keep_alive,</if>
+            <if test="list[0].showSingleChildren != null">show_single_children,</if>
+            <if test="list[0].affix != null">affix,</if>
+            <if test="list[0].icon != null">icon,</if>
+            <if test="list[0].breadcrumb != null">breadcrumb,</if>
+            <if test="list[0].sort != null">sort,</if>
+            <if test="list[0].redirect != null">redirect,</if>
+        </trim>
+        VALUES
+        <foreach collection="list" item="item" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="item.parentId != null">#{item.parentId},</if>
+                <if test="item.treePath != null">#{item.treePath},</if>
+                <if test="item.name != null">#{item.name},</if>
+                <if test="item.type != null">#{item.type},</if>
+                <if test="item.path != null">#{item.path},</if>
+                <if test="item.component != null">#{item.component},</if>
+                <if test="item.permission != null">#{item.permission},</if>
+                <if test="item.hidden != null">#{item.hidden},</if>
+                <if test="item.keepAlive != null">#{item.keepAlive},</if>
+                <if test="item.showSingleChildren != null">#{item.showSingleChildren},</if>
+                <if test="item.affix != null">#{item.affix},</if>
+                <if test="item.icon != null">#{item.icon},</if>
+                <if test="item.breadcrumb != null">#{item.breadcrumb},</if>
+                <if test="item.sort != null">#{item.sort},</if>
+                <if test="item.redirect != null">#{item.redirect},</if>
+            </trim>
+        </foreach>
+    </insert>
 
 </mapper>

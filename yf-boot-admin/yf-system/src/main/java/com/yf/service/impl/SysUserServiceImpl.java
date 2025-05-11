@@ -10,6 +10,8 @@ import com.yf.constants.RedisKeyConstants;
 import com.yf.constants.SystemConstants;
 import com.yf.converter.UserConverter;
 import com.yf.exception.ServiceException;
+import com.yf.file.storage.FileStorageService;
+import com.yf.file.utils.FileUtils;
 import com.yf.mapper.system.SysOauthMapper;
 import com.yf.mapper.system.SysUserMapper;
 import com.yf.model.common.dto.UserAuthInfo;
@@ -23,8 +25,6 @@ import com.yf.model.system.form.UserForm;
 import com.yf.model.system.query.UserPageQuery;
 import com.yf.model.vo.UserInfoVO;
 import com.yf.model.vo.UserPageVO;
-import com.yf.oss.storage.FileStorageService;
-import com.yf.oss.utils.FileUtils;
 import com.yf.result.ResultCode;
 import com.yf.security.utils.SecurityUtil;
 import com.yf.service.ISysMenuService;
@@ -163,7 +163,10 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserMapper, SysUser> impl
         if (isSaveUser) {
             // 4.1 构建用户角色信息
             List<SysUserRole> collect = userForm.getRoleIds().stream()
-                    .map(item -> new SysUserRole(sysUser.getId(), item))    // 构建SysUserRole对象
+                    .map(item -> SysUserRole.builder()
+                            .userId(sysUser.getId())
+                            .roleId(item)
+                            .build())    // 构建SysUserRole对象
                     .toList();
             // 4.2 保存用户角色信息
             userRoleService.saveBatch(collect);

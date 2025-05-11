@@ -25,7 +25,7 @@ public interface DictDataConverter {
     @Mappings(
             {@Mapping(target = "id", source = "value"), @Mapping(target = "label", source = "name")}
     )
-    Option<Integer> list2option(SysDictData menu);
+    Option<String> entity2option(SysDictData menu);
 
     Page<DictDataPageVO> page2pageVO(Page<SysDictData> page);
 

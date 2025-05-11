@@ -12,6 +12,10 @@ public interface SystemConstants {
      */
     String ADMIN_CODE = "ADMIN";
     /**
+     * 默认演示用户 CODE
+     */
+    String DEMO_USER_CODE = "USER_EXPERIENCE";
+    /**
      * 系统默认密码
      */
     String SYSTEM_DEFAULT_PASSWORD = "12345678";

@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -18,9 +19,10 @@ import java.util.List;
  */
 @Schema(description = "下拉选项对象")
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class Option<T extends Number> implements ITreeNode<T, Option<T>> {
+public class Option<T> implements ITreeNode<T, Option<T>> {
 
     @Schema(name = "value", description = "选项的值")
     @JsonProperty("value")

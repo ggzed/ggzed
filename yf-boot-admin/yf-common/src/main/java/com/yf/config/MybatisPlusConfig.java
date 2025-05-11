@@ -21,7 +21,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @Configuration
 @EnableTransactionManagement
-@MapperScan("com.yf.mapper")
+@MapperScan("com.yf.**.mapper") // 扫描所有 Mapper 接口
 public class MybatisPlusConfig {
 
     /**

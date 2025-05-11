@@ -18,8 +18,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
-import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 /**
  * 字典数据表-SysDictDataIServiceImpl
@@ -37,27 +38,39 @@ public class SysDictDataServiceImpl extends ServiceImpl<SysDictDataMapper, SysDi
     /**
      * 字典下拉列表
      *
-     * @param type 字典类型
+     * @param types 字典类型
      * @return 字典列表
      */
     @Override
-    public List<Option<Integer>> listDictOptions(String type) {
-        // 1. 查询字典类型的状态是否可用
-        if (dictTypeService.lambdaQuery()
-                .eq(SysDictType::getType, type)
-                .eq(SysDictType::getStatus, EnableStatusEnum.ENABLE)
-                .exists()) {
-            // 2. 查询字典数据状态是否可用
-            List<SysDictData> list = this.lambdaQuery()
-                    .select(SysDictData::getName, SysDictData::getValue)
-                    .eq(SysDictData::getDictType, type)
-                    .eq(SysDictData::getStatus, EnableStatusEnum.ENABLE)
-                    .orderByAsc(SysDictData::getSort)
-                    .list();
-            return dictDataConverter.list2options(list);
-        } else {
-            return Collections.emptyList();
-        }
+    public Map<String, List<Option<String>>> listDictOptions(List<String> types) {
+        // 1. 查询所有字典数据
+        List<SysDictData> dictDataList = this.lambdaQuery()
+                .select(SysDictData::getName, SysDictData::getValue, SysDictData::getDictType)
+                .in(SysDictData::getDictType, types)
+                .eq(SysDictData::getStatus, EnableStatusEnum.ENABLE)
+                .orderByAsc(SysDictData::getSort)
+                .list();
+        // 2. 填充 Map<String,List<Option<Integer>>> key 为 type , value 为 Option
+        return dictDataList.stream()
+                .collect(Collectors.groupingBy(SysDictData::getDictType,
+                        Collectors.mapping(dictDataConverter::entity2option, Collectors.toList())));
+
+//        // 1. 查询字典类型的状态是否可用
+//        if (dictTypeService.lambdaQuery()
+//                .eq(SysDictType::getType, type)
+//                .eq(SysDictType::getStatus, EnableStatusEnum.ENABLE)
+//                .exists()) {
+//            // 2. 查询字典数据状态是否可用
+//            List<SysDictData> list = this.lambdaQuery()
+//                    .select(SysDictData::getName, SysDictData::getValue)
+//                    .eq(SysDictData::getDictType, type)
+//                    .eq(SysDictData::getStatus, EnableStatusEnum.ENABLE)
+//                    .orderByAsc(SysDictData::getSort)
+//                    .list();
+//            return dictDataConverter.list2options(list);
+//        } else {
+//            return Collections.emptyList();
+//        }
     }
 
     /**
@@ -80,8 +93,11 @@ public class SysDictDataServiceImpl extends ServiceImpl<SysDictDataMapper, SysDi
         Integer status = queryParams.getStatus();
         Integer defaulted = queryParams.getDefaulted();
         Page<SysDictData> page = this.lambdaQuery()
+                .and(StringUtils.hasText(name), query -> query
+                        .like(SysDictData::getName, name)
+                        .or()
+                        .like(SysDictData::getValue, name))
                 .eq(SysDictData::getDictType, type)
-                .eq(StringUtils.hasText(name), SysDictData::getName, name)
                 .eq(status != null, SysDictData::getStatus, status)
                 .eq(defaulted != null, SysDictData::getDefaulted, defaulted)
                 .page(queryParams.lambdaMpPage(SysDictData::getSort, true));

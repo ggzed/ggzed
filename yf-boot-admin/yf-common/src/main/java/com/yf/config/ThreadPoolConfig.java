@@ -9,7 +9,6 @@ import org.springframework.scheduling.annotation.EnableAsync;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 
-import java.util.concurrent.Executors;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -23,29 +22,25 @@ public class ThreadPoolConfig {
      * 配置定时任务执行器
      */
     @Bean(name = "scheduledExecutorService")
-    protected ScheduledExecutorService scheduledExecutorService() {
-        // 核心线程数为 CPU 核心数，最大线程数为 CPU 核心数的两倍
+    public ScheduledExecutorService scheduledExecutorService() {
+        // 核心线程数为 CPU 核心数
         int corePoolSize = Runtime.getRuntime().availableProcessors();
-        int maxPoolSize = corePoolSize * 2;
 
-        // 使用有界任务队列，限制任务的并发度，避免流量突然增加导致系统负载过高
-        int queueCapacity = 200;
-
-        // 使用调度线程池，支持定时任务
-        ThreadPoolExecutor executor = new ThreadPoolExecutor(
+        // 创建调度线程池
+        ScheduledThreadPoolExecutor scheduledExecutorService = new ScheduledThreadPoolExecutor(
                 corePoolSize,
-                maxPoolSize,
-                0L,
-                java.util.concurrent.TimeUnit.MILLISECONDS,
-                new java.util.concurrent.LinkedBlockingQueue<Runnable>(queueCapacity),
-                new BasicThreadFactory.Builder().namingPattern("schedule-pool-%d").daemon(true).build(),
-                new ThreadPoolExecutor.CallerRunsPolicy()
+                new BasicThreadFactory.Builder()
+                        .namingPattern("schedule-pool-%d")
+                        .daemon(true)
+                        .build()
         );
 
-        // 转换为 ScheduledExecutorService
-        ScheduledExecutorService scheduledExecutorService = Executors.newScheduledThreadPool(corePoolSize);
-        ((ScheduledThreadPoolExecutor) scheduledExecutorService).setContinueExistingPeriodicTasksAfterShutdownPolicy(false);
-        ((ScheduledThreadPoolExecutor) scheduledExecutorService).setExecuteExistingDelayedTasksAfterShutdownPolicy(false);
+        // 配置线程池策略
+        scheduledExecutorService.setRejectedExecutionHandler(new ThreadPoolExecutor.CallerRunsPolicy());
+
+        // 设置调度线程池的行为：在关闭时不继续执行已有的周期任务
+        scheduledExecutorService.setContinueExistingPeriodicTasksAfterShutdownPolicy(false);
+        scheduledExecutorService.setExecuteExistingDelayedTasksAfterShutdownPolicy(false);
 
         return scheduledExecutorService;
     }

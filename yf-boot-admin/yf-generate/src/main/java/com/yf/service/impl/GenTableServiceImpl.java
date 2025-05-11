@@ -1,20 +1,23 @@
 package com.yf.service.impl;
 
-import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yf.converter.GenTableConverter;
 import com.yf.mapper.generate.GenTableMapper;
-import com.yf.model.generate.bo.SyncGenTableBo;
+import com.yf.mapper.system.SysMenuMapper;
+import com.yf.model.generate.bo.DBTableBO;
+import com.yf.model.generate.bo.DBTableInfoBO;
 import com.yf.model.generate.entity.GenTable;
+import com.yf.model.generate.form.GenTableForm;
+import com.yf.model.generate.query.DBTablePageQuery;
+import com.yf.model.system.entity.SysMenu;
+import com.yf.model.vo.DBTableVO;
 import com.yf.service.IGenTableFieldsService;
 import com.yf.service.IGenTableService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.Set;
-import java.util.stream.Collectors;
+import static com.yf.constants.GenTableDefaultConstants.GEN_FILENAME;
 
 /**
  * GenTableIServiceImpl
@@ -26,59 +29,105 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 public class GenTableServiceImpl extends ServiceImpl<GenTableMapper, GenTable> implements IGenTableService {
 
-    private final IGenTableFieldsService genTableFieldsService;
+    private final SysMenuMapper menuMapper;
     private final GenTableConverter genTableConverter;
+    private final IGenTableFieldsService genTableFieldsService;
 
     /**
-     * 同步数据库
+     * 查询数据库所有可导入表
      *
-     * @return 是否同步成功
+     * @param queryParams 查询参数
+     * @return IPage<DBTableVO> 分页展示内容
      */
     @Override
-    @Transactional
-    public boolean syncDatabase() {
-        // 1. 同步表
-        List<Integer> genTableNames = this.syncTable();
-        // 2. 同步对应表字段
-        genTableFieldsService.syncFields(genTableNames);
+    public IPage<DBTableVO> getDBTablePage(DBTablePageQuery queryParams) {
+        IPage<DBTableBO> dbTableBOIPage = this.getBaseMapper()
+                .getDBTablePage(queryParams.getTableName(), queryParams.toPage());
+        return genTableConverter.pageBO2VO(dbTableBOIPage);
+    }
+
+    /**
+     * 查询数据库表信息
+     *
+     * @param dbTableName 表名
+     * @return DBTableInfoBO 表信息
+     */
+    @Override
+    public DBTableInfoBO getDBTableInfo(String dbTableName) {
+        DBTableInfoBO dbTableInfoBO = this.getBaseMapper().getDBTableByName(dbTableName);
+        // 如果数据为空，或者名字不匹配，返回空
+        if (dbTableInfoBO == null || !dbTableName.equals(dbTableInfoBO.getTableName())) {
+            return null;
+        }
+        // 表存在则查询字段
+        dbTableInfoBO.setFieldList(genTableFieldsService.getDBFields(dbTableName));
+        return dbTableInfoBO;
+    }
+
+    /**
+     * 修改生成表
+     *
+     * @param tableId 生成表ID
+     * @param form    生成表表单
+     * @return 是否修改成功
+     */
+    @Override
+    public boolean updateGenTable(Integer tableId, GenTableForm form) {
+        this.lambdaUpdate()
+                .eq(GenTable::getId, tableId)
+                .update(genTableConverter.form2Entity(form));
         return true;
     }
 
     /**
-     * 同步数据表到 GenTableName
+     * tableId 是否存在
      *
-     * @return 新增后的 GenTableName
+     * @param tableId 生成表ID
+     * @return 是否删除成功
      */
-    @Transactional
-    public List<Integer> syncTable() {
-        // 1. 获取数据库所有表
-        List<SyncGenTableBo> syncGenTableBos = this.getBaseMapper().getDatabaseTable();
-        // 2. 排除当前已有表
-        List<GenTable> existingTables = this.lambdaQuery().list();
-        Set<String> existingTableNames = existingTables.stream()
-                .map(GenTable::getTableName)
-                .collect(Collectors.toSet());
+    @Override
+    public boolean genTableIsExist(Integer tableId) {
+        return this.lambdaQuery().select(GenTable::getId).eq(GenTable::getId, tableId).exists();
+    }
 
-        // 3. 过滤出不存在于 existingTables 的表
-        List<GenTable> newTables = syncGenTableBos.stream()
-                .filter(syncGenTableBo -> !existingTableNames.contains(syncGenTableBo.getTableName()))
-                .map(syncGenTableBo -> {
-                    // 3.1 转换出 GenTable
-                    GenTable genTable = genTableConverter.syncBo2entity(syncGenTableBo);
-                    // 3.2 填充必要字段
-                    String tableName = genTable.getTableName();
-                    String tableComment = genTable.getTableComment();
-                    String className = StrUtil.upperFirst(StrUtil.toCamelCase(tableName, '_'));
+    /**
+     * 生成文件名
+     *
+     * @param tableId 生成表ID集合
+     * @return 文件名
+     */
+    @Override
+    public String generateFileName(Integer tableId) {
+        // 1. 查询 genTable
+        GenTable genTable = this.lambdaQuery()
+                .select(GenTable::getModuleName, GenTable::getBusinessName)
+                .eq(GenTable::getId, tableId).one();
+        // 2. 返回文件名
+        if (genTable != null) {
+            return genTable.getModuleName() + "-" + genTable.getBusinessName();
+        } else {
+            return GEN_FILENAME;
+        }
+    }
 
-                    genTable.setClassName(className);
-                    genTable.setFunctionNotes(tableComment);
-                    return genTable;
-                }).toList();
-
-        // 4. 存储新表
-        this.saveBatch(newTables);
-        // 5. 返回表名
-        return newTables.stream().map(GenTable::getId).toList();
+    /**
+     * 获取生成表详情
+     *
+     * @param tableId 生成表ID
+     * @return GenTableForm
+     */
+    @Override
+    public GenTableForm getGenTableForm(Integer tableId) {
+        GenTable table = this.lambdaQuery().eq(GenTable::getId, tableId).one();
+        SysMenu sysMenu = menuMapper.selectById(table.getMenuId());
+        if (sysMenu == null) {
+            table.setMenuId(null);
+            this.lambdaUpdate()
+                    .eq(GenTable::getId, tableId)
+                    .set(GenTable::getMenuId, null)
+                    .update();
+        }
+        return genTableConverter.entity2Form(table);
     }
 }
 

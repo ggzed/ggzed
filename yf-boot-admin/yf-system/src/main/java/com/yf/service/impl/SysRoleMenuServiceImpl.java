@@ -58,7 +58,10 @@ public class SysRoleMenuServiceImpl extends ServiceImpl<SysRoleMenuMapper, SysRo
         }
         if (!CollectionUtils.isEmpty(toAdd)) {
             List<SysRoleMenu> userRolesToAdd = toAdd.stream()
-                    .map(menuId -> new SysRoleMenu(roleId, menuId))
+                    .map(menuId -> SysRoleMenu.builder()
+                            .roleId(roleId)
+                            .menuId(menuId)
+                            .build())
                     .collect(Collectors.toList());
             this.saveBatch(userRolesToAdd);
         }

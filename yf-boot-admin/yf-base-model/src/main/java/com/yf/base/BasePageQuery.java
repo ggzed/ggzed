@@ -5,7 +5,6 @@ import com.baomidou.mybatisplus.core.toolkit.LambdaUtils;
 import com.baomidou.mybatisplus.core.toolkit.support.SFunction;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import io.swagger.v3.oas.annotations.media.Schema;
-import jakarta.validation.constraints.Max;
 import lombok.Data;
 import org.apache.commons.lang3.StringUtils;
 
@@ -20,8 +19,16 @@ public class BasePageQuery {
     private int pageNum = 1;
 
     @Schema(description = "每页记录数", example = "10")
-    @Max(value = 100)
     private int pageSize = 10;
+
+    /**
+     * 转换为 mybatis-plus 的 Page 对象
+     *
+     * @return Page<T>
+     */
+    public <T> Page<T> toPage() {
+        return new Page<>(this.pageNum, this.pageSize);
+    }
 
     /**
      * 转换为 mybatis-plus 的 Page 对象

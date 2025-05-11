@@ -1,16 +1,24 @@
 package com.yf.converter;
 
-import com.yf.model.generate.bo.SyncGenTableBo;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import com.yf.model.generate.bo.DBTableBO;
 import com.yf.model.generate.entity.GenTable;
+import com.yf.model.generate.form.GenTableForm;
+import com.yf.model.vo.DBTableVO;
 import org.mapstruct.Mapper;
 
 /**
- * GenTable转换器
+ * GenTable 转换器
  *
  * @author : YiFei
- * @since : 2024/6/14 17:28
+ * @since : 2025/3/30 16:58
  */
 @Mapper(componentModel = "spring")
 public interface GenTableConverter {
-    GenTable syncBo2entity(SyncGenTableBo syncGenTableBo);
+    Page<DBTableVO> pageBO2VO(IPage<DBTableBO> dbTableBOIPage);
+
+    GenTable form2Entity(GenTableForm form);
+
+    GenTableForm entity2Form(GenTable entity);
 }

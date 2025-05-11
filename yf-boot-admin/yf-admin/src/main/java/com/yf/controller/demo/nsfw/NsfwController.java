@@ -1,10 +1,10 @@
 package com.yf.controller.demo.nsfw;
 
-import com.yf.log.annotation.OperationLog;
 import com.yf.exception.ServiceException;
+import com.yf.file.constraints.MultipartFileValid;
+import com.yf.file.utils.NSFWAnalyzerUtils;
+import com.yf.log.annotation.OperationLog;
 import com.yf.model.log.enums.BusinessTypeEnum;
-import com.yf.oss.constraints.MultipartFileValid;
-import com.yf.oss.utils.NSFWAnalyzerUtils;
 import com.yf.rate_limiting.annotation.PreventDuplicateSubmit;
 import com.yf.rate_limiting.annotation.RateLimiter;
 import com.yf.rate_limiting.annotation.RateLimiters;

@@ -21,7 +21,6 @@ import java.time.Duration;
 public class RedisConfig {
 
     /**
-     * TODO 无注入信息
      * 修改 Redis 序列化方式，默认 JdkSerializationRedisSerializer
      *
      * @param redisConnectionFactory {@link RedisConnectionFactory}
@@ -57,7 +56,7 @@ public class RedisConfig {
                         RedisSerializationContext
                                 .SerializationPair
                                 .fromSerializer(RedisSerializer.json())
-                 )  // 设置缓存值（value）的序列化方式为JSON格式
+                )  // 设置缓存值（value）的序列化方式为JSON格式
                 .entryTtl(Duration.ofDays(7)) // 默认过期时间 7 天
                 .disableCachingNullValues(); // 禁用缓存空值
 

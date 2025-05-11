@@ -97,5 +97,12 @@ public interface ISysRoleService extends IService<SysRole> {
      * @return 是否分配成功
      */
     boolean updateRoleMenus(Integer roleId, List<Integer> menuIds);
+
+    /**
+     * 获取管理员角色
+     *
+     * @return 管理员角色
+     */
+    SysRole getAdminRole();
 }
 

@@ -1,5 +1,7 @@
 package com.yf.model.system.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.AllArgsConstructor;
@@ -26,6 +28,13 @@ public class SysUserRole implements Serializable {
 
     @Serial
     private static final long serialVersionUID = -53738064122275021L;
+
+    /**
+     * 主键ID
+     */
+    @TableId(type = IdType.AUTO)
+    @Schema(description = "主键ID")
+    private Integer id;
 
     /**
      * 用户ID

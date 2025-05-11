@@ -3,10 +3,12 @@ package com.yf.model.generate.dto;
 import com.yf.model.generate.entity.GenTable;
 import com.yf.model.generate.entity.GenTableFields;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * 代码生成Dto
@@ -15,6 +17,7 @@ import java.util.List;
  * @since : 2024/6/25 19:34
  */
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
 public class GenCodeDto {
@@ -24,6 +27,10 @@ public class GenCodeDto {
     private GenTable table;
     /**
      * 表字段信息
+     * pk -> [{Fields}]   => 默认只有第一个主键有效
+     * query -> [{Fields}]
+     * form -> [{Fields}]
+     * show -> [{Fields}]
      */
-    private List<GenTableFields> fields;
+    private Map<String, List<GenTableFields>> mapFields;
 }

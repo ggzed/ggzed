@@ -4,13 +4,29 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.yf.mapper.generate.GenTableMapper">
 
-    <select id="getDatabaseTable" resultType="com.yf.model.generate.bo.SyncGenTableBo">
+    <select id="getDBTablePage" resultType="com.yf.model.generate.bo.DBTableBO">
         SELECT table_name,
-               table_comment,
-               create_time,
-               update_time
-        FROM information_schema.tables
+        table_comment,
+        create_time,
+        update_time,
+        `engine`,
+        table_rows
+        FROM information_schema.TABLES
         WHERE table_schema = DATABASE()
-          AND table_name NOT LIKE 'gen%';
+        AND table_name NOT LIKE 'gen%'
+        AND table_name NOT IN (SELECT table_name FROM gen_table)
+        <if test="tableName != null and tableName != ''">
+            AND table_name LIKE CONCAT('%', #{tableName}, '%')
+        </if>
+        ORDER BY create_time
+    </select>
+
+    <select id="getDBTableByName" resultType="com.yf.model.generate.bo.DBTableInfoBO">
+        SELECT table_name,
+               table_comment
+        FROM information_schema.TABLES
+        WHERE table_schema = DATABASE()
+          AND table_name = #{tableName}
+          AND table_name NOT LIKE 'gen%'
     </select>
 </mapper>

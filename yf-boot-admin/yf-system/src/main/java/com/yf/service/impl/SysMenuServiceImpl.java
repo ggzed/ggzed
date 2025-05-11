@@ -18,6 +18,7 @@ import com.yf.model.vo.MenuPageVO;
 import com.yf.model.vo.RouteVO;
 import com.yf.service.ISysMenuService;
 import com.yf.service.ISysRoleMenuService;
+import com.yf.service.ISysRoleService;
 import com.yf.utils.TreeNodeUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
@@ -45,6 +46,7 @@ import java.util.stream.Collectors;
 public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> implements ISysMenuService {
 
     private final MenuConverter menuConverter;
+    private final ISysRoleService roleService;
     private final ISysRoleMenuService roleMenuService;
 
     /**

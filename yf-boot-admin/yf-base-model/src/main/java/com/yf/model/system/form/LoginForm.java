@@ -5,7 +5,6 @@ import lombok.Builder;
 import lombok.Data;
 import me.zhyd.oauth.model.AuthCallback;
 
-// TODO 待定迁移
 @Data
 @Builder
 @Schema(description = "统一登录表单")

@@ -1,5 +1,6 @@
 package com.yf.service.impl;
 
+import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
@@ -8,6 +9,8 @@ import com.yf.converter.DictTypeConverter;
 import com.yf.exception.ServiceException;
 import com.yf.mapper.system.SysDictDataMapper;
 import com.yf.mapper.system.SysDictTypeMapper;
+import com.yf.model.common.Option;
+import com.yf.model.common.enums.EnableStatusEnum;
 import com.yf.model.system.entity.SysDictData;
 import com.yf.model.system.entity.SysDictType;
 import com.yf.model.system.form.DictTypeForm;
@@ -137,6 +140,10 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
         this.lambdaUpdate()
                 .eq(SysDictType::getId, dictTypeId)
                 .update(dictType);
+        // 4. 关联修改 dict_data 表的 name
+        dictDataMapper.update(new LambdaUpdateWrapper<SysDictData>()
+                .eq(SysDictData::getDictType, dictTypeForm.getType())
+                .set(SysDictData::getDictType, dictType.getType()));
         return true;
     }
 
@@ -153,6 +160,22 @@ public class SysDictTypeServiceImpl extends ServiceImpl<SysDictTypeMapper, SysDi
                 .eq(SysDictType::getId, dictTypeId)
                 .set(SysDictType::getStatus, status)
                 .update();
+    }
+
+    /**
+     * 获取字典类型下拉列表
+     *
+     * @return 字典类型下拉列表
+     */
+    @Override
+    public List<Option<String>> listDictOptions() {
+        List<SysDictType> dictTypes = this.lambdaQuery()
+                .select(SysDictType::getId, SysDictType::getName, SysDictType::getType)
+                .eq(SysDictType::getStatus, EnableStatusEnum.ENABLE.getValue())
+                .orderByAsc(SysDictType::getUpdateTime)
+                .list();
+
+        return dictTypeConverter.entity2options(dictTypes);
     }
 
     /**

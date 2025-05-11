@@ -1,11 +1,11 @@
 package com.yf.controller.system;
 
+import com.yf.file.constraints.MultipartFileValid;
 import com.yf.log.annotation.OperationLog;
 import com.yf.model.log.enums.BusinessTypeEnum;
 import com.yf.model.system.form.ResetUserPasswordForm;
 import com.yf.model.system.form.UserProfileForm;
 import com.yf.model.vo.UserProfileInfoVO;
-import com.yf.oss.constraints.MultipartFileValid;
 import com.yf.rate_limiting.annotation.PreventDuplicateSubmit;
 import com.yf.rate_limiting.annotation.RateLimiter;
 import com.yf.rate_limiting.annotation.RateLimiters;
@@ -20,7 +20,16 @@ import lombok.RequiredArgsConstructor;
 import me.zhyd.oauth.model.AuthCallback;
 import org.hibernate.validator.constraints.Length;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.concurrent.TimeUnit;
@@ -54,7 +63,7 @@ public class SysProfileController {
         boolean result = userProfileService.checkPasswordExistence();
         return Result.success(result);
     }
-
+    
     @Operation(summary = "修改用户名")
     @RateLimiters(
             rateLimiters = {
@@ -105,7 +114,7 @@ public class SysProfileController {
     @Operation(summary = "修改用户头像")
     @OperationLog(title = "修改用户头像", businessType = BusinessTypeEnum.UPLOAD)
     @PreventDuplicateSubmit
-    @PatchMapping("/avatar")
+    @PostMapping("/avatar")
     public Result<String> updateAvatar(@Validated @MultipartFileValid MultipartFile avatar) {
         String avatarUrl = userProfileService.updateAvatar(avatar);
         return Result.success(avatarUrl);
