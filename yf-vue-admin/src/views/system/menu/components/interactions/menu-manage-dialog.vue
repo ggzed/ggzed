@@ -252,7 +252,7 @@ const rules: FormRules = {
 // 数据
 const menuFormRef = ref<FormInstance | null>(null);          // 菜单表单
 const form = ref<MenuForm>({...initialForm});                // menu 表单初始化数据
-const menuOptions = ref<OptionType[]>([{value: 0, label: "顶级菜单", children: []}]);  // 菜单操作列表
+const menuOptions = ref<OptionType[]>([{value: "0", label: "顶级菜单", children: []}]);  // 菜单操作列表
 // 方法
 /**
  * 提交表单

@@ -179,7 +179,7 @@ export class GenerateCrudAPI {
             return `${API_BASE}${API_SUFFIXES.TABLE_FIELDS_UPDATE.replace("{tableId}", tableId.toString())}`;
         },
         permission: "generate:crud:update",
-        request: (tableId: number, forms: GenTableForm[]): AxiosPromise<void> => {
+        request: (tableId: number, forms: GenTableFieldsForm[]): AxiosPromise<void> => {
             return request<void>({
                 url: GenerateCrudAPI.TABLE_FIELDS_UPDATE.endpoint(tableId),
                 method: "put",

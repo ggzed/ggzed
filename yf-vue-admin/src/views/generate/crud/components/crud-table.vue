@@ -7,7 +7,7 @@
                    :circle="device === DeviceEnum.MOBILE"
                    plain
                    type="success"
-                   @click="openImportDialog()">
+                   @click="openImportDialog('导入现有数据库')">
           <el-icon>
             <plus/>
           </el-icon>
@@ -134,6 +134,7 @@
       :close-dialog="closeImportDialog"
       :device="device"
       :load-data="props.loadData"
+      :title="importDialogTitle"
   />
 </template>
 
@@ -166,6 +167,7 @@ const emits = defineEmits<{
 // hooks
 const query = useVModel(props, 'query', emits)
 const {
+  title: importDialogTitle,
   visible: importDialogVisible,
   openDialog: openImportDialog,
   closeDialog
@@ -203,7 +205,7 @@ async function genZip(tableId: number) {
         response.headers["content-disposition"].split(";")[1].split("=")[1]
     );
 
-    const blob = new Blob([response.data], {type: "application/zip"});
+    const blob = new Blob([response.data as unknown as ArrayBuffer], {type: "application/zip"});
     const a = document.createElement("a");
     const url = window.URL.createObjectURL(blob);
     a.href = url;

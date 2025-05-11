@@ -28,10 +28,8 @@ defineOptions({
 });
 // 公共数据 & 方法
 const initialQuery: GenCrudTablePageQuery = {
-  parentMenuId: undefined,
   functionAuthor: undefined,
   tableName: undefined,
-  tableComment: undefined,
   pageNum: 1,
   pageSize: 10,
 }                       // 初始化查询条件

@@ -19,33 +19,33 @@ export class SystemConstant {
  */
 export class EnableStatusEnum {
     static readonly OPTIONS_RADIO: OptionType[] = [
-        {label: "启用", value: 1},
-        {label: "禁用", value: 0}
+        {label: "启用", value: "1"},
+        {label: "禁用", value: "0"}
     ]
 
-    static readonly OPTIONS: Record<string | number, string> = {1: "启用", 0: "禁用"}
+    static readonly OPTIONS: Record<string | number, string> = {"1": "启用", "0": "禁用"}
 
     static readonly TAG_STYLE: Array<'success' | 'info' | 'warning' | 'danger' | 'primary'> = ["danger", "success"]
 }
 
 export class OperatorLogStatusEnum {
     static readonly OPTIONS_RADIO: OptionType[] = [
-        {label: "正常", value: 1},
-        {label: "异常", value: 0}
+        {label: "正常", value: "1"},
+        {label: "异常", value: "0"}
     ]
 
-    static readonly OPTIONS: Record<string | number, string> = {1: "正常", 0: "异常"}
+    static readonly OPTIONS: Record<string | number, string> = {"1": "正常", "0": "异常"}
 
     static readonly TAG_STYLE: Array<'success' | 'info' | 'warning' | 'danger' | 'primary'> = ["danger", "success"]
 }
 
 export class DefaultedStatusEnum {
     static readonly OPTIONS_RADIO: OptionType[] = [
-        {label: "默认项", value: 1},
-        {label: "其他项", value: 0}
+        {label: "默认项", value: "1"},
+        {label: "其他项", value: "0"}
     ]
 
-    static readonly OPTIONS: Record<string | number, string> = {1: "默认项", 0: "其他项"}
+    static readonly OPTIONS: Record<string | number, string> = {"1": "默认项", "0": "其他项"}
 
     static readonly TAG_STYLE: Array<'success' | 'info' | 'warning' | 'danger' | 'primary'> = ["info", "success"]
 }
@@ -53,11 +53,11 @@ export class DefaultedStatusEnum {
 export class HiddenStatusEnum {
 
     static readonly OPTIONS_RADIO: OptionType[] = [
-        {label: "展示", value: 0},
-        {label: "隐藏", value: 1}
+        {label: "展示", value: "0"},
+        {label: "隐藏", value: "1"}
     ]
 
-    static readonly OPTIONS: Record<string | number, string> = {1: "隐藏", 0: "显示"}
+    static readonly OPTIONS: Record<string | number, string> = {"1": "隐藏", "0": "显示"}
 
     static readonly TAG_STYLE: Array<'success' | 'info' | 'warning' | 'danger' | 'primary'> = ["success", "danger"]
 }

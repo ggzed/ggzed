@@ -7,7 +7,6 @@
           <el-scrollbar max-height="72vh">
             <el-tree
                 :data="[fileTree]"
-
                 default-expand-all
                 highlight-current
                 @node-click="handleNodeClick"
@@ -70,7 +69,7 @@ const fileTree = ref<PreviewGenCodeTreeVO>({});
 const currentCode = ref('')
 
 // 方法
-function handleNodeClick(node) {
+function handleNodeClick(node: PreviewGenCodeTreeVO) {
   if (node.isFile) {
     currentCode.value = "``` " + node.codeLanguage + "\n" + node.content + "```";
   }
@@ -89,7 +88,7 @@ async function genZip() {
         response.headers["content-disposition"].split(";")[1].split("=")[1]
     );
 
-    const blob = new Blob([response.data], {type: "application/zip"});
+    const blob = new Blob([response.data as unknown as ArrayBuffer], {type: "application/zip"});
     const a = document.createElement("a");
     const url = window.URL.createObjectURL(blob);
     a.href = url;

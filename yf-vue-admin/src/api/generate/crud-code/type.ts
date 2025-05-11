@@ -186,6 +186,10 @@ export interface GenTableMenuForm {
 
 export interface GenTableForm {
     /**
+     * 菜单Id
+     */
+    menuId?: number;
+    /**
      * 作者
      */
     functionAuthor?: string;

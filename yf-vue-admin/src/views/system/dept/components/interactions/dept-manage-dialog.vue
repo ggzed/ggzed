@@ -115,7 +115,7 @@ const rules: FormRules = {
 }                                                        // dept 表单校验规则
 // 数据
 const deptFormRef = ref<FormInstance | null>(null);          // 部门表单
-const deptOptions = ref<OptionType[]>([{value: 0, label: "顶级菜单", children: []}]);  // 部门操作列表
+const deptOptions = ref<OptionType[]>([{value: "0", label: "顶级菜单", children: []}]);  // 部门操作列表
 const form = ref<DeptForm>({...initialForm});
 
 // 方法

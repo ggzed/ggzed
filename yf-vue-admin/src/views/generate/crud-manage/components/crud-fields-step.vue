@@ -3,7 +3,7 @@
     <el-card class="table-container">
       <el-table
           ref="tableRef"
-          :data="form"
+          :data="forms"
           class="fields-table"
           highlight-current-row
           row-key="id"
@@ -124,7 +124,7 @@
 </template>
 
 <script lang="ts" setup>
-import Sortable from "sortablejs";
+import Sortable, { SortableEvent } from "sortablejs";
 import {GenTableFieldsForm} from "@/api/generate/crud-code/type";
 import {GenerateCrudAPI} from "@/api/generate/crud-code";
 import {useDictionary} from "@/hooks/userDict";
@@ -154,7 +154,7 @@ const emits = defineEmits<{
 const active = useVModel(props, 'active', emits)
 // 数据
 const loading = ref<boolean>(true);
-const form = ref<GenTableFieldsForm[]>([]);
+const forms = ref<GenTableFieldsForm[]>([]);
 const dictType = ref<OptionType[]>([])
 const dictData = await useDictionary([
   DictType.JAVA_TYPE,
@@ -200,7 +200,7 @@ async function goToNextStep() {
 
 async function save() {
   // 保存修改
-  await GenerateCrudAPI.TABLE_FIELDS_UPDATE.request(props.curdManageId, form.value);
+  await GenerateCrudAPI.TABLE_FIELDS_UPDATE.request(props.curdManageId, forms.value);
 }
 
 function nextActive() {
@@ -211,7 +211,7 @@ function nextActive() {
 // 生命周期
 onMounted(async () => {
   await GenerateCrudAPI.TABLE_FIELDS_FORM.request(props.curdManageId).then(({data}) => {
-    form.value = data;
+    forms.value = data;
   }).finally(() => {
     loading.value = false;
   })
@@ -219,12 +219,17 @@ onMounted(async () => {
   const tbody = tableRef.value.$el.querySelector('.el-table__body-wrapper tbody');
   Sortable.create(tbody, {
     animation: 150,
-    onEnd: ({oldIndex, newIndex}) => {
-      if (oldIndex !== newIndex) {
+    onEnd: (evt: SortableEvent) => {
+      const { oldIndex, newIndex } = evt;
+      if (oldIndex !== newIndex && oldIndex !== undefined && newIndex !== undefined) {
         // 交换位置
-        const temp = form.value[oldIndex].sort;
-        form.value[oldIndex].sort = form.value[newIndex].sort;
-        form.value[newIndex].sort = temp;
+        const oldItem = forms.value[oldIndex];
+        const newItem = forms.value[newIndex];
+        if (oldItem && newItem) {
+          const temp = oldItem.sort;
+          oldItem.sort = newItem.sort;
+          newItem.sort = temp;
+        }
       }
     }
   });

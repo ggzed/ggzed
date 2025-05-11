@@ -22,7 +22,7 @@ interface TableManagement<T> {
 
 export function useTableManagement<T>(
     tableRef: Ref<TableInstance | null>,
-    rowKey? = "id"
+    rowKey = "id"
 ): TableManagement<T> {
     const selectedIds = ref<T[]>([]) as Ref<T[]>;
 

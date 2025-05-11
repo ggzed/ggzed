@@ -92,6 +92,8 @@ defineOptions({
 // 组件 props & emits
 const props = withDefaults(defineProps<{
   // dialog-visible
+  title: string;
+  // dialog-visible
   visible: boolean;
   // 设备
   device?: DeviceEnum;
@@ -134,7 +136,7 @@ function submitForm() {
     ElMessage.warning("请选择要导入的表");
     return;
   }
-  GenerateCrudAPI.IMPORT_DB_TABLE.request(selectedTableNames.value).then(() => {
+  GenerateCrudAPI.IMPORT_DB_TABLE.request(selectedTableNames.value.join(",")).then(() => {
     ElMessage.success("导入成功");
     props.closeDialog();
   })
