@@ -1,6 +1,7 @@
 import {RouteRecordRaw} from "vue-router";
 import {Layout, NotFound} from "@/router/core/ConstantRoutes";
 import {RouteVO} from "@/api/system/menu/type";
+import {SystemConstant} from "@/constants/system";
 
 const modules = import.meta.glob("../../views/**/**.vue");
 
@@ -54,6 +55,9 @@ export function hasPermission(roles: string[], route: RouteRecordRaw): boolean {
     if (route.meta && route.meta.roles) {
         return roles.some((role) => {
             if (route.meta?.roles) {
+                if (role === SystemConstant.ADMIN) {
+                    return true;
+                }
                 return route.meta.roles.includes(role);
             }
         });

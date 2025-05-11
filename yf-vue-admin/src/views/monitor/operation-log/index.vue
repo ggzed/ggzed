@@ -3,19 +3,17 @@
     <!--  搜索框   -->
     <operation-log-search
         v-model:query="query"
-        :business-dict="businessDict"
         :load-data="loadData"
-        :operator-type-dict="operatorTypeDict"
+        :operator-log-dict="operatorLogDict"
         :reset-query="resetQuery"
     />
     <!--  表格   -->
     <operation-log-table
         v-model:query="query"
-        :business-dict="businessDict"
         :data-list="dataList"
         :load-data="loadData"
         :loading="loading"
-        :operator-type-dict="operatorTypeDict"
+        :operator-log-dict="operatorLogDict"
         :total="total"
     />
   </div>
@@ -57,8 +55,7 @@ const {
   loadData,
   resetQuery
 } = useDataLoader<OperationLogVO, OperationLogPageQuery>(OperationLogAPI.PAGE.request, initialQuery);
-const businessDict = await useDictionary(DictType.BUSINESS)                // 日志业务类型字典数据
-const operatorTypeDict = await useDictionary(DictType.OPERATOR_TYPE)       // 日志操作类型字典数据
+const operatorLogDict = await useDictionary([DictType.BUSINESS, DictType.OPERATOR_TYPE]); // 字典数据
 
 
 // 生命周期

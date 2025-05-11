@@ -119,26 +119,11 @@ export class UserProfileAPI {
             })
         }
     }
+    
     /**
      * 修改头像
      */
     static UPLOAD_AVATAR = {
-        endpoint: `${API_BASE}${API_SUFFIXES.UPLOAD_AVATAR}`,
-        maxFileSize: 20 * 1024 * 1024, // 20M
-        allowedFileTypes: ['image/bmp', 'image/png', 'image/jpeg', 'image/gif'],
-        request: (avatar: File): AxiosPromise<string> => {
-            // 1. 创建一个FormData对象并附加文件
-            const formData = new FormData();
-            formData.append('avatar', avatar);
-            // 2. 请求更改头像
-            return request<string>({
-                url: UserProfileAPI.UPLOAD_AVATAR.endpoint,
-                method: "patch",
-                data: formData,
-                headers: {
-                    'Content-Type': 'multipart/form-data'
-                }
-            })
-        }
+        endpoint: `${API_BASE}${API_SUFFIXES.UPLOAD_AVATAR}`
     }
 }

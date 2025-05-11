@@ -1,10 +1,17 @@
 <template>
   <v-md-editor v-model="modelValue"
+               :autofocus="props.autofocus"
+               :default-fullscreen="props.defaultFullscreen"
+               :default-show-toc="props.defaultShowToc"
                :disabled-menus="[]"
                :height="props.height"
                :include-level="[1, 2, 3, 4, 5, 6]"
                :left-toolbar="props.leftToolBar"
+               :mode="props.mode"
+               :placeholder="props.placeholder"
                :right-toolbar="props.rightToolBar"
+               :table-size="props.tabSize"
+               :toc-nav-position-right="props.tocNavPositionRight"
                :toolbar="toolbar"
                @upload-image="handleUploadImage"
   />
@@ -15,14 +22,29 @@ import {FileAPI} from "@/api/file";
 // 数据
 const props = withDefaults(defineProps<{
   modelValue: string;
-  savePath: string;
+  savePath?: string;
+  mode?: "editable" | "preview" | "edit";
   height?: string;
+  tocNavPositionRight?: boolean;
+  defaultFullscreen?: boolean;
+  defaultShowToc?: boolean;
+  autofocus?: boolean;
   leftToolBar?: string;
+  tabSize?: number;
   rightToolBar?: string;
+  placeholder?: string;
 }>(), {
   height: "100%",
+  savePath: "",
+  mode: "editable",
+  tabSize: 2,
+  tocNavPositionRight: false,
+  defaultShowToc: false,
+  defaultFullscreen: false,
+  autofocus: false,
   leftToolBar: "undo redo | h bold italic strikethrough quote | ul ol table hr customAlign | link image code | tip emoji customTodoList customToc| save",
-  rightToolBar: "preview toc fullscreen"
+  rightToolBar: "preview toc fullscreen",
+  placeholder: "请输入内容",
 });
 
 const emit = defineEmits<{

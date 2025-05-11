@@ -11,7 +11,7 @@
       </el-form-item>
       <el-form-item label="菜单类型 :" prop="type">
         <el-select v-model="query.type" placeholder="菜单类型选择">
-          <el-option v-for="(value,key) in props.menuDict" :label="value" :value="Number(key)"/>
+          <el-option v-for="(value,key) in props.menuDict[DictType.MENU]" :label="value" :value="Number(key)"/>
         </el-select>
       </el-form-item>
       <el-form-item label="隐藏类型 :" prop="hidden">
@@ -38,11 +38,12 @@
 </template>
 
 <script lang="ts" setup>
-// 组件定义
 import {HiddenStatusEnum} from "@/constants/system";
 import {MenuPageQuery} from "@/api/system/menu/type";
 import {FormInstance} from "element-plus";
+import {DictType} from "@/api/system/dict-data/type";
 
+// 组件定义
 defineOptions({
   name: "MenuSearch",
   inheritAttrs: false,
@@ -52,7 +53,7 @@ const props = withDefaults(defineProps<{
   query: MenuPageQuery;
   loadData: (callback?: () => void) => Promise<void>;                    // 加载数据函数
   resetQuery: (callback?: () => void) => Promise<void>;                  // 重置查询条件
-  menuDict: Record<number | string, string>;                             // 菜单类型
+  menuDict: Record<DictType | string, Record<any, string>>;              // 菜单类型
 }>(), {});
 
 const emits = defineEmits<{

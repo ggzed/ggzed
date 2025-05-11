@@ -7,6 +7,15 @@ export enum DictType {
     DATA_PERMISSION = "data_permission",
     BUSINESS = "business",
     OPERATOR_TYPE = "operator_type",
+    BACK_END = "back_end",
+    FRONT_END = "front_end",
+    JAVA_TYPE = "java_type",
+    TS_TYPE = "ts_type",
+    DB_TYPE = "db_type",
+    FORM_TYPE = "form_type",
+    QUERY_FORM_TYPE = "query_form_type",
+    QUERY_TYPE = "query_type",
+    SHOW_TYPE = "show_type",
 }
 
 export interface DictDataPageQuery extends PageQuery {

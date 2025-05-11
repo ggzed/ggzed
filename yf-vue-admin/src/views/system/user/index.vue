@@ -13,13 +13,13 @@
         v-model:query="query"
         :data-list="dataList"
         :dept-options="deptOptions"
-        :gender-dict="genderDict"
         :load-data="loadData"
         :load-dept-data="loadDeptData"
         :load-role-data="loadRoleData"
         :loading="loading"
         :role-options="roleOptions"
         :total="total"
+        :user-dict="userDict"
     />
   </div>
 </template>
@@ -68,7 +68,7 @@ const {
   loadData: loadRoleData
 } = useDataLoader<OptionType, object>(RoleAPI.OPTIONS.request, {});
 // 性别字典
-const genderDict = await useDictionary(DictType.GENDER)        // 性别字典数据
+const userDict = await useDictionary([DictType.GENDER])        // 性别字典数据
 // 数据
 
 // 方法

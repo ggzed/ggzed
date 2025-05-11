@@ -17,6 +17,9 @@ importers:
       '@types/lodash':
         specifier: ^4.17.15
         version: 4.17.15
+      '@types/sortablejs':
+        specifier: ^1.15.8
+        version: 1.15.8
       '@vueuse/core':
         specifier: ^10.9.0
         version: 10.11.1(vue@3.5.6(typescript@5.6.2))
@@ -44,6 +47,9 @@ importers:
       prismjs:
         specifier: ^1.29.0
         version: 1.29.0
+      sortablejs:
+        specifier: ^1.15.6
+        version: 1.15.6
       vue:
         specifier: ^3.4.21
         version: 3.5.6(typescript@5.6.2)
@@ -570,6 +576,9 @@ packages:
 
   '@types/prismjs@1.26.5':
     resolution: {integrity: sha512-AUZTa7hQ2KY5L7AmtSiqxlhWxb4ina0yd8hNbl4TWuqnv/pFP0nDMb3YrfSBf4hJVGLh2YEIBfKaBW/9UEl6IQ==}
+
+  '@types/sortablejs@1.15.8':
+    resolution: {integrity: sha512-b79830lW+RZfwaztgs1aVPgbasJ8e7AXtZYHTELNXZPsERt4ymJdjV4OccDbHQAvHrCcFpbF78jkm0R6h/pZVg==}
 
   '@types/svgo@2.6.4':
     resolution: {integrity: sha512-l4cmyPEckf8moNYHdJ+4wkHvFxjyW6ulm9l4YGaOxeyBWPhBOT0gvni1InpFPdzx1dKf/2s62qGITwxNWnPQng==}
@@ -2276,6 +2285,9 @@ packages:
   sortablejs@1.14.0:
     resolution: {integrity: sha512-pBXvQCs5/33fdN1/39pPL0NZF20LeRbLQ5jtnheIPN9JQAaufGjKdWduZn4U7wCtVuzKhmRkI0DFYHYRbB2H1w==}
 
+  sortablejs@1.15.6:
+    resolution: {integrity: sha512-aNfiuwMEpfBM/CN6LY0ibyhxPfPbyFeBTYJKCvzkJ2GkUpazIt3H+QIPAMHwqQ7tMKaHz1Qj+rJJCqljnf4p3A==}
+
   source-map-js@1.2.1:
     resolution: {integrity: sha512-UXWMKhLOwVKb728IUtQPXxfYU+usdybtUrK/8uGE8CQMvrhOpwvzDBwj0QhSL7MQc7vIsISBG8VQ8+IDQxpfQA==}
     engines: {node: '>=0.10.0'}
@@ -3108,6 +3120,8 @@ snapshots:
   '@types/nprogress@0.2.3': {}
 
   '@types/prismjs@1.26.5': {}
+
+  '@types/sortablejs@1.15.8': {}
 
   '@types/svgo@2.6.4':
     dependencies:
@@ -5151,6 +5165,8 @@ snapshots:
       - supports-color
 
   sortablejs@1.14.0: {}
+
+  sortablejs@1.15.6: {}
 
   source-map-js@1.2.1: {}
 

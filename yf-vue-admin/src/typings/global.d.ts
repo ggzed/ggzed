@@ -16,12 +16,13 @@ declare global {
         /** 总数 */
         total: number;
     }
+
     /**
      * 组件数据源
      */
     interface OptionType {
         /** 值 */
-        value: string | number;
+        value: string;
         /** 文本 */
         label: string;
         /** 子列表  */

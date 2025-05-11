@@ -31,7 +31,7 @@
       <el-table-column align="center" label="操作人员" min-width="140" prop="operatorName"/>
       <el-table-column align="center" label="业务类型" min-width="100" prop="businessType">
         <template #default="scope">
-          <el-tag>{{ props.businessDict[scope.row.businessType] }}</el-tag>
+          <el-tag>{{ props.operatorLogDict[DictType.BUSINESS][scope.row.businessType] }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column align="center" label="操作状态" min-width="100" prop="status">
@@ -44,7 +44,7 @@
       </el-table-column>
       <el-table-column align="center" label="对接客户端" min-width="100" prop="operatorType">
         <template #default="scope">
-          <el-tag>{{ props.operatorTypeDict[scope.row.operatorType] }}</el-tag>
+          <el-tag>{{ props.operatorLogDict[DictType.OPERATOR_TYPE][scope.row.operatorType] }}</el-tag>
         </template>
       </el-table-column>
       <el-table-column align="center" label="操作ip" min-width="100" prop="operatorIp"/>
@@ -100,10 +100,9 @@
   <!-- 操作日志详情模态框 -->
   <operation-log-detail-dialog
       v-model:visible="visible"
-      :business-dict="props.businessDict"
       :device="device"
       :operation-log-detail="operationLogDetail"
-      :operator-type-dict="props.operatorTypeDict"
+      :operator-log-dict="props.operatorLogDict"
       :title="title"
   />
 </template>
@@ -118,6 +117,7 @@ import {TableInstance} from "element-plus";
 import {useTableManagement} from "@/hooks/useTableManagement";
 import {useCrudActions} from "@/hooks/useCrudActions";
 import {useSystemStore} from "@/store/modules/system";
+import {DictType} from "@/api/system/dict-data/type";
 // 组件定义
 defineOptions({
   name: "OperationLogTable",
@@ -127,8 +127,7 @@ defineOptions({
 const props = withDefaults(defineProps<{
   query: OperationLogPageQuery;
   dataList: OperationLogVO[];
-  businessDict: Record<number | string, string>;         // 日志业务类型字典数据
-  operatorTypeDict: Record<number | string, string>;     // 日志操作类型字典数据
+  operatorLogDict: Record<DictType | string, Record<any, string>>;
   total: number;
   loading: boolean;
   loadData: (callback?: () => void) => Promise<void>;   // 加载数据函数

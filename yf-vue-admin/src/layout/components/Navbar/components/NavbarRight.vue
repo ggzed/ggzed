@@ -71,7 +71,7 @@ const rightPadding = computed(() => {
 // 定义一个对象映射，将命令字符串映射到相应的处理函数
 const commandActions: { [key: string]: () => void } = {
   'user-profile': () => router.push('/user-profile'), // 当命令为 'user-profile' 时，跳转到用户个人中心页面
-  'gitee': () => window.open('https://gitee.com/fateyifei/yf-vue3-admin-base', '_blank'), // 当命令为 'gitee' 时，在新标签页中打开 GITEE 源码页面
+  'gitee': () => window.open('https://gitee.com/fateyifei/yf', '_blank'), // 当命令为 'gitee' 时，在新标签页中打开 GITEE 源码页面
   'logout': () => { // 当命令为 'logout' 时，执行退出登录操作
     AuthAPI.LOGOUT.request().then(() => {
       userStore.resetToken(); // 调用用户存储的方法来重置令牌

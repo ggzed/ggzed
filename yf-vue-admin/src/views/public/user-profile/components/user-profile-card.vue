@@ -7,14 +7,19 @@
     </div>
 
     <!--    头像      -->
-    <el-upload
-        :before-upload="beforeAvatarUpload"
-        :http-request="uploadAvatar"
+    <file-upload
+        v-model="avatar"
+        :api="UserProfileAPI.UPLOAD_AVATAR.endpoint"
+        :file-key="'avatar'"
+        :file-name-size="100"
+        :file-type="['png', 'jpg', 'jpeg', 'gif']"
+        :limit="1"
+        :list-type="'picture'"
         :show-file-list="false"
-        class="upload-area"
+        :show-tip="false"
     >
       <el-avatar :size="120"
-                 :src="userProfileInfo.avatar">
+                 :src="avatar">
         {{ userProfileInfo?.username }}
       </el-avatar>
 
@@ -23,7 +28,9 @@
           <Plus></Plus>
         </el-icon>
       </div>
-    </el-upload>
+    </file-upload>
+
+
     <!--  个人信息描述  -->
     <div style="width: 100%;margin-top: 20px;">
       <el-descriptions
@@ -63,7 +70,7 @@
               性别
             </div>
           </template>
-          {{ genderDict[userProfileInfo?.gender || 0] }}
+          {{ userDict[DictType.GENDER][userProfileInfo?.gender || 0] }}
         </el-descriptions-item>
 
         <el-descriptions-item>
@@ -133,9 +140,9 @@
   <user-profile-manage-dialog
       v-if="visible"
       :close-dialog="closeDialog"
-      :gender-dict="genderDict"
       :load-data="props.loadData"
       :title="title"
+      :user-dict="userDict"
       :user-profile-info="props.userProfileInfo"
       :visible="visible"
   />
@@ -150,7 +157,6 @@ import {useSystemStore} from "@/store/modules/system";
 import {UserProfileInfoVO} from "@/api/system/user-profile/type";
 import {UserFilled} from "@element-plus/icons-vue";
 import {UserProfileAPI} from "@/api/system/user-profile";
-import {UploadRawFile, UploadRequestOptions} from "element-plus";
 import {useDialogManage} from "@/hooks/useDialogManage";
 
 defineOptions({
@@ -169,6 +175,10 @@ const emits = defineEmits<{
 
 // hooks
 const userProfileInfo = useVModel(props, 'userProfileInfo', emits)
+const avatar = computed({
+  get: () => userProfileInfo.value.avatar || '',
+  set: (value) => userProfileInfo.value.avatar = value
+})
 const {
   visible,
   title,
@@ -176,7 +186,7 @@ const {
   closeDialog
 } = useDialogManage();
 // 数据
-const genderDict = await useDictionary(DictType.GENDER)               // 性别字典数据
+const userDict = await useDictionary([DictType.GENDER])          // 用户模块所需字典
 const userStore = useUserStore()                                      // 用户信息
 const systemStore = useSystemStore()                                  // 系统信息
 // 方法
@@ -185,43 +195,6 @@ const systemStore = useSystemStore()                                  // 系统�
  */
 function exportPdf() {
   ElNotification.info('个人名片导出正在开发中...')
-}
-
-/**
- * 上传文件限制
- * @param rawFile 文件信息
- */
-function beforeAvatarUpload(rawFile: UploadRawFile) {
-  if (!UserProfileAPI.UPLOAD_AVATAR.allowedFileTypes.includes(rawFile.type)) {
-    ElMessage.error('头像文件格式错误')
-    return false
-  } else if (rawFile.size > UserProfileAPI.UPLOAD_AVATAR.maxFileSize) {
-    ElMessage.error('头像文件大小不能超过 20MB!')
-    return false
-  } else if (rawFile.name.length <= 0 || rawFile.name.length >= 100) {
-    ElMessage.error('头像文件名不能超过100个字符')
-    return false
-  }
-  return true
-}
-
-/**
- * 上传头像
- * @param options 操作项
- */
-function uploadAvatar(options: UploadRequestOptions) {
-  // 注 : 对于上传成功 , 使用 on-success 也可行，其中参数 response 可获取到当前 resolve(unknown) 值
-  return new Promise((resolve) => {
-    // 1. 执行上传操作
-    UserProfileAPI.UPLOAD_AVATAR.request(options.file).then(({data}) => {
-      // 2. 更改当前页头像数据
-      userProfileInfo.value.avatar = data;
-      // 3. 更改缓存中头像数据
-      userStore.setUserInfo({permissions: [], roles: [], ...userStore.userInfo, avatar: data})
-      // 4. data 传给 on-success
-      resolve(data)
-    })
-  })
 }
 
 function openUserProfileDialog() {
@@ -260,7 +233,7 @@ function openUserProfileDialog() {
   }
 }
 
-.upload-area {
+.file-upload {
   position: relative;
 
   .upload-mask {

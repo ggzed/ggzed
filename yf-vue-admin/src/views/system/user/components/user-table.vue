@@ -67,7 +67,7 @@
       </el-table-column>
       <el-table-column align="center" label="性别" prop="gender" width="60">
         <template #default="scope">
-          <span>{{ props.genderDict[scope.row.gender] }}</span>
+          <span>{{ props.userDict[DictType.GENDER][scope.row.gender] }}</span>
         </template>
       </el-table-column>
       <el-table-column align="center" label="角色" prop="roleNames" width="120"/>
@@ -145,10 +145,10 @@
       :current-click-row-id="currentClickRowId"
       :dept-options="props.deptOptions"
       :device="device"
-      :gender-dict="props.genderDict"
       :load-data="props.loadData"
       :role-options="props.roleOptions"
       :title="title"
+      :user-dict="props.userDict"
   />
 </template>
 
@@ -162,6 +162,7 @@ import {TableInstance} from "element-plus";
 import {useTableManagement} from "@/hooks/useTableManagement";
 import {useSystemStore} from "@/store/modules/system";
 import {UserForm, UserPageQuery, UserPageVO} from "@/api/system/user/type";
+import {DictType} from "@/api/system/dict-data/type";
 
 defineOptions({
   name: "UserTable",
@@ -173,7 +174,7 @@ const props = withDefaults(defineProps<{
   dataList: UserPageVO[];
   deptOptions: OptionType[];                                             // 部门集合
   roleOptions: OptionType[];                                             // 角色集合
-  genderDict: Record<number | string, string>;                           // 性别字典
+  userDict: Record<DictType | string, Record<any, string>>;              // 用户模块所需字典
   total: number;
   loading: boolean;
   loadData: (callback?: () => void) => Promise<void>;                    // 加载数据函数

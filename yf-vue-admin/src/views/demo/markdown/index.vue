@@ -1,6 +1,7 @@
 <template>
   <div class="app-container">
-    <Markdown v-model="value" save-path="demo/markdown"/>
+    <Markdown v-model="value" :mode="'preview'" save-path="demo/markdown"/>
+    <!--    <div v-html="test"></div>-->
   </div>
 </template>
 

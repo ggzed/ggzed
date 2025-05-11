@@ -27,7 +27,7 @@
     >
       <el-table-column align="center" type="selection" width="50"/>
       <el-table-column align="center" label="用户名" min-width="80" prop="username"/>
-      <el-table-column align="center" label="平台名" min-width="80" prop="platformName"/>
+      <el-table-column align="center" label="第三方平台" min-width="80" prop="platformName"/>
       <el-table-column align="center" label="平台授权信息" min-width="180" prop="platformName">
         <template #default="scope">
           <div class="user-oauth__detail">

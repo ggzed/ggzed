@@ -124,9 +124,9 @@
       v-model:visible="visible"
       :close-dialog="closeDialog"
       :current-click-row-id="currentClickRowId"
-      :data-scope-dict="props.dataScopeDict"
       :device="device"
       :load-data="props.loadData"
+      :role-dict="props.roleDict"
       :title="title"
   />
 
@@ -154,6 +154,7 @@ import {useDialogManage} from "@/hooks/useDialogManage";
 import {useSystemStore} from "@/store/modules/system";
 import {TableInstance} from "element-plus";
 import {useTableManagement} from "@/hooks/useTableManagement";
+import {DictType} from "@/api/system/dict-data/type";
 // 组件定义
 defineOptions({
   name: "RoleTable",
@@ -163,7 +164,7 @@ defineOptions({
 const props = withDefaults(defineProps<{
   query: RolePageQuery;
   dataList: RolePageVO[];
-  dataScopeDict: Record<number | string, string>;
+  roleDict: Record<DictType | string, Record<any, string>>;
   total: number;
   loading: boolean;
   loadData: (callback?: () => void) => Promise<void>;   // 加载数据函数

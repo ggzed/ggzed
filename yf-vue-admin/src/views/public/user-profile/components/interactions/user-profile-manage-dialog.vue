@@ -18,7 +18,7 @@
       </el-form-item>
       <el-form-item label="性别 :" prop="gender">
         <el-radio-group v-model="form.gender">
-          <el-radio v-for="(value,key) in props.genderDict" :value="Number(key)">{{ value }}</el-radio>
+          <el-radio v-for="(value,key) in props.userDict[DictType.GENDER]" :value="Number(key)">{{ value }}</el-radio>
         </el-radio-group>
       </el-form-item>
       <el-form-item label="手机号 :" prop="phoneNumber">
@@ -43,6 +43,7 @@ import {useSystemStore} from "@/store/modules/system";
 import {UserProfileForm, UserProfileInfoVO} from "@/api/system/user-profile/type";
 import {FormInstance, FormRules} from "element-plus";
 import {UserProfileAPI} from "@/api/system/user-profile";
+import {DictType} from "@/api/system/dict-data/type";
 // 组件定义
 defineOptions({
   name: "UserProfileManageDialog",
@@ -56,8 +57,8 @@ const props = withDefaults(defineProps<{
   title: string;
   // 用户信息
   userProfileInfo: UserProfileInfoVO;
-  // 性别字典
-  genderDict: Record<number | string, string>;
+  // 用户模块所需字典
+  userDict: Record<DictType | string, Record<any, string>>;
   // 加载数据
   loadData: (callback?: () => void) => Promise<void>;
   // 关闭弹窗

@@ -24,14 +24,18 @@
     >
       <el-table-column label="菜单名称" min-width="200">
         <template #default="scope">
-          <svg-icon :icon-class="scope.row.icon"/>
-          {{ scope.row.name }}
+          <div style="display: inline-block;">
+            <div style="display: flex;align-items: center">
+              <system-icon :icon="scope.row.type !== MenuTypeEnum.BUTTON ? scope.row.icon : 'button'"/>
+              <span>{{ scope.row.name }}</span>
+            </div>
+          </div>
         </template>
       </el-table-column>
 
       <el-table-column align="center" label="类型" min-width="80">
         <template #default="scope">
-          <el-tag :type="MENU_STYLE[scope.row.type % 4]">{{ menuDict[scope.row.type] }}</el-tag>
+          <el-tag :type="MENU_STYLE[scope.row.type % 4]">{{ menuDict[DictType.MENU][scope.row.type] }}</el-tag>
         </template>
       </el-table-column>
 
@@ -139,6 +143,7 @@ import {MenuTypeEnum} from "@/enums/MenuTypeEnum";
 import {useSystemStore} from "@/store/modules/system";
 import {useDialogManage} from "@/hooks/useDialogManage";
 import {useCrudActions} from "@/hooks/useCrudActions";
+import {DictType} from "@/api/system/dict-data/type";
 
 defineOptions({
   name: "MenuTable",
@@ -150,7 +155,7 @@ const props = withDefaults(defineProps<{
   loading: boolean;
   loadData: (callback?: () => void) => Promise<void>;
   // 菜单类型
-  menuDict: Record<number | string, string>;
+  menuDict: Record<DictType | string, Record<any, string>>;
 }>(), {});
 // hooks
 const {

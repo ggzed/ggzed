@@ -41,7 +41,7 @@ const {
   loadData,
   resetQuery
 } = useDataLoader<MenuPageVO, MenuPageQuery>(MenuAPI.PAGE.request, initialQuery);
-const menuDict = await useDictionary(DictType.MENU)           // 菜单类型字典
+const menuDict = await useDictionary([DictType.MENU])           // 菜单类型字典
 
 // 生命周期
 onMounted(async () => {

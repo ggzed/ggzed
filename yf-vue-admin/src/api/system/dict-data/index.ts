@@ -1,12 +1,12 @@
 import request from "@/utils/request";
 import {AxiosPromise} from "axios";
-import {DictDataForm, DictDataPageQuery, DictDataPageVO, DictType} from "@/api/system/dict-data/type";
+import {DictDataForm, DictDataPageQuery, DictDataPageVO} from "@/api/system/dict-data/type";
 
 const API_BASE = '/dict/data';
 
 const API_SUFFIXES = {
     /** 根据type获取字典数据 */
-    DATA_OPTIONS: '/{type}/options',
+    DATA_OPTIONS: '/{dictTypes}/options',
     /** 分页获取字典数据数据 */
     PAGE: '/{dictTypeId}/page',
     /** 获取字典数据表单数据 */
@@ -28,12 +28,12 @@ export class DictDataAPI {
      * @param type 字典类型
      */
     static DATA_OPTIONS = {
-        endpoint: (type: DictType): string => {
-            return `${API_BASE}${API_SUFFIXES.DATA_OPTIONS.replace("{type}", type)}`;
+        endpoint: (dictTypes: string): string => {
+            return `${API_BASE}${API_SUFFIXES.DATA_OPTIONS.replace("{dictTypes}", dictTypes)}`;
         },
-        request: (type: DictType): AxiosPromise<OptionType[]> => {
-            return request<OptionType[]>({
-                url: DictDataAPI.DATA_OPTIONS.endpoint(type),
+        request: (dictTypes: string): AxiosPromise<Record<string, OptionType[]>> => {
+            return request<Record<string, OptionType[]>>({
+                url: DictDataAPI.DATA_OPTIONS.endpoint(dictTypes),
                 method: "get"
             });
         }

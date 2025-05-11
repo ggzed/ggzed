@@ -21,17 +21,18 @@ interface TableManagement<T> {
 }
 
 export function useTableManagement<T>(
-    tableRef: Ref<TableInstance | null>
+    tableRef: Ref<TableInstance | null>,
+    rowKey? = "id"
 ): TableManagement<T> {
     const selectedIds = ref<T[]>([]) as Ref<T[]>;
 
     function handleCellDblclick(row: any) {
-        const isSelected = selectedIds.value.includes(row.id);
+        const isSelected = selectedIds.value.includes(row[rowKey]);
         tableRef.value?.toggleRowSelection(row, !isSelected);
     }
 
     function handleSelectionChange(newSelection: any[]) {
-        selectedIds.value = newSelection.map(item => item.id);
+        selectedIds.value = newSelection.map(item => item[rowKey]);
     }
 
     return {

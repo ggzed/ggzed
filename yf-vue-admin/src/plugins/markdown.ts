@@ -14,6 +14,7 @@ import createAlignPlugin from '@kangc/v-md-editor/lib/plugins/align';
 import createMermaidPlugin from '@kangc/v-md-editor/lib/plugins/mermaid/cdn';
 import createTodoListPlugin from '@kangc/v-md-editor/lib/plugins/todo-list/index';
 import createHighlightLinesPlugin from '@kangc/v-md-editor/lib/plugins/highlight-lines/index';
+import createLineNumbertPlugin from '@kangc/v-md-editor/lib/plugins/line-number/index';
 
 // 代码高亮
 import Prism from 'prismjs';
@@ -27,7 +28,7 @@ export function setupVueMarkdownEditor(app: App<Element>) {
     VueMarkdownEditor.use(vuepressTheme, {
         Prism,
         codeHighlightExtensionMap: {
-            vue: 'html',
+            vue: 'html'
         },
         config: {
             toc: {
@@ -37,6 +38,8 @@ export function setupVueMarkdownEditor(app: App<Element>) {
     });
     // 支持 emoji 插件
     VueMarkdownEditor.use(createEmojiPlugin());
+    // 支持行号
+    VueMarkdownEditor.use(createLineNumbertPlugin());
     // 支持插入 katex 公式
     VueMarkdownEditor.use(createKatexPlugin());
     // 支持复制代码

@@ -23,7 +23,7 @@
 
       <el-form-item label="数据权限" prop="dataScope">
         <el-select v-model="form.dataScope">
-          <el-option v-for="(value,key) in props.dataScopeDict" :key="Number(key)" :label="value"
+          <el-option v-for="(value,key) in props.roleDict[DictType.DATA_PERMISSION]" :key="Number(key)" :label="value"
                      :value="Number(key)"></el-option>
         </el-select>
       </el-form-item>
@@ -63,6 +63,7 @@ import {FormInstance, FormRules} from "element-plus";
 import {RoleForm} from "@/api/system/role/type";
 import {useCrudActions} from "@/hooks/useCrudActions";
 import {RoleAPI} from "@/api/system/role";
+import {DictType} from "@/api/system/dict-data/type";
 
 // 组件定义
 defineOptions({
@@ -74,7 +75,7 @@ const props = withDefaults(defineProps<{
   // 当前点击节点ID
   currentClickRowId: number | undefined;
   // 数据权限数据
-  dataScopeDict: Record<number | string, string>;
+  roleDict: Record<DictType | string, Record<any, string>>;
   // dialog-visible
   visible: boolean;
   // dialog-title

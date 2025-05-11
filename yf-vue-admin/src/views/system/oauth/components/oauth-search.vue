@@ -9,13 +9,20 @@
             @keyup.enter="loadData"
         />
       </el-form-item>
-      <el-form-item label="平台名 :" prop="platformName">
-        <el-input
+      <el-form-item label="三方平台 :" prop="platformName">
+        <el-select
             v-model="query.platformName"
             clearable
-            placeholder="平台名"
-            @keyup.enter="loadData"
-        />
+            placeholder="第三方平台"
+            @change="loadData"
+        >
+          <el-option
+              v-for="platform in platformList"
+              :key="platform"
+              :label="platform"
+              :value="platform"
+          />
+        </el-select>
       </el-form-item>
       <el-form-item label="创建时间 :" prop="startTime">
         <el-date-picker
@@ -58,6 +65,7 @@
 // 组件 props & emits
 import {FormInstance} from "element-plus";
 import {OauthPageQuery} from "@/api/system/oauth/type";
+import {OauthAPI} from "@/api/system/oauth";
 
 const props = withDefaults(defineProps<{
   query: OauthPageQuery;
@@ -72,6 +80,13 @@ const emits = defineEmits<{
 const query = useVModel(props, 'query', emits)
 // 数据
 const queryFormRef = ref<FormInstance | null>(null);         // 查询表单
+const platformList = ref<string[]>([]);
+// 生命周期
+onMounted(() => {
+  OauthAPI.SUPPORT_PLATFORMS.request().then((res) => {
+    platformList.value = res.data;
+  })
+})
 </script>
 
 <style lang="scss" scoped>

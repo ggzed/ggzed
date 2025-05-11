@@ -26,7 +26,7 @@
           <template #label>
             操作模块:
           </template>
-          {{ props.businessDict[props.operationLogDetail.businessType || 0] }} /
+          {{ props.operatorLogDict[DictType.BUSINESS][props.operationLogDetail.businessType || 0] }} /
           {{ props.operationLogDetail.title }}
         </el-descriptions-item>
         <el-descriptions-item :span="2">
@@ -90,7 +90,10 @@
           <template #label>
             对接客户端:
           </template>
-          <el-tag>{{ props.operatorTypeDict[props.operationLogDetail.operatorType || 0] }}</el-tag>
+          <el-tag>{{
+              props.operatorLogDict[DictType.OPERATOR_TYPE][props.operationLogDetail.operatorType || 0]
+            }}
+          </el-tag>
         </el-descriptions-item>
       </el-descriptions>
     </div>
@@ -105,6 +108,7 @@
 import {DeviceEnum} from "@/enums/DeviceEnum";
 import {OperatorLogStatusEnum} from "@/constants/system";
 import {OperationLogVO} from "@/api/monitor/operation-log/type";
+import {DictType} from "@/api/system/dict-data/type";
 
 defineOptions({
   name: "DeptManageDialog",
@@ -113,8 +117,7 @@ defineOptions({
 // 组件 props & emits
 const props = withDefaults(defineProps<{
   operationLogDetail: OperationLogVO;
-  businessDict: Record<number | string, string>;                  // 日志业务类型字典数据
-  operatorTypeDict: Record<number | string, string>;              // 日志操作类型字典数据
+  operatorLogDict: Record<DictType | string, Record<any, string>>;
   // dialog-visible
   visible: boolean;
   // dialog-title

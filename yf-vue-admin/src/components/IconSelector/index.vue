@@ -7,7 +7,8 @@
     >
       <!--   reference   -->
       <template #reference>
-        <el-input ref="iconSelectRef" v-model="modelValue" placeholder="请选择您的图标" readonly @click="showPopover()">
+        <el-input ref="iconSelectRef" v-model="modelValue" :disabled="disabled" placeholder="请选择您的图标" readonly
+                  @click="showPopover()">
           <template #prefix>
             <SystemIcon :icon="modelValue"/>
           </template>
@@ -48,8 +49,10 @@ defineOptions({
 const props = withDefaults(defineProps<{
   modelValue?: string;
   width?: string;
+  disabled?: boolean;
 }>(), {
-  width: "100%"
+  width: "100%",
+  disabled: false
 });
 
 const emit = defineEmits<{

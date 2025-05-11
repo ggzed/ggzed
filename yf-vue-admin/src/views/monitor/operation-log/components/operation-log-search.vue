@@ -11,13 +11,15 @@
       </el-form-item>
       <el-form-item label="业务类型 :" prop="businessType">
         <el-select v-model="query.businessType" clearable placeholder="业务类型选择">
-          <el-option v-for="(value,key) in props.businessDict" :label="value" :value="Number(key)"/>
+          <el-option v-for="(value,key) in props.operatorLogDict[DictType.BUSINESS]" :label="value"
+                     :value="Number(key)"/>
         </el-select>
       </el-form-item>
 
       <el-form-item label="客户端 :" prop="operatorType">
         <el-select v-model="query.operatorType" clearable placeholder="对接客户端选择">
-          <el-option v-for="(value,key) in props.operatorTypeDict" :label="value" :value="Number(key)"/>
+          <el-option v-for="(value,key) in props.operatorLogDict[DictType.OPERATOR_TYPE]" :label="value"
+                     :value="Number(key)"/>
         </el-select>
       </el-form-item>
 
@@ -117,6 +119,7 @@
 import {OperatorLogStatusEnum} from "@/constants/system";
 import {OperationLogPageQuery} from "@/api/monitor/operation-log/type";
 import {FormInstance} from "element-plus";
+import {DictType} from "@/api/system/dict-data/type";
 // 组件定义
 defineOptions({
   name: "OperationLogSearch",
@@ -125,8 +128,7 @@ defineOptions({
 // 组件 props & emits
 const props = withDefaults(defineProps<{
   query: OperationLogPageQuery;
-  businessDict: Record<number | string, string>;                  // 日志业务类型字典数据
-  operatorTypeDict: Record<number | string, string>;              // 日志操作类型字典数据
+  operatorLogDict: Record<DictType | string, Record<any, string>>;
   loadData: (callback?: () => void) => Promise<void>;                    // 加载数据函数
   resetQuery: (callback?: () => void) => Promise<void>;                  // 重置查询条件
 }>(), {});

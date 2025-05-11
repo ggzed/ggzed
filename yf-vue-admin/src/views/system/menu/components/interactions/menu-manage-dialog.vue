@@ -33,7 +33,7 @@
 
       <el-form-item label="菜单类型 :" prop="type">
         <el-radio-group v-model="form.type">
-          <el-radio v-for="(value,key) in props.menuDict" :value="Number(key)">{{ value }}</el-radio>
+          <el-radio v-for="(value,key) in props.menuDict[DictType.MENU]" :value="Number(key)">{{ value }}</el-radio>
         </el-radio-group>
       </el-form-item>
 
@@ -190,6 +190,7 @@ import {MenuForm} from "@/api/system/menu/type";
 import {FormInstance, FormRules} from "element-plus";
 import {MenuAPI} from "@/api/system/menu";
 import {useCrudActions} from "@/hooks/useCrudActions";
+import {DictType} from "@/api/system/dict-data/type";
 
 // 组件定义
 defineOptions({
@@ -203,7 +204,7 @@ const props = withDefaults(defineProps<{
   // 当前点击节点ID
   currentClickRowId: number | undefined;
   // 菜单类型
-  menuDict: Record<number | string, string>;
+  menuDict: Record<DictType | string, Record<any, string>>;
   // dialog-visible
   visible: boolean;
   // dialog-title
@@ -271,6 +272,22 @@ async function submitForm() {
       props.loadData()
     })
   }
+
+  setTimeout(() => {
+    ElNotification.warning({
+      title: '操作提示',
+      message: `<strong>修改【权限标识】</strong>后需要用户重新登录才能生效。`,
+      dangerouslyUseHTMLString: true,
+    });
+  }, 0)
+
+  setTimeout(() => {
+    ElNotification.warning({
+      title: '操作提示',
+      message: `<strong>新增或修改菜单</strong>需要刷新页面以确保变更生效。`,
+      dangerouslyUseHTMLString: true,
+    });
+  }, 0)
 }
 
 /**

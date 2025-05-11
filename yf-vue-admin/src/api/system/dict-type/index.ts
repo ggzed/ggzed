@@ -7,6 +7,8 @@ const API_BASE = '/dict/type';
 const API_SUFFIXES = {
     /** 分页获取字典类型数据 */
     PAGE: '/page',
+    /** 操作项 */
+    OPTIONS: '/options',
     /** 获取字典类型表单数据 */
     FORM: '/{dictTypeId}/form',
     /** 新增字典类型 ( POST 请求 ) */
@@ -28,7 +30,7 @@ export class DictTypeAPI {
      */
     static PAGE = {
         endpoint: `${API_BASE}${API_SUFFIXES.PAGE}`,
-        permission: "system:dict-type:page",
+        permission: "system:dict-type:list",
         request: (query: DictTypePageQuery): AxiosPromise<PageResult<DictTypePageVO[]>> => {
             return request<PageResult<DictTypePageVO[]>>({
                 url: DictTypeAPI.PAGE.endpoint,
@@ -37,6 +39,20 @@ export class DictTypeAPI {
             })
         }
     };
+
+    /**
+     * 获取字典类型操作项
+     */
+    static OPTIONS = {
+        endpoint: `${API_BASE}${API_SUFFIXES.OPTIONS}`,
+        permission: "",
+        request: (): AxiosPromise<OptionType[]> => {
+            return request<OptionType[]>({
+                url: DictTypeAPI.OPTIONS.endpoint,
+                method: "get"
+            })
+        }
+    }
 
     /**
      * 获取字典数据表单数据

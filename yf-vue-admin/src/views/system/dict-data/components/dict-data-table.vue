@@ -142,7 +142,7 @@ import {TableInstance} from "element-plus";
 // 组件定义
 
 defineOptions({
-  name: "DeptDataTable",
+  name: "DictDataTable",
   inheritAttrs: false,
 });
 // 组件 props & emits

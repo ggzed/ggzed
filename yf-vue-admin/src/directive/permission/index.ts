@@ -1,12 +1,17 @@
 import {Directive, DirectiveBinding} from "vue";
 import {useUserStore} from "@/store/modules/user";
+import {SystemConstant} from "@/constants/system";
 
 /**
  * 按钮权限
  */
 export const PermissionChecker: Directive = {
     mounted(el: HTMLElement, binding: DirectiveBinding) {
-        const {permissions} = useUserStore();
+        const {permissions, roles} = useUserStore();
+        // 管理员不需要认证
+        if (roles.some((role => role === SystemConstant.ADMIN))) {
+            return true;
+        }
         // 「」按钮权限校验
         const {value} = binding;
         if (value) {
@@ -19,7 +24,7 @@ export const PermissionChecker: Directive = {
             }
         } else {
             throw new Error(
-                "need perms! Like v-has-perm=\"['sys:user:add','sys:user:edit']\""
+                "need perms! Like v-permission=\"['sys:user:add','sys:user:edit']\""
             );
         }
     },
@@ -32,6 +37,10 @@ export const PermissionChecker: Directive = {
 export const RoleChecker: Directive = {
     mounted(el: HTMLElement, binding: DirectiveBinding) {
         const {roles} = useUserStore();
+        // 管理员不需要认证
+        if (roles.some((role => role === SystemConstant.ADMIN))) {
+            return true;
+        }
         // 「」角色校验
         const {value} = binding;
         if (value) {
@@ -45,7 +54,7 @@ export const RoleChecker: Directive = {
             }
         } else {
             throw new Error(
-                "need perms! Like v-has-perm=\"['sys:user:add','sys:user:edit']\""
+                "need perms! Like v-role=\"['ADMIN','TEST']\""
             );
         }
     },

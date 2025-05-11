@@ -54,12 +54,12 @@ const cachedViews = computed(() => useTagsViewStore().cachedViews); // 缓存页
   min-height: calc(100vh - $navbar-height);
 
   .app-container {
-    min-height: calc(100vh - $navbar-height - 20px);
+    height: calc(100vh - $navbar-height - 20px);
   }
 }
 
 .main-tags-view {
-  height: calc(100vh - $navbar-height - $tags-view-height);
+  min-height: calc(100vh - $navbar-height - $tags-view-height);
 
   .app-container {
     height: calc(100vh - $navbar-height - $tags-view-height - 20px);

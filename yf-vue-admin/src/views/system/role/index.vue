@@ -10,9 +10,9 @@
     <role-table
         v-model:query="query"
         :data-list="dataList"
-        :data-scope-dict="dataScopeDict"
         :load-data="loadData"
         :loading="loading"
+        :role-dict="roleDict"
         :total="total"
     />
   </div>
@@ -44,7 +44,7 @@ const {
   loadData,
   resetQuery
 } = useDataLoader<RolePageVO, RolePageQuery>(RoleAPI.PAGE.request, initialQuery);
-const dataScopeDict: Record<number | string, string> = await useDictionary(DictType.DATA_PERMISSION)  // 数据权限字典数据
+const roleDict = await useDictionary([DictType.DATA_PERMISSION])  // 数据权限字典数据
 // 数据
 
 // 方法
