@@ -45,16 +45,16 @@ import java.util.stream.Collectors;
  * @author: ${table.functionAuthor}
  * @since : ${.now}
  */
-@Tag(name = "${table.tableComment}" )
+@Tag(name = "${table.tableComment}")
 @RestController
-@RequestMapping("${table.tableName}" )
+@RequestMapping("${table.tableName}")
 @RequiredArgsConstructor
 public class ${table.className}Controller {
 
     private final I${table.className}Service ${classNameLower}Service;
 
-    @Operation(summary = "查询${table.tableComment}" )
-    @OperationLog(title = "查询${table.tableComment}" , businessType = BusinessTypeEnum.SEARCH)
+    @Operation(summary = "查询${table.tableComment}")
+    @OperationLog(title = "查询${table.tableComment}", businessType = BusinessTypeEnum.SEARCH)
     @PreventDuplicateSubmit
     @PreAuthorize("@permission.checker('${table.moduleName}:${table.businessName}:list')" )
     @GetMapping("/page" )
@@ -63,7 +63,7 @@ public class ${table.className}Controller {
         return PageResult.success(result);
     }
 
-    @Operation(summary = "${table.tableComment}表单数据" )
+    @Operation(summary = "${table.tableComment}表单数据")
     @PreventDuplicateSubmit
     @PreAuthorize("@permission.checker('${table.moduleName}:${table.businessName}:list')" )
     @GetMapping("/{${mapFields.pk[0].javaTsFieldName}}/form" )
@@ -72,18 +72,18 @@ public class ${table.className}Controller {
         return Result.judge(${classNameLower}Form);
     }
 
-    @Operation(summary = "新增${table.tableComment}" )
-    @OperationLog(title = "新增${table.tableComment}" , businessType = BusinessTypeEnum.INSERT)
+    @Operation(summary = "新增${table.tableComment}")
+    @OperationLog(title = "新增${table.tableComment}", businessType = BusinessTypeEnum.INSERT)
     @PreventDuplicateSubmit
     @PreAuthorize("@permission.checker('${table.moduleName}:${table.businessName}:save')" )
     @PostMapping
     public Result<${mapFields.pk[0].javaType}> save${table.className}(@RequestBody @Validated ${table.className}Form ${classNameLower}Form) {
-        ${mapFields.pk[0].javaType} result = ${classNameLower}Service.save${table.className}(${classNameLower}Form);
+    ${mapFields.pk[0].javaType} result = ${classNameLower}Service.save${table.className}(${classNameLower}Form);
         return Result.judge(result);
     }
 
-    @Operation(summary = "修改${table.tableComment}" )
-    @OperationLog(title = "修改${table.tableComment}" , businessType = BusinessTypeEnum.UPDATE)
+    @Operation(summary = "修改${table.tableComment}")
+    @OperationLog(title = "修改${table.tableComment}", businessType = BusinessTypeEnum.UPDATE)
     @PreventDuplicateSubmit
     @PreAuthorize("@permission.checker('${table.moduleName}:${table.businessName}:update')" )
     @PutMapping("/{${mapFields.pk[0].javaTsFieldName}}" )
@@ -92,8 +92,8 @@ public class ${table.className}Controller {
         return Result.judge(deleted);
     }
 
-    @Operation(summary = "删除${table.tableComment}" )
-    @OperationLog(title = "删除${table.tableComment}" , businessType = BusinessTypeEnum.DELETE)
+    @Operation(summary = "删除${table.tableComment}")
+    @OperationLog(title = "删除${table.tableComment}", businessType = BusinessTypeEnum.DELETE)
     @PreventDuplicateSubmit
     @PreAuthorize("@permission.checker('${table.moduleName}:${table.businessName}:delete')" )
     @DeleteMapping("/{${mapFields.pk[0].javaTsFieldName}s}" )
@@ -105,4 +105,3 @@ public class ${table.className}Controller {
 
 }
 <#-- @formatter:on -->
-
