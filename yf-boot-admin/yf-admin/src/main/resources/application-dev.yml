@@ -137,9 +137,9 @@ system:
     - /favicon.ico
     - /auth/login/*
     - /auth/refresh
+    - /oauth/support/platforms
     - /auth/*/redirect
     - /auth/*/code
-    - /oauth/support/platforms
     - /doc.html
     - /v3/api-docs/**
     - /webjars/**
@@ -217,8 +217,12 @@ springdoc:
         - "/qr/**"
         - "/dynamic-logic-switch/**"
       packages-to-scan: com.yf.controller.demo
+    - group: "代码生成器"
+      paths-to-match:
+        - "/crud/**"
+      packages-to-scan: com.yf.controller.generate
     - group: "公开接口"
       paths-to-match:
         - "/public/**"
-      packages-to-scan: com.yf.controller.publics
+      packages-to-scan: com.yf.controller.open
 
