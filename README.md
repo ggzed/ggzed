@@ -37,8 +37,16 @@
 
 | 地址      | 链接                                                         |
 | --------- | ------------------------------------------------------------ |
-| 网站      | <a href="http://8.137.57.215/yf-vue-admin" target="_blank">yf-vue-admin</a> |
+| 项目展示  | <a href="http://yf.wiki" target="_blank">所有项目展示</a> |
+| 网站      | <a href="http://yf.wiki/yf-vue-admin" target="_blank">yf-vue-admin</a> |
 | Gitee源码 | <a href="https://gitee.com/fateyifei/yf" target="_blank">YF</a> |
+
+
+## 项目展示
+
+### 所有项目
+
+![AllProject](docs/images/all-project.png)
 
 ## 项目文档更新
 
