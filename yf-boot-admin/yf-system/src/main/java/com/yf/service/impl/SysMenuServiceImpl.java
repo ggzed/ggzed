@@ -334,13 +334,33 @@ public class SysMenuServiceImpl extends ServiceImpl<SysMenuMapper, SysMenu> impl
         MenuTypeEnum menuType = menuForm.getType();
         Integer parentId = menuForm.getParentId();
         // 1. 处理对应菜单不同类型的数据
-        // 如果是目录
         if (MenuTypeEnum.CATALOG.equals(menuType)) {
-            if (SystemConstants.INTEGER_ROOT_ID.equals(parentId) && !path.startsWith("/")) {
-                menuForm.setPath("/" + path); // 一级目录需以 / 开头
+            // 如果是目录
+            if (SystemConstants.INTEGER_ROOT_ID.equals(parentId)) {
+                if (!path.startsWith("/")) {
+                    menuForm.setPath("/" + path); // 一级目录需以 / 开头
+                }
+                menuForm.setComponent("Layout");
+            } else {
+                // 注 : 不解决 // 开头的问题 , 默认为用户想以 / 开头
+                if (path.startsWith("/")) {
+                    menuForm.setPath(path.substring(1)); // 子目录不以 / 开头
+                }
+                menuForm.setComponent("SubLayout");
             }
-            menuForm.setComponent("Layout");
+
             menuForm.setPermission("");
+        } else if (MenuTypeEnum.MENU.equals(menuType)) {
+            // 如果是菜单
+            if (SystemConstants.INTEGER_ROOT_ID.equals(parentId)) {
+                if (!path.startsWith("/")) {
+                    menuForm.setPath("/" + path); // 一级菜单需以 / 开头
+                }
+            } else {
+                if (path.startsWith("/")) {
+                    menuForm.setPath(path.substring(1));  // 子集菜单不以 / 开头
+                }
+            }
         } else if (MenuTypeEnum.BUTTON.equals(menuType)) {
             menuForm.setKeepAlive(0);
             menuForm.setComponent("");
