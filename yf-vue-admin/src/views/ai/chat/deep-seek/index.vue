@@ -1,12 +1,12 @@
 <template>
   <div class="app-container">
-    <iframe src="https://chat3.eqing.tech/#/chat"></iframe>
+    DeepSeek 开发中
   </div>
 </template>
 
 <script lang="ts" setup>
 defineOptions({
-  name: "EasyChat",
+  name: "DeepSeek",
   inheritAttrs: false,
 });
 // 数据
@@ -18,13 +18,4 @@ defineOptions({
 
 <style lang="scss" scoped>
 /* 样式 */
-.app-container {
-  width: 100%;
-  height: 82.5vh;
-
-  > iframe {
-    width: 100%;
-    height: 100%;
-  }
-}
 </style>
