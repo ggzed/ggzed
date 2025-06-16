@@ -2,6 +2,7 @@ import {RouteRecordRaw} from "vue-router";
 import {RouteConstant} from "@/constants/route";
 
 export const Layout = () => import("@/layout/index.vue");
+export const SubLayout = () => import("@/layout/sub/index.vue");
 export const Home = () => import("@/views/public/home/index.vue");
 export const HotList = () => import("@/views/public/hot-list/index.vue");
 export const TodayAvatar = () => import("@/views/public/today-avatar/index.vue");

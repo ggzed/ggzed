@@ -1,5 +1,5 @@
 import {RouteRecordRaw} from "vue-router";
-import {Layout, NotFound} from "@/router/core/ConstantRoutes";
+import {Layout, NotFound, SubLayout} from "@/router/core/ConstantRoutes";
 import {RouteVO} from "@/api/system/menu/type";
 import {SystemConstant} from "@/constants/system";
 
@@ -17,6 +17,9 @@ export function filterAsyncRoutes(routes: RouteVO[], roles: string[]) {
 
     routes.forEach((route) => {
         const tempRoute: RouteRecordRaw = {...route, component: Layout, children: []} as RouteRecordRaw; // ES6扩展运算符复制新对象
+        if (route.component === 'SubLayout') {
+            tempRoute.component = SubLayout; // 如果是子布局则使用 SubLayout 组件
+        }
         // 1. 未传入 name 则使用path作为 name
         if (!route.name) {
             tempRoute.name = route.path;
@@ -24,7 +27,7 @@ export function filterAsyncRoutes(routes: RouteVO[], roles: string[]) {
         // 2. 判断是否有权限
         if (hasPermission(roles, tempRoute)) {
             // 2. 1 判断是否匹配到子路由
-            if (route.component !== 'Layout') {
+            if (route.component !== 'Layout' && route.component !== 'SubLayout') {
                 const component = modules[`../../views/${route.component}.vue`];
                 if (component) {
                     tempRoute.component = component;
@@ -63,35 +66,4 @@ export function hasPermission(roles: string[], route: RouteRecordRaw): boolean {
         });
     }
     return false;
-}
-
-/**
- * routeVo -> RouteRecordRaw
- */
-export function routeVo2RecordRaw(routeVo: RouteVO): RouteRecordRaw {
-    const {path, component, redirect, name, meta, children} = routeVo;
-
-    const routeRecordRaw: RouteRecordRaw = {
-        path,
-        component: Layout,
-        redirect,
-        name,
-        meta: {
-            title: meta.title,
-            icon: meta.icon,
-            hidden: meta.hidden,
-            keepAlive: meta.keepAlive,
-            affix: meta.affix,
-            breadcrumb: meta.breadcrumb,
-            showSingleChildren: meta.showSingleChildren,
-            roles: meta.roles,
-        },
-        children: []
-    };
-
-    if (children) {
-        routeRecordRaw.children = children.map(child => routeVo2RecordRaw(child));
-    }
-
-    return routeRecordRaw;
 }
