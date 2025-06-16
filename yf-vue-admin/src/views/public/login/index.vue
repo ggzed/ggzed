@@ -258,15 +258,21 @@ const throttledLoginFn = useThrottleFn(() => {
           {}
       );
     }
-    router.replace({path: redirect, query: otherQueryParams});
+    // 使用 router.replace 的 Promise 来确保在路由跳转完成后再关闭 loading
+    router.replace({path: redirect, query: otherQueryParams})
+        .then(() => {
+          logging.value = false;
+        })
+        .catch(() => {
+          logging.value = false;
+          ElMessage.error('路由跳转失败');
+        });
   }).catch(() => {
     // 异常则刷新验证码
     if (!(loginType.value === "PHONE" || loginType.value === "EMAIL")) {
       loginType.value = "USERNAME_PASSWORD"
       refreshCaptcha()
     }
-  }).finally(() => {
-    // 解除加载中
     logging.value = false;
   })
 }, 1000)
