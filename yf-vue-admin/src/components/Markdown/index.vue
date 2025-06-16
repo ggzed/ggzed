@@ -21,7 +21,7 @@
 import {FileAPI} from "@/api/file";
 // 数据
 const props = withDefaults(defineProps<{
-  modelValue: string;
+  modelValue?: string;
   savePath?: string;
   mode?: "editable" | "preview" | "edit";
   height?: string;
@@ -34,6 +34,7 @@ const props = withDefaults(defineProps<{
   rightToolBar?: string;
   placeholder?: string;
 }>(), {
+  modelValue: "",
   height: "100%",
   savePath: "",
   mode: "editable",
