@@ -7,6 +7,12 @@ export {}
 
 declare module 'vue' {
   export interface GlobalComponents {
+    AiConversationManageDialog: typeof import('./../views/ai/manage/conversation/components/interactions/ai-conversation-manage-dialog.vue')['default']
+    AiConversationSearch: typeof import('./../views/ai/manage/conversation/components/ai-conversation-search.vue')['default']
+    AiConversationTable: typeof import('./../views/ai/manage/conversation/components/ai-conversation-table.vue')['default']
+    AiMessageManageDialog: typeof import('./../views/ai/manage/message/components/interactions/ai-message-manage-dialog.vue')['default']
+    AiMessageSearch: typeof import('./../views/ai/manage/message/components/ai-message-search.vue')['default']
+    AiMessageTable: typeof import('./../views/ai/manage/message/components/ai-message-table.vue')['default']
     AnimateSettings: typeof import('./../layout/components/Settings/componets/AnimateSettings.vue')['default']
     AppLink: typeof import('./../components/AppLink/index.vue')['default']
     AppMain: typeof import('./../layout/components/AppMain/index.vue')['default']

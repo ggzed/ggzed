@@ -2,17 +2,17 @@
   <transition enter-active-class="animate__animated animate__fadeInLeft"
               leave-active-class="animate__animated animate__fadeOutLeft"
   >
-    <div class="logo-container" v-if="systemStore.settings.sidebarLogo">
+    <div v-if="systemStore.settings.sidebarLogo" class="logo-container">
       <router-link to="/">
-        <svg-icon icon-class="vite" size="25px"></svg-icon>
-        <span class="logo-container__title"
-              v-if="systemStore.app.sidebarStatus === SidebarStatusEnum.OPENED"> {{ defaultSettings.title }}</span>
+        <svg-icon icon-class="logo" size="25px"></svg-icon>
+        <span v-if="systemStore.app.sidebarStatus === SidebarStatusEnum.OPENED"
+              class="logo-container__title"> {{ defaultSettings.title }}</span>
       </router-link>
     </div>
   </transition>
 </template>
 
-<script setup lang="ts">
+<script lang="ts" setup>
 import {useSystemStore} from "@/store/modules/system";
 import {SidebarStatusEnum} from "@/enums/SidebarStatusEnum";
 import defaultSettings from "@/settings";
@@ -22,7 +22,7 @@ const systemStore = useSystemStore();
 // 生命周期
 </script>
 
-<style scoped lang="scss">
+<style lang="scss" scoped>
 /* 样式 */
 .logo-container {
   display: flex;

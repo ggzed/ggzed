@@ -18,7 +18,7 @@ export const HOME_ROUTE_RAW: RouteRecordRaw = {
     component: Home,
     meta: {
         title: '首页',
-        icon: 'vite',
+        icon: 'logo',
         affix: true,
         keepAlive: true,
         hidden: false,
