@@ -21,7 +21,7 @@
                         @change="props.loadData()"
                 >
                     <el-option v-for="(value,key) in props.dictData['${field.dictTypeName}']" :label="value"
-                               :value="Number(key)"/>
+                               :value="key"/>
                 </el-select>
                 <#elseif field.queryFormType == "multi_select" && field.dictTypeName?has_content>
                 <el-select
@@ -33,7 +33,7 @@
                         @change="props.loadData()"
                 >
                     <el-option v-for="(value,key) in props.dictData['${field.dictTypeName}']" :label="value"
-                               :value="Number(key)"/>
+                               :value="key"/>
                 </el-select>
                 <#elseif field.queryFormType == "date">
                 <el-date-picker
@@ -177,7 +177,7 @@ const props = withDefaults(defineProps<{
     dictData?: Record<DictType | string, Record<any, string>>;
     loadData: (callback?: () => void) => Promise<void>;
     resetQuery: (callback?: () => void) => Promise<void>;                  // 重置查询条件
-}>(), {dictData: {}});
+}>(), {dictData: () => ({})});
 
 const emits = defineEmits<{
 (event: "update:query", query: ${table.className}PageQuery): void

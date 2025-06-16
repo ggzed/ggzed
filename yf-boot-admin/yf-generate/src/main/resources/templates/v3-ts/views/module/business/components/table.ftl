@@ -206,7 +206,7 @@ const props = withDefaults(defineProps<{
     total: number;
     loading: boolean;
     loadData: (callback?: () => void) => Promise<void>;   // 加载数据函数
-}>(), {dictData: {}});
+}>(), {dictData: () => ({})});
 
 const emits = defineEmits<{
 (event: "update:query", query: ${table.className}PageQuery): void

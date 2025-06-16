@@ -57,7 +57,15 @@ defineOptions({
 // 公共数据 & 方法
 const initialQuery: ${table.className}PageQuery = {
     <#list mapFields.query as field>
+    <#if field.queryType != "between" && field.queryType != "in">
     ${field.javaTsFieldName}: undefined,
+    <#elseif field.queryType != "between" && field.queryType == "in">
+    ${field.javaTsFieldName}: [],
+    <#elseif field.queryType == "between" && !(field.dictTypeName?has_content)>
+    ${field.javaTsFieldName}Start: undefined,
+    ${field.javaTsFieldName}End: undefined,
+    </#if>
+
     </#list>
     pageNum: 1,
     pageSize: 10

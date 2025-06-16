@@ -78,7 +78,7 @@ public class ${table.className}Controller {
     @PreAuthorize("@permission.checker('${table.moduleName}:${table.businessName}:save')" )
     @PostMapping
     public Result<${mapFields.pk[0].javaType}> save${table.className}(@RequestBody @Validated ${table.className}Form ${classNameLower}Form) {
-    ${mapFields.pk[0].javaType} result = ${classNameLower}Service.save${table.className}(${classNameLower}Form);
+        ${mapFields.pk[0].javaType} result = ${classNameLower}Service.save${table.className}(${classNameLower}Form);
         return Result.judge(result);
     }
 
@@ -105,3 +105,4 @@ public class ${table.className}Controller {
 
 }
 <#-- @formatter:on -->
+

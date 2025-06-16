@@ -42,18 +42,18 @@
                 <el-select v-model="form.${field.javaTsFieldName}"
                            placeholder="请选择${field.showName}">
                     <el-option
-                            v-for="item in props.dictData['${field.dictTypeName}']"
-                            :key="item.value"
-                            :label="item.label"
-                            :value="item.value"/>
+                            v-for="(value,key) in props.dictData['${field.dictTypeName}']"
+                            :key="key"
+                            :value="value"
+                            :label="value"/>
                 </el-select>
             <#elseif field.saveFormType == "radio" && field.dictTypeName?has_content>
                 <el-radio-group v-model="form.${field.javaTsFieldName}">
                     <el-radio
-                            v-for="item in props.dictData['${field.dictTypeName}']"
-                            :key="item.value"
-                            :label="item.value">
-                        {{ item.label }}
+                            v-for="(value,key) in props.dictData['${field.dictTypeName}']"
+                            :key="key"
+                            :value="value">
+                        {{ value }}
                     </el-radio>
                 </el-radio-group>
             <#elseif field.saveFormType == "switch" && field.dictTypeName?has_content>
@@ -79,7 +79,8 @@
                 />
             <#elseif field.saveFormType == "markdown">
                 <Markdown v-model="form.${field.javaTsFieldName}"
-                          height="600px"
+                          height="400px"
+                          mode="edit"
                           placeholder="请输入${field.showName}"
                           save-path="demo/markdown"/>
             <#elseif field.saveFormType == "text_area">
@@ -129,7 +130,7 @@ defineOptions({
 });
 // 组件 props & emits
 const props = withDefaults(defineProps<{
-    currentClickRowId: number | undefined;
+    currentClickRowId: ${mapFields.pk[0].tsType} | undefined;
     visible: boolean;
     title: string;
     dictData?: Record<DictType | string, Record<any, string>>;
@@ -138,7 +139,7 @@ const props = withDefaults(defineProps<{
     loadData: (callback?: () => void) => Promise<void>;
 }>(), {
     device: DeviceEnum.DESKTOP,
-    dictData: {}
+    dictData: () => ({})
 });
 
 const emits = defineEmits<{
@@ -150,7 +151,7 @@ const visible = useVModel(props, 'visible', emits)
 const {
     saveData,
     updateData
-} = useCrudActions<number, ${table.className}Form>(${table.className}API.SAVE.request, ${table.className}API.UPDATE.request, undefined, undefined);
+} = useCrudActions<${mapFields.pk[0].tsType}, ${table.className}Form>(${table.className}API.SAVE.request, ${table.className}API.UPDATE.request, undefined, undefined);
 // 初始校验规则
 const initialForm: ${table.className}Form = {
 <#list mapFields.form as field>
@@ -173,8 +174,8 @@ async function submitForm() {
     const isValid = await formRef.value?.validate(); // 使用 await 简化验证逻辑
     if (!isValid) return; // 验证未通过，直接返回
     // 校验通过后执行 API 请求
-    if (form.value.id) {
-        await updateData(form.value.id, form.value, () => {
+    if (props.currentClickRowId) {
+        await updateData(props.currentClickRowId, form.value, () => {
             props.closeDialog()
             props.loadData()
         })
