@@ -80,9 +80,12 @@ spring:
         debug: false
   ## ai 配置
   ai:
-    ollama:
+    deepseek:
       chat:
-        enabled: true
+        enabled: false
+#        api-key: ???
+#        options:
+#          model: deepseek-reasoner
 # 日志信息
 logging:
   level:

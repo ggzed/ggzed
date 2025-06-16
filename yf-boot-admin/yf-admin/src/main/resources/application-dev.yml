@@ -78,9 +78,12 @@ spring:
         debug: false
   ## ai 配置
   ai:
-    ollama:
+    deepseek:
       chat:
-        enabled: true
+        enabled: false
+#        api-key: ???
+#        options:
+#          model: deepseek-reasoner
 # mybatis-plus 基础配置
 mybatis-plus:
   ## 扫描 mapper 文件
