@@ -1,12 +1,12 @@
 package com.yf.controller.auth;
 
-
 import com.yf.auth.model.enums.LoginTypeEnum;
 import com.yf.auth.model.form.RefreshTokenForm;
 import com.yf.auth.security.service.IAuthService;
 import com.yf.captcha.graphic.model.dto.CaptchaResult;
 import com.yf.captcha.graphic.service.ICaptchaCodeService;
 import com.yf.captcha.mail.service.IEmailService;
+import com.yf.captcha.sms.ISmsService;
 import com.yf.justauth.factory.JustAuthFactory;
 import com.yf.log.annotation.OperationLog;
 import com.yf.model.log.enums.BusinessTypeEnum;
@@ -24,7 +24,16 @@ import lombok.RequiredArgsConstructor;
 import me.zhyd.oauth.request.AuthRequest;
 import me.zhyd.oauth.utils.AuthStateUtils;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * 权限-AuthController
@@ -44,6 +53,7 @@ public class AuthController {
     private final JustAuthFactory justAuthFactory;
     private final ICaptchaCodeService captchaCodeService;
     private final IEmailService emailService;
+    private final ISmsService smsService;
 
 
     @Operation(summary = "登陆")
@@ -91,11 +101,33 @@ public class AuthController {
         return Result.success(captchaCodeService.generateVerifyCode());
     }
 
+    @RateLimiters(rateLimiters = {
+            @RateLimiter(
+                    limitTypeEnum = LimitTypeEnum.IP,
+                    rateRules = @RateRule(timeDuration = 180, timeUnit = TimeUnit.MINUTES),
+                    addToBlacklist = true
+            )
+    })
     @Operation(summary = "发送邮箱验证码")
     @PreventDuplicateSubmit(expire = 60)
     @GetMapping("/email/code")
     public Result<Void> sendEmailCode(String email) {
         emailService.sendEmailCode(email);
+        return Result.success();
+    }
+
+    @RateLimiters(rateLimiters = {
+            @RateLimiter(
+                    limitTypeEnum = LimitTypeEnum.IP,
+                    rateRules = @RateRule(timeDuration = 1, timeUnit = TimeUnit.DAYS),
+                    addToBlacklist = true
+            )
+    })
+    @Operation(summary = "发送手机验证码")
+    @PreventDuplicateSubmit(expire = 60)
+    @GetMapping("/phone/code")
+    public Result<Void> sendPhoneCode(String phone) {
+        smsService.sendPhoneCode(phone);
         return Result.success();
     }
 

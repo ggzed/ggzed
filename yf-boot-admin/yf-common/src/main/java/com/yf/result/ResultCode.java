@@ -50,6 +50,8 @@ public enum ResultCode implements IResultCode, Serializable {
 
     DEMO_USER_OPERATION("I199", "演示用户信息禁止更改,您可以自己注册账号进行操作,或联系管理员生成账号,谢谢!"),
 
+    PHONE_CODE_NOT_SUPPORTED("I363", "手机号验证码发送功能未实现"),
+
     ROLE_CODE_DUPLICATE("I111", "含有相同角色编码的角色"),
     ROLE_BIND_USER("I112", "有用户绑定被删除角色,请解绑后删除"),
     ROLE_NOT_ASSIGNED("W011", "用户未分配角色，无法登录，请联系管理员"),
