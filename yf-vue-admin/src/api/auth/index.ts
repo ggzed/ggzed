@@ -15,6 +15,8 @@ const API_SUFFIXES = {
     CAPTCHA_CODE: '/captcha/code',
     /** 发送邮箱 */
     EMAIL_CODE: '/email/code',
+    /** 手机号登录 */
+    PHONE_CODE: '/phone/code',
     /** 退出登录 */
     LOGOUT: '/logout',
     /** 跳转第三方登录 */
@@ -119,6 +121,17 @@ export class AuthAPI {
             return request<string>({
                 url: AuthAPI.REDIRECT_LOGIN.endpoint(type),
                 method: "get"
+            });
+        }
+    };
+
+    static PHONE_CODE = {
+        endpoint: `${API_BASE}${API_SUFFIXES.PHONE_CODE}`,
+        request: (phone: string): AxiosPromise<void> => {
+            return request<void>({
+                url: AuthAPI.PHONE_CODE.endpoint,
+                method: "get",
+                params: {"phone": phone}
             });
         }
     };
