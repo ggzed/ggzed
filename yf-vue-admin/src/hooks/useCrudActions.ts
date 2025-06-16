@@ -5,7 +5,7 @@ import {AxiosPromise} from "axios";
  */
 export function useCrudActions<KEY, T>(
     // 新增数据 API
-    saveDataApi?: (data: T) => AxiosPromise<number>,
+    saveDataApi?: (data: T) => AxiosPromise<number | string>,
     // 修改数据 API
     updateDataApi?: (id: KEY, data: T) => AxiosPromise<void>,
     // 删除数据 API
