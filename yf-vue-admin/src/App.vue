@@ -1,17 +1,18 @@
 <template>
   <el-config-provider :locale="zhCn" :size="size">
     <div class="app-container">
-      <!-- 开启水印 z-index > el-affix(z-index = 100) 即可  :locale="'zh-cn'" -->
-      <el-watermark
-          v-if="watermarkEnabled"
-          :content="defaultSettings.title"
-          :font="{ color: fontColor }"
-          :z-index="101"
-      >
-        <router-view/>
-      </el-watermark>
-      <!-- 关闭水印 -->
-      <router-view v-else/>
+<!--      &lt;!&ndash; 开启水印 z-index > el-affix(z-index = 100) 即可  :locale="'zh-cn'" &ndash;&gt;-->
+<!--      <el-watermark-->
+<!--          v-if="watermarkEnabled"-->
+<!--          :content="defaultSettings.title"-->
+<!--          :font="{ color: fontColor }"-->
+<!--          :z-index="101"-->
+<!--      >-->
+<!--        <router-view/>-->
+<!--      </el-watermark>-->
+<!--      &lt;!&ndash; 关闭水印 &ndash;&gt;-->
+<!--      <router-view v-else/>-->
+      <router-view/>
     </div>
   </el-config-provider>
 </template>

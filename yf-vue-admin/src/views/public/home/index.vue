@@ -1,39 +1,17 @@
 <template>
   <!--  页面  -->
   <div class="home-container">
-    <!--  欢迎信息  -->
-    <el-card>
-      <el-row justify="space-between">
-        <el-col :span="24">
-          <div class="user-info">
-            <el-avatar :size="80" :src="userStore.userInfo.avatar">
-              {{ userStore.userInfo.username }}
-            </el-avatar>
-            <div class="content">
-              <p class="single-line">您好 , {{ userStore.userInfo.nickname }} !</p>
-              <p class="double-line"> {{ weather }}</p>
-            </div>
-          </div>
-        </el-col>
-      </el-row>
-    </el-card>
 
     <!--  小功能向导  -->
     <el-row :gutter="20" class="action-cards">
       <el-col :lg="6" :sm="12" :xs="24">
-        <router-link to="/hot-list">
+<!--        <router-link to="/hot-list">-->
           <el-card>
             <div>
               <svg-icon icon-class="hot-list" size="24"></svg-icon>
               <el-text tag="b">每日热榜</el-text>
             </div>
-            <div>
-              <el-icon>
-                <ArrowRightBold/>
-              </el-icon>
-            </div>
           </el-card>
-        </router-link>
       </el-col>
       <el-col :lg="6" :sm="12" :xs="24">
         <router-link to="/today-avatar">
@@ -80,17 +58,8 @@
 
     <!--  PV , UV , Echarts   -->
     <el-row :gutter="10">
-      <el-col :span="16" :xs="24" style="margin-bottom: 10px;">
+      <el-col style="margin-bottom: 10px;">
         <visit-trend-card/>
-      </el-col>
-      <el-col :span="8" :xs="24" style="margin-bottom: 10px;">
-        <div class="image-wrapper">
-          <el-image
-              class="custom-image"
-              fit="cover"
-              src="https://api.vvhan.com/api/moyu"
-          ></el-image>
-        </div>
       </el-col>
     </el-row>
   </div>

@@ -41,7 +41,7 @@ const defaultSettings: DefaultSettings = {
             danger: "#F56C6C"
         },
         animateCss: 'animate__fadeIn',
-        watermarkEnabled: true
+        watermarkEnabled: false
     }
 };
 

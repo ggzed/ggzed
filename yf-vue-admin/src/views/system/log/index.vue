@@ -35,7 +35,7 @@ import {useDictionary} from "@/hooks/userDict";
 import {DictType} from "@/api/system/dict-data/type";
 
 defineOptions({
-  name: "User",
+  name: "Role",
   inheritAttrs: false,
 });
 // 公共数据 & 方法

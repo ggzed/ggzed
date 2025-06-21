@@ -13,7 +13,7 @@
         <module>yf-system</module>
         <module>yf-websocket</module>
         <module>yf-generate</module>
-        <module>yf-ai</module>
+<!--        <module>yf-ai</module>-->
         <module>yf-admin</module>
         <module>yf-demo</module>
         <module>yf-monitor</module>

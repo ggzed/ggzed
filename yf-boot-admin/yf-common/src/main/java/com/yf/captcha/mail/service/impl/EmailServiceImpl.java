@@ -44,8 +44,8 @@ import java.util.concurrent.TimeUnit;
 @RequiredArgsConstructor
 public class EmailServiceImpl implements IEmailService {
     // 防止报错
-    @Resource
-    private final JavaMailSender javaMailSender;
+//    @Resource
+//    private final JavaMailSender javaMailSender;
 
     private final CompanyConfiguration companyConfiguration;
     private final TaskExecutor ioIntensiveExecutor;
@@ -138,8 +138,8 @@ public class EmailServiceImpl implements IEmailService {
      */
     private void sendEmailWithHtmlContent(String sendToEmail, String subject, String html) throws MessagingException {
         // 创建 MimeMessage 对象
-        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
-
+//        MimeMessage mimeMessage = javaMailSender.createMimeMessage();
+        MimeMessage mimeMessage = null;
         // 使用 MimeMessageHelper 对象设置邮件的发送者、接收者、主题和内容
         MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMessage, true);
         mimeMessageHelper.setFrom(companyConfiguration.getName() + '<' + companyConfiguration.getEmail() + ">");
@@ -148,7 +148,7 @@ public class EmailServiceImpl implements IEmailService {
         mimeMessageHelper.setText(html, true);
 
         // 发送邮件
-        javaMailSender.send(mimeMessage);
+//        javaMailSender.send(mimeMessage);
     }
 
 

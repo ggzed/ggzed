@@ -216,7 +216,7 @@ const userStore = useUserStore();                     // 存储用户信息
 const oauthStore = useOauthStore();                   // oauth 信息
 const captchaBase64 = ref<string>('');                // USERNAME_PASSWORD 登录方式中验证码
 const loginForm = ref<LoginParams>({                  // 登录表单信息
-  username: "demo_admin",
+  username: "admin",
   password: "12345678"
 });
 const emailCountdown = ref(0);

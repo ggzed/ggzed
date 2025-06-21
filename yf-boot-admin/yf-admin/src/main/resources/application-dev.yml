@@ -13,8 +13,8 @@ spring:
     ## 数据库驱动 （ 5.0 和 8.0 不一样）
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/vue3_springboot3_admin?useUnicode=true&characterEncoding=UTF-8&&serverTimezone=GMT%2B8&useSSL=false&allowMultiQueries=true&rewriteBatchedStatements=true
-    username: ???
-    password: ???
+    username: root
+    password: root
     ## Hikari连接池配置
     hikari:
       ## 最小空闲连接数量
@@ -42,7 +42,7 @@ spring:
     type: redis
   data:
     redis:
-      host: ???
+      host: localhost
       port: 6379
       #      password: 123456
       timeout: 10s
@@ -56,31 +56,31 @@ spring:
           max-idle: 8
           # 连接池中的最小空闲连接 默认0
           min-idle: 0
-  ## 邮箱配置
-  mail:
-    ## 配置邮件服务器的地址
-    host: smtp.qq.com
-    ## 配置邮件服务器的端口（465或587）
-    port: 465
-    ## 配置邮箱账号
-    username: ${company.email}
-    ## 配置邮箱授权码
-    password: ???
-    # 配置默认编码
-    default-encoding: UTF-8
-    properties:
-      mail:
-        smtp:
-          socketFactory:
-            ## SSL 连接配置
-            class: javax.net.ssl.SSLSocketFactory
-        ## 是否开启 debug，这样方便开发者查看邮件发送日志
-        debug: false
+#  ## 邮箱配置
+#  mail:
+#    ## 配置邮件服务器的地址
+#    host: smtp.qq.com
+#    ## 配置邮件服务器的端口（465或587）
+#    port: 465
+#    ## 配置邮箱账号
+#    username: ${company.email}
+#    ## 配置邮箱授权码
+#    password: ???
+#    # 配置默认编码
+#    default-encoding: UTF-8
+#    properties:
+#      mail:
+#        smtp:
+#          socketFactory:
+#            ## SSL 连接配置
+#            class: javax.net.ssl.SSLSocketFactory
+#        ## 是否开启 debug，这样方便开发者查看邮件发送日志
+#        debug: false
   ## ai 配置
-  ai:
-    deepseek:
-      chat:
-        enabled: false
+#  ai:
+#    deepseek:
+#      chat:
+#        enabled: false
 #        api-key: ???
 #        options:
 #          model: deepseek-reasoner
