@@ -4,7 +4,7 @@
     <template #header>
       <div>
         <el-text size="large" tag="b">
-          访问趋势 🚀
+          系统健康状态 🚀
         </el-text>
       </div>
       <el-radio-group v-model="visitTrendType" size="small" @change="initVisitTrendCharts">
@@ -70,10 +70,11 @@ function initVisitTrendCharts() {
 
     // 使用类型断言确保 series 是一个数组
     const series = options.series as Array<{ data: number[] }>;
-    if (series && series.length >= 3) {
+    if (series && series.length >= 4) {
       series[0].data = data.pvList;
       series[1].data = data.uvList;
       series[2].data = data.ipList;
+      series[3].data = data.ipList;
     }
   }).finally(() => {
     visitTrendLoading.value = false;

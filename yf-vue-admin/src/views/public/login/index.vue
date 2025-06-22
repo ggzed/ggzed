@@ -7,7 +7,7 @@
         </button>
 
         <div class="login-header">
-          <h1><img src="/logo.png" style="width: 40px;height: 40px;">后台管理系统</h1>
+          <h1><img src="/logo.png" style="width: 40px;height: 40px;">分布式融合管理系统</h1>
           <p>前沿技术驱动，安全高效的管理体验</p>
         </div>
 
@@ -20,22 +20,22 @@
             <svg-icon icon-class="account"/>
             账号密码登录
           </button>
-          <button
-              :class="{ active: loginType === 'EMAIL' }"
-              class="tab-btn"
-              @click="loginType = 'EMAIL'"
-          >
-            <svg-icon icon-class="email-fill"/>
-            邮箱登录
-          </button>
-          <button
-              :class="{ active: loginType === 'PHONE' }"
-              class="tab-btn"
-              @click="loginType = 'PHONE'"
-          >
-            <svg-icon icon-class="phone"/>
-            手机号登录
-          </button>
+<!--          <button-->
+<!--              :class="{ active: loginType === 'EMAIL' }"-->
+<!--              class="tab-btn"-->
+<!--              @click="loginType = 'EMAIL'"-->
+<!--          >-->
+<!--            <svg-icon icon-class="email-fill"/>-->
+<!--            邮箱登录-->
+<!--          </button>-->
+<!--          <button-->
+<!--              :class="{ active: loginType === 'PHONE' }"-->
+<!--              class="tab-btn"-->
+<!--              @click="loginType = 'PHONE'"-->
+<!--          >-->
+<!--            <svg-icon icon-class="phone"/>-->
+<!--            手机号登录-->
+<!--          </button>-->
         </div>
 
         <!-- 账号登录表单 -->
@@ -135,16 +135,16 @@
           <button class="login-btn" @click="handleLogin">登录系统</button>
         </div>
 
-        <div class="other-options">
-          <span>三方登录方式</span>
-        </div>
+<!--        <div class="other-options">-->
+<!--          <span>三方登录方式</span>-->
+<!--        </div>-->
 
-        <div class="social-login">
-          <button v-for="platform in Object.values(supportOauthPlatforms)" :key="platform" class="social-btn"
-                  @click="redirectOauth(platform)">
-            <svg-icon :icon-class="platform" size="26px"></svg-icon>
-          </button>
-        </div>
+<!--        <div class="social-login">-->
+<!--          <button v-for="platform in Object.values(supportOauthPlatforms)" :key="platform" class="social-btn"-->
+<!--                  @click="redirectOauth(platform)">-->
+<!--            <svg-icon :icon-class="platform" size="26px"></svg-icon>-->
+<!--          </button>-->
+<!--        </div>-->
 
         <p style="text-align: center; color: var(--text-light); font-size: 0.85rem;">
           除演示账户外 , 用户可自行注册账号 , 平台将自动注册账号
@@ -153,34 +153,34 @@
 
       <div class="login-right">
         <div class="right-content">
-          <h2>企业级开源管理系统</h2>
-          <p>基于SpringBoot3+Vue3的全栈解决方案，集成AI助手、多平台文件服务、实时通讯及企业级安全体系，赋能高效管理</p>
+<!--          <h2>企业级开源管理系统</h2>-->
+<!--          <p>基于SpringBoot3+Vue3的全栈解决方案，集成AI助手、多平台文件服务、实时通讯及企业级安全体系，赋能高效管理</p>-->
 
-          <div class="features">
-            <div class="feature-item">
-              <svg-icon icon-class="security" size="2rem"/>
-              <h3>安全可靠</h3>
-              <p>JWT认证、限流防刷、按钮级权限控制、NSFW 图片鉴黄、脏词过滤、数据脱敏</p>
-            </div>
-            <div class="feature-item">
-              <svg-icon icon-class="ai-fill" size="2rem"/>
-              <h3>AI智能助手</h3>
-              <p>通过 Spring AI 集成 DeepSeek 智能引擎</p>
-            </div>
-            <div class="feature-item">
-              <svg-icon icon-class="file-cloud" size="2rem"/>
-              <h3>云存储支持</h3>
-              <p>多平台适配，通过配置文件选择多种云存储平 ( e.g Local/MinIO/七牛云/OSS 等 )</p>
-            </div>
-            <div class="feature-item">
-              <svg-icon icon-class="comments" size="2rem"/>
-              <h3>实时协作</h3>
-              <p>集群级 WebSocket 通讯 , 支持多人聊天 , 消息推送</p>
-            </div>
-          </div>
+<!--          <div class="features">-->
+<!--            <div class="feature-item">-->
+<!--              <svg-icon icon-class="security" size="2rem"/>-->
+<!--              <h3>安全可靠</h3>-->
+<!--              <p>JWT认证、限流防刷、按钮级权限控制、NSFW 图片鉴黄、脏词过滤、数据脱敏</p>-->
+<!--            </div>-->
+<!--            <div class="feature-item">-->
+<!--              <svg-icon icon-class="ai-fill" size="2rem"/>-->
+<!--              <h3>AI智能助手</h3>-->
+<!--              <p>通过 Spring AI 集成 DeepSeek 智能引擎</p>-->
+<!--            </div>-->
+<!--            <div class="feature-item">-->
+<!--              <svg-icon icon-class="file-cloud" size="2rem"/>-->
+<!--              <h3>云存储支持</h3>-->
+<!--              <p>多平台适配，通过配置文件选择多种云存储平 ( e.g Local/MinIO/七牛云/OSS 等 )</p>-->
+<!--            </div>-->
+<!--            <div class="feature-item">-->
+<!--              <svg-icon icon-class="comments" size="2rem"/>-->
+<!--              <h3>实时协作</h3>-->
+<!--              <p>集群级 WebSocket 通讯 , 支持多人聊天 , 消息推送</p>-->
+<!--            </div>-->
+<!--          </div>-->
         </div>
-        <div class="system-info">Copyright © yf.wiki All Rights Reserved. <a
-            href="https://beian.miit.gov.cn/#/Integrated/index">蜀ICP备2024093013号-1</a></div>
+<!--        <div class="system-info">Copyright © yf.wiki All Rights Reserved. <a-->
+<!--            href="https://beian.miit.gov.cn/#/Integrated/index">蜀ICP备2024093013号-1</a></div>-->
       </div>
     </div>
   </div>

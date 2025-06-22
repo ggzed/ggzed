@@ -54,7 +54,7 @@ export class HomeAPI {
                     trigger: "axis",
                 },
                 legend: {
-                    data: ["浏览量(PV)", "用户量(UV)", "访客量(IP)"],
+                    data: ["CPU使用率", "内存使用率", "磁盘使用率", "网络使用率"],
                     bottom: 0,
                 },
                 grid: {
@@ -84,7 +84,7 @@ export class HomeAPI {
                 },
                 series: [
                     {
-                        name: "浏览量(PV)",
+                        name: "CPU使用率",
                         type: "line",
                         data: [],
                         areaStyle: {
@@ -99,7 +99,7 @@ export class HomeAPI {
                         },
                     },
                     {
-                        name: "用户量(UV)",
+                        name: "内存使用率",
                         type: "line",
                         data: [],
                         areaStyle: {
@@ -113,7 +113,22 @@ export class HomeAPI {
                             color: "#67C23A",
                         },
                     }, {
-                        name: "访客量(IP)",
+                        name: "磁盘使用率",
+                        type: "line",
+                        data: [],
+                        areaStyle: {
+                            color: "rgba(103, 194, 58, 0.1)",
+                        },
+                        smooth: true,
+                        itemStyle: {
+                            color: "#E6A03EFF",
+                        },
+                        lineStyle: {
+                            color: "#E6A03EFF",
+                        },
+                    },
+                    , {
+                        name: "网络使用率",
                         type: "line",
                         data: [],
                         areaStyle: {

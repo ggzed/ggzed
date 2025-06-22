@@ -1,6 +1,6 @@
 <template>
   <div class="tour-container">
-    <!--   该组件只是为了简化 layout/index.vue 页面展示压力     -->
+    <!--   该组件只是为了简化 layout/dfms-db-pg-database-manage.vue 页面展示压力     -->
     <el-tour v-model="tempTourRef" @close="$emit('update:modelValue', false)">
       <el-tour-step
           placement="right"

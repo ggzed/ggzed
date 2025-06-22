@@ -9,7 +9,7 @@
           <el-card>
             <div>
               <svg-icon icon-class="hot-list" size="24"></svg-icon>
-              <el-text tag="b">每日热榜</el-text>
+              <el-text tag="b">系统健康状态</el-text>
             </div>
           </el-card>
       </el-col>
@@ -18,7 +18,7 @@
           <el-card>
             <div>
               <svg-icon icon-class="today-avatar" size="24"></svg-icon>
-              <el-text tag="b">照片推荐墙</el-text>
+              <el-text tag="b">存储使用量</el-text>
             </div>
             <div>
               <el-icon>
@@ -32,7 +32,7 @@
         <el-card @click="systemStore.settings.settingsVisible = true">
           <div>
             <svg-icon icon-class="page-personalize" size="24"></svg-icon>
-            <el-text tag="b">页面个性化</el-text>
+            <el-text tag="b">节点状态</el-text>
           </div>
           <div>
             <el-icon>
@@ -45,7 +45,7 @@
         <el-card @click="systemStore.setTourStatus(true)">
           <div>
             <svg-icon icon-class="page-wizard" size="24"></svg-icon>
-            <el-text tag="b">页面向导</el-text>
+            <el-text tag="b">数据库</el-text>
           </div>
           <div>
             <el-icon>
